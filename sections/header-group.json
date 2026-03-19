@@ -43,11 +43,16 @@
           }
         }
       },
-      "block_order": ["announcement_sale", "announcement_1", "announcement_2", "announcement_3"],
+      "block_order": [
+        "announcement_sale",
+        "announcement_1",
+        "announcement_2",
+        "announcement_3"
+      ],
       "settings": {
         "auto_rotate": true,
         "change_slides_speed": 5,
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-2",
         "show_line_separator": true,
         "show_social": false,
         "enable_country_selector": false,
@@ -74,5 +79,8 @@
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }
