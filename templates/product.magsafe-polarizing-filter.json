@@ -11,9 +11,21 @@
           "type": "price",
           "settings": {}
         },
+        "price_anchor": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"display:inline-flex;align-items:center;gap:6px;background:#fff3cd;border-radius:4px;padding:5px 10px;margin:2px 0 4px;\"><span style=\"font-size:12px;color:#856404;\">💰 Professional filters cost $60+ abroad — get it locally for $19.99, delivered to your door</span></div>"
+          }
+        },
         "rating": {
           "type": "rating",
           "settings": {}
+        },
+        "summary_text": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<p style=\"font-size:14px;color:#555;line-height:1.75;margin:2px 0 10px;\">Snap on in 2 seconds. Cuts glare from water, glass &amp; sky instantly. Deeper colors, sharper photos — every time. No apps, no setup, no adapter rings.</p>"
+          }
         },
         "exclusive_badge": {
           "type": "custom_liquid",
@@ -96,12 +108,22 @@
             "icon": "truck",
             "content": "<p><strong>Delivery:</strong> 1–3 business days across Lebanon.</p><p><strong>Free shipping</strong> on all orders over $25.</p><p><strong>Returns:</strong> 30-day money-back guarantee. If you're not satisfied, we'll make it right — no questions asked.</p>"
           }
+        },
+        "faq_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Common Questions",
+            "icon": "chat_bubble",
+            "content": "<details style=\"border-bottom:1px solid #e8e8e1;padding:10px 0;\"><summary style=\"font-weight:600;cursor:pointer;list-style:none;\">Will it work with my current iPhone case?</summary><p style=\"margin:8px 0 0;color:#555;font-size:14px;\">Yes — as long as your case is MagSafe-compatible (most modern cases are). The filter clicks directly onto the magnetic ring. If your case supports wireless charging alignment, it will work.</p></details><details style=\"border-bottom:1px solid #e8e8e1;padding:10px 0;\"><summary style=\"font-weight:600;cursor:pointer;list-style:none;\">Is this the same product I saw on Instagram?</summary><p style=\"margin:8px 0 0;color:#555;font-size:14px;\">Yes. SaversLeb is the exclusive seller in Lebanon. Same product, delivered locally — no customs fees, no 4-week wait, no risk.</p></details><details style=\"border-bottom:1px solid #e8e8e1;padding:10px 0;\"><summary style=\"font-weight:600;cursor:pointer;list-style:none;\">How do I pay?</summary><p style=\"margin:8px 0 0;color:#555;font-size:14px;\">Cash on delivery — you pay when it arrives at your door. No card required. You can also order directly via WhatsApp if you prefer.</p></details><details style=\"padding:10px 0;\"><summary style=\"font-weight:600;cursor:pointer;list-style:none;\">What if I don't like it?</summary><p style=\"margin:8px 0 0;color:#555;font-size:14px;\">Return it within 30 days for a full refund. No questions asked. We stand behind the product completely.</p></details>"
+          }
         }
       },
       "block_order": [
         "title",
         "price",
+        "price_anchor",
         "rating",
+        "summary_text",
         "exclusive_badge",
         "live_counter",
         "inventory",
@@ -112,7 +134,8 @@
         "icon_with_text",
         "description_tab",
         "compatibility_tab",
-        "shipping_tab"
+        "shipping_tab",
+        "faq_tab"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -130,10 +153,62 @@
         "padding_bottom": 12
       }
     },
+    "how_it_works": {
+      "type": "multicolumn",
+      "blocks": {
+        "step_1": {
+          "type": "column",
+          "settings": {
+            "title": "1 — Snap It On",
+            "text": "Hold the filter near your iPhone's camera. The MagSafe magnet clicks it perfectly into place in under 2 seconds. No tools, no threading, no adapter rings.",
+            "link_label": "",
+            "link": "",
+            "icon": "none"
+          }
+        },
+        "step_2": {
+          "type": "column",
+          "settings": {
+            "title": "2 — Open Your Camera",
+            "text": "Use the native iPhone camera app exactly as you always do. No settings to change, no extra apps to download. It just works.",
+            "link_label": "",
+            "link": "",
+            "icon": "none"
+          }
+        },
+        "step_3": {
+          "type": "column",
+          "settings": {
+            "title": "3 — Shoot Better Photos",
+            "text": "Point and shoot. Glare disappears, colors deepen, reflections vanish. Every scene looks exactly the way your eye sees it.",
+            "link_label": "",
+            "link": "",
+            "icon": "none"
+          }
+        }
+      },
+      "block_order": ["step_1", "step_2", "step_3"],
+      "settings": {
+        "title": "As Easy as 1, 2, 3",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 52,
+        "padding_bottom": 36
+      }
+    },
     "video_section": {
       "type": "video",
       "settings": {
-        "heading": "See It in Action",
+        "heading": "See the Difference for Yourself",
         "heading_size": "h2",
         "enable_video_looping": false,
         "video_url": "https://www.youtube.com/watch?v=SWogZGOL_2M",
@@ -217,6 +292,7 @@
   },
   "order": [
     "main",
+    "how_it_works",
     "video_section",
     "reviews_section",
     "related_products"
