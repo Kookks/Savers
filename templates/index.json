@@ -1,1 +1,183 @@
-{"sections":{"image_banner":{"type":"image-banner","blocks":{"button":{"type":"buttons","settings":{"button_label_1":"","button_link_1":"shopify:\/\/collections\/all","button_style_secondary_1":true,"button_label_2":"","button_link_2":"","button_style_secondary_2":true}}},"block_order":["button"],"custom_css":[],"settings":{"image":"shopify:\/\/shop_images\/Picture_c2673288-b21f-4919-89f0-57633f1f5d28.jpg","image_overlay_opacity":40,"image_height":"large","image_behavior":"none","desktop_content_position":"middle-center","desktop_content_alignment":"center","show_text_box":false,"color_scheme":"scheme-1","stack_images_on_mobile":true,"mobile_content_alignment":"center","show_text_below":false}},"featured_collection":{"type":"featured-collection","settings":{"collection":"all","products_to_show":8,"title":"<strong>Best Selling <\/strong>","heading_size":"h2","description":"","show_description":false,"description_style":"body","columns_desktop":4,"enable_desktop_slider":false,"full_width":false,"show_view_all":true,"view_all_style":"solid","color_scheme":"scheme-1","image_ratio":"adapt","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"2","swipe_on_mobile":false,"padding_top":44,"padding_bottom":36}},"1770061865e0ebcce0":{"type":"_blocks","settings":{}}},"order":["image_banner","featured_collection","1770061865e0ebcce0"]}
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "See the World in Full Color",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Lebanon's first MagSafe polarizing lens filter. Eliminate glare, capture richer colors — in seconds.",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop Now",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "See How It Works",
+            "button_link_2": "shopify://collections/all",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "image": "shopify://shop_images/Picture_c2673288-b21f-4919-89f0-57633f1f5d28.jpg",
+        "image_overlay_opacity": 45,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": true,
+        "color_scheme": "scheme-4",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "trust_bar": {
+      "type": "multicolumn",
+      "blocks": {
+        "col_1": {
+          "type": "column",
+          "settings": {
+            "title": "MagSafe Compatible",
+            "text": "Snaps on and off in one second. No extra case needed.",
+            "link_label": "",
+            "link": "",
+            "icon": "none",
+            "image": "shopify://shop_images/Magnet--Streamline-Twemoji-Emoji.png"
+          }
+        },
+        "col_2": {
+          "type": "column",
+          "settings": {
+            "title": "Polarized Precision",
+            "text": "Removes reflections and glare. Richer, truer colors in every shot.",
+            "link_label": "",
+            "link": "",
+            "icon": "none",
+            "image": "shopify://shop_images/toppng.com-emoji-sparkles-622x646.png"
+          }
+        },
+        "col_3": {
+          "type": "column",
+          "settings": {
+            "title": "Pocket-Sized",
+            "text": "Compact and lightweight. Always ready in your bag or pocket.",
+            "link_label": "",
+            "link": "",
+            "icon": "none",
+            "image": "shopify://shop_images/Backpack--Streamline-Noto-Emojis.png"
+          }
+        },
+        "col_4": {
+          "type": "column",
+          "settings": {
+            "title": "Exclusive in Lebanon",
+            "text": "Only available at SaversLeb. Authentic product, guaranteed.",
+            "link_label": "",
+            "link": "",
+            "icon": "star"
+          }
+        }
+      },
+      "block_order": ["col_1", "col_2", "col_3", "col_4"],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "Our Products",
+        "heading_size": "h2",
+        "description": "Designed for iPhone photographers who want more from their shots.",
+        "show_description": true,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "social_proof": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Trusted by Lebanese iPhone Users",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The MagSafe Polarizing Lens Filter is the only product of its kind available in Lebanon. Loved by photographers, travelers, and everyday iPhone users who want better photos — without a bulky camera setup.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop the Filter",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": false,
+            "open_in_new_tab": false
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "trust_bar",
+    "featured_collection",
+    "social_proof"
+  ]
+}

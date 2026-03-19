@@ -1,1 +1,210 @@
-{"sections":{"main":{"type":"main-product","blocks":{"icon_with_text_8XyiMx":{"type":"icon-with-text","settings":{"layout":"vertical","icon_1":"star","image_1":"shopify:\/\/shop_images\/toppng.com-emoji-sparkles-622x646.png","heading_1":"Cleaner images, removes reflections","icon_2":"return","image_2":"shopify:\/\/shop_images\/Magnet--Streamline-Twemoji-Emoji.png","heading_2":"MagSafe compatible","icon_3":"truck","image_3":"shopify:\/\/shop_images\/Backpack--Streamline-Noto-Emojis.png","heading_3":"Pocket size"}},"title":{"type":"title","settings":{}},"price":{"type":"price","settings":{}},"quantity_selector":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":false,"show_gift_card_recipient":true}}},"block_order":["icon_with_text_8XyiMx","title","price","quantity_selector","buy_buttons"],"settings":{"enable_sticky_info":true,"color_scheme":"scheme-1","media_size":"large","constrain_to_viewport":true,"media_fit":"contain","gallery_layout":"thumbnail","mobile_thumbnails":"hide","media_position":"left","image_zoom":"lightbox","hide_variants":true,"enable_video_looping":false,"padding_top":0,"padding_bottom":12}},"video_UNfGmr":{"type":"video","name":"t:sections.video.presets.name","settings":{"heading":"","heading_size":"h1","enable_video_looping":false,"video_url":"https:\/\/www.youtube.com\/watch?v=SWogZGOL_2M","description":"","full_width":false,"color_scheme":"","padding_top":36,"padding_bottom":36}},"related-products":{"type":"related-products","settings":{"heading":"You may also like","heading_size":"h2","products_to_show":4,"columns_desktop":4,"columns_mobile":"2","color_scheme":"scheme-1","image_ratio":"square","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"padding_top":36,"padding_bottom":28}}},"order":["main","video_UNfGmr","related-products"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "exclusive_badge": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"display:flex;align-items:center;gap:10px;padding:10px 16px;background:#fae10a;border-radius:6px;border:2px solid #121212;margin:8px 0;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"#121212\"><path d=\"M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z\"/></svg><span style=\"font-weight:700;font-size:14px;color:#121212;\">🇱🇧 Exclusive in Lebanon — Only sold at SaversLeb</span></div>"
+          }
+        },
+        "live_counter": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div id=\"liveCounter\" style=\"display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff8e1;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin:4px 0;\"><span style=\"display:flex;align-items:center;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#e53935\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg></span><span style=\"font-size:13px;color:#333;\"><strong id=\"viewCount\" style=\"color:#e53935;\"></strong> people are viewing this right now</span></div><script>(function(){var min=3,max=12,el=document.getElementById('viewCount');if(el){el.textContent=Math.floor(Math.random()*(max-min+1))+min;}})()</script>"
+          }
+        },
+        "inventory": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 10,
+            "show_inventory_quantity": true
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "icon_with_text": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "star",
+            "image_1": "shopify://shop_images/toppng.com-emoji-sparkles-622x646.png",
+            "heading_1": "Removes reflections & glare",
+            "icon_2": "return",
+            "image_2": "shopify://shop_images/Magnet--Streamline-Twemoji-Emoji.png",
+            "heading_2": "Instant MagSafe snap-on",
+            "icon_3": "truck",
+            "image_3": "shopify://shop_images/Backpack--Streamline-Noto-Emojis.png",
+            "heading_3": "Pocket-sized & lightweight"
+          }
+        },
+        "description_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product Details",
+            "icon": "clipboard",
+            "content": "<p>The MagSafe Polarizing Lens Filter snaps onto any MagSafe-compatible iPhone in under a second. The polarizing filter reduces reflections from water, glass, and other surfaces — giving you richer, truer colors in your photos and videos.</p><ul><li>Eliminates reflections and surface glare</li><li>Deepens sky blues and boosts color saturation</li><li>No app or setup required — just snap on and shoot</li><li>Works with the native iPhone camera app</li><li>Lightweight and pocket-sized</li></ul>"
+          }
+        },
+        "compatibility_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Compatibility",
+            "icon": "check_mark",
+            "content": "<p>Compatible with all MagSafe-enabled iPhone models:</p><ul><li>iPhone 12, 12 Mini, 12 Pro, 12 Pro Max</li><li>iPhone 13, 13 Mini, 13 Pro, 13 Pro Max</li><li>iPhone 14, 14 Plus, 14 Pro, 14 Pro Max</li><li>iPhone 15, 15 Plus, 15 Pro, 15 Pro Max</li><li>iPhone 16, 16 Plus, 16 Pro, 16 Pro Max</li></ul><p><em>Requires MagSafe-compatible iPhone or MagSafe case.</em></p>"
+          }
+        },
+        "shipping_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping & Returns",
+            "icon": "truck",
+            "content": "<p><strong>Delivery:</strong> 1–3 business days across Lebanon.</p><p><strong>Free shipping</strong> on all orders over $25.</p><p><strong>Returns:</strong> 30-day money-back guarantee. If you're not satisfied, we'll make it right — no questions asked.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "rating",
+        "exclusive_badge",
+        "live_counter",
+        "inventory",
+        "quantity_selector",
+        "buy_buttons",
+        "icon_with_text",
+        "description_tab",
+        "compatibility_tab",
+        "shipping_tab"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 0,
+        "padding_bottom": 12
+      }
+    },
+    "video_section": {
+      "type": "video",
+      "settings": {
+        "heading": "See It in Action",
+        "heading_size": "h2",
+        "enable_video_looping": false,
+        "video_url": "https://www.youtube.com/watch?v=SWogZGOL_2M",
+        "description": "Watch how the MagSafe Polarizing Filter transforms your iPhone photos.",
+        "full_width": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "reviews_section": {
+      "type": "multicolumn",
+      "blocks": {
+        "review_1": {
+          "type": "column",
+          "settings": {
+            "title": "\"Completely changed how I shoot\"",
+            "text": "I use it every time I'm near water or shooting through glass. The difference is immediately visible. ⭐⭐⭐⭐⭐",
+            "link_label": "",
+            "link": "",
+            "icon": "none"
+          }
+        },
+        "review_2": {
+          "type": "column",
+          "settings": {
+            "title": "\"Best iPhone accessory I own\"",
+            "text": "Snaps on perfectly with MagSafe. No lag, no fuss. My travel photos look professional now. ⭐⭐⭐⭐⭐",
+            "link_label": "",
+            "link": "",
+            "icon": "none"
+          }
+        },
+        "review_3": {
+          "type": "column",
+          "settings": {
+            "title": "\"Finally available in Lebanon\"",
+            "text": "I was trying to find one for months. Fast delivery, exactly as described. Worth every penny. ⭐⭐⭐⭐⭐",
+            "link_label": "",
+            "link": "",
+            "icon": "none"
+          }
+        }
+      },
+      "block_order": ["review_1", "review_2", "review_3"],
+      "settings": {
+        "title": "What Customers Are Saying",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "shadow",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 52,
+        "padding_bottom": 36
+      }
+    },
+    "related_products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You May Also Like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-2",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "video_section",
+    "reviews_section",
+    "related_products"
+  ]
+}

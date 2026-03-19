@@ -3595,3 +3595,94 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+/* =============================================
+   SAVERSLEB CRO ENHANCEMENTS
+   ============================================= */
+
+/* Sticky Add to Cart mobile enhancement */
+@media screen and (max-width: 749px) {
+  .product-form__buttons {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 12px 0;
+    z-index: 10;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+    border-top: 1px solid #e5e5e5;
+  }
+}
+
+/* Make Add to Cart button more prominent */
+.product-form__submit {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.product-form__submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Buy buttons section spacing */
+.product-form__buttons .btn,
+.product-form__buttons button {
+  min-height: 52px;
+}
+
+/* Trust icon row improvements */
+.icon-with-text {
+  padding: 16px 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  margin: 16px 0;
+}
+
+/* Announcement bar - make scheme-4 (dark) look sharp */
+.color-scheme-4 .announcement-bar__message {
+  letter-spacing: 0.03em;
+  font-size: 0.85rem;
+}
+
+/* Product accordion tabs - cleaner look */
+.product__accordion .accordion__title {
+  font-weight: 600;
+}
+
+/* Review cards on product page */
+.multicolumn-card {
+  border-left: 3px solid #fae10a;
+  padding-left: 16px;
+}
+
+/* Enhance the video section heading */
+.section-video .title {
+  font-weight: 800;
+}
+
+/* Featured collection quick-add button */
+.card__footer .quick-add__submit {
+  background: #121212;
+  color: #fae10a;
+  font-weight: 700;
+}
+
+/* Homepage hero text readability */
+.banner__content .banner__heading {
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  font-weight: 900;
+}
+
+/* Price - make it stand out */
+.price-item--regular,
+.price-item--sale {
+  font-weight: 800;
+}
+
+/* Inventory status indicator */
+.product__inventory {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
