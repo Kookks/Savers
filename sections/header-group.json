@@ -14,6 +14,13 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_sale": {
+          "type": "announcement",
+          "settings": {
+            "text": "🔥 50% OFF — Limited Time Offer. Order Now & Pay on Delivery",
+            "link": ""
+          }
+        },
         "announcement_1": {
           "type": "announcement",
           "settings": {
@@ -36,7 +43,7 @@
           }
         }
       },
-      "block_order": ["announcement_1", "announcement_2", "announcement_3"],
+      "block_order": ["announcement_sale", "announcement_1", "announcement_2", "announcement_3"],
       "settings": {
         "auto_rotate": true,
         "change_slides_speed": 5,
