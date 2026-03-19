@@ -25,6 +25,13 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- if request.page_type == 'product' -%}
+      <link rel="preconnect" href="https://www.youtube.com" crossorigin>
+      <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+      <link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
+      <link rel="dns-prefetch" href="https://wa.me">
+    {%- endif -%}
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
