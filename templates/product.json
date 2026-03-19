@@ -16,6 +16,12 @@
           "type": "title",
           "settings": {}
         },
+        "custom_liquid_Urjzqd": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  .custom-product-reviews {\n    display: flex;\n    align-items: center;\n    gap: 5px; /* Space between stars and text */\n    margin-top: 8px; \n    margin-bottom: 15px;\n  }\n  .custom-stars {\n    color: #FFC107; /* Standard gold/yellow color for stars */\n    font-size: 18px;\n    letter-spacing: 2px;\n    line-height: 1;\n  }\n  .custom-review-text {\n    font-size: 14px;\n    color: #666; /* Subtle grey text */\n  }\n</style>\n\n<div class=\"custom-product-reviews\">\n  <div class=\"custom-stars\">\n    &#9733;&#9733;&#9733;&#9733;&#9733;\n  </div>\n  <div class=\"custom-review-text\">\n    7 reviews\n  </div>\n</div>"
+          }
+        },
         "price": {
           "type": "price",
           "settings": {}
@@ -40,6 +46,7 @@
       },
       "block_order": [
         "title",
+        "custom_liquid_Urjzqd",
         "price",
         "quantity_selector",
         "buy_buttons_XRthpp",
