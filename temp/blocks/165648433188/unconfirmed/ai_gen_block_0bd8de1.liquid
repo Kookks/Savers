@@ -1,6 +1,173 @@
+{% doc %}
+  @prompt
+    Create a product page block that displays a static star rating showing 4.9 stars out of 5 with 7 reviews. It should show filled/partial star icons visually representing 4.9 stars, the number "4.9" and "(7 reviews)" text next to it. This block should be added inside the product information section so it can be reordered and placed above the price block. Style it to look clean and professional, matching the store's theme.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-star-rating-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .ai-star-rating__stars-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .ai-star-rating__star-{{ ai_gen_id }} {
+    width: {{ block.settings.star_size }}px;
+    height: {{ block.settings.star_size }}px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .ai-star-rating__star-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .ai-star-rating__star-empty-{{ ai_gen_id }} {
+    fill: {{ block.settings.empty_star_color }};
+  }
+
+  .ai-star-rating__star-filled-{{ ai_gen_id }} {
+    fill: {{ block.settings.filled_star_color }};
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+
+  .ai-star-rating__number-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    line-height: 1;
+  }
+
+  .ai-star-rating__reviews-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    color: {{ block.settings.reviews_text_color }};
+    line-height: 1;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-star-rating__star-{{ ai_gen_id }} {
+      width: {{ block.settings.star_size | times: 0.9 }}px;
+      height: {{ block.settings.star_size | times: 0.9 }}px;
+    }
+
+    .ai-star-rating__number-{{ ai_gen_id }},
+    .ai-star-rating__reviews-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-star-rating-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-star-rating__stars-{{ ai_gen_id }}">
+    {% for i in (1..5) %}
+      <span class="ai-star-rating__star-{{ ai_gen_id }}">
+        <svg class="ai-star-rating__star-empty-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        {% if i < 5 %}
+          <svg class="ai-star-rating__star-filled-{{ ai_gen_id }}" style="width: 100%;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        {% elsif i == 5 %}
+          <svg class="ai-star-rating__star-filled-{{ ai_gen_id }}" style="width: 90%;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        {% endif %}
+      </span>
+    {% endfor %}
+  </div>
+
+  <span class="ai-star-rating__number-{{ ai_gen_id }}">{{ block.settings.rating_number }}</span>
+
+  <span class="ai-star-rating__reviews-{{ ai_gen_id }}">({{ block.settings.review_count }} reviews)</span>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Star rating",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    {
+      "type": "text",
+      "id": "rating_number",
+      "label": "Rating number",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count",
+      "default": "7"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "star_size",
+      "label": "Star size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "filled_star_color",
+      "label": "Filled star color",
+      "default": "#fae10a"
+    },
+    {
+      "type": "color",
+      "id": "empty_star_color",
+      "label": "Empty star color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Rating number color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "reviews_text_color",
+      "label": "Reviews text color",
+      "default": "#6b6b6b"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Star rating"
+    }
+  ],
+  "tag": null
+}
 {% endschema %}
