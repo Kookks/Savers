@@ -14,7 +14,7 @@
         "price_anchor": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div style=\"display:inline-flex;align-items:center;gap:6px;background:#fff3cd;border-radius:4px;padding:5px 10px;margin:2px 0 4px;\"><span style=\"font-size:12px;color:#856404;\">💰 Professional filters cost $60+ abroad — get it locally for $19.99, delivered to your door</span></div>"
+            "custom_liquid": "<div style=\"display:flex;align-items:center;gap:10px;margin:4px 0 8px;\"><span style=\"display:inline-flex;align-items:center;background:#e53935;color:#fff;font-weight:800;font-size:15px;letter-spacing:0.03em;padding:5px 12px;border-radius:5px;\">50% OFF</span><span style=\"font-size:13px;color:#888;text-decoration:line-through;\">$39.99</span><span style=\"font-size:12px;color:#e53935;font-weight:600;\">Limited time</span></div>"
           }
         },
         "rating": {
