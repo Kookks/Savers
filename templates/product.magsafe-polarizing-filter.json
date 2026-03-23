@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -11,42 +20,6 @@
           "type": "price",
           "settings": {}
         },
-        "price_anchor": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<div style=\"display:flex;align-items:center;gap:10px;margin:4px 0 8px;\"><span style=\"display:inline-flex;align-items:center;background:#e53935;color:#fff;font-weight:800;font-size:15px;letter-spacing:0.03em;padding:5px 12px;border-radius:5px;\">50% OFF</span><span style=\"font-size:13px;color:#888;text-decoration:line-through;\">$39.99</span><span style=\"font-size:12px;color:#e53935;font-weight:600;\">Limited time</span></div>"
-          }
-        },
-        "rating": {
-          "type": "rating",
-          "settings": {}
-        },
-        "summary_text": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<p style=\"font-size:14px;color:#555;line-height:1.75;margin:2px 0 10px;\">Snap on in 2 seconds. Cuts glare from water, glass &amp; sky instantly. Deeper colors, sharper photos — every time. No apps, no setup, no adapter rings.</p>"
-          }
-        },
-        "exclusive_badge": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<div style=\"display:flex;align-items:center;gap:10px;padding:10px 16px;background:#fae10a;border-radius:6px;border:2px solid #121212;margin:8px 0;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"#121212\"><path d=\"M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z\"/></svg><span style=\"font-weight:700;font-size:14px;color:#121212;\">🇱🇧 Exclusive in Lebanon — Only sold at SaversLeb</span></div>"
-          }
-        },
-        "live_counter": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<div id=\"liveCounter\" style=\"display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#fff8e1;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin:4px 0;\"><span style=\"display:flex;align-items:center;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#e53935\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg></span><span style=\"font-size:13px;color:#333;\"><strong id=\"viewCount\" style=\"color:#e53935;\"></strong> people are viewing this right now</span></div><script>(function(){var min=3,max=12,el=document.getElementById('viewCount');if(el){el.textContent=Math.floor(Math.random()*(max-min+1))+min;}})()</script>"
-          }
-        },
-        "inventory": {
-          "type": "inventory",
-          "settings": {
-            "text_style": "body",
-            "inventory_threshold": 10,
-            "show_inventory_quantity": true
-          }
-        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -54,88 +27,16 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": false
-          }
-        },
-        "trust_signals": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<div style=\"border-top:1px solid #e8e8e1;padding-top:14px;margin-top:2px;\"><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:10px;\"><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">💵</span><span><strong>Cash on Delivery</strong><br>Pay at your door</span></div><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">🚚</span><span><strong>Fast Delivery</strong><br>1–3 days across Lebanon</span></div><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">🔄</span><span><strong>30-Day Returns</strong><br>No questions asked</span></div><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">🇱🇧</span><span><strong>Lebanon-Wide</strong><br>All regions covered</span></div></div></div>"
-          }
-        },
-        "whatsapp_button": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<a href=\"https://wa.me/96181807900?text=Hi%20I'd%20like%20to%20order%20the%20MagSafe%20Polarizing%20Filter\" target=\"_blank\" rel=\"noopener\" style=\"display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;background:#25D366;color:#fff;border-radius:6px;font-weight:600;font-size:15px;text-decoration:none;margin-top:10px;box-sizing:border-box;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"#fff\"><path d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z\"/></svg>Order via WhatsApp</a>"
-          }
-        },
-        "icon_with_text": {
-          "type": "icon-with-text",
-          "settings": {
-            "layout": "horizontal",
-            "icon_1": "star",
-            "image_1": "shopify://shop_images/toppng.com-emoji-sparkles-622x646.png",
-            "heading_1": "Removes reflections & glare",
-            "icon_2": "return",
-            "image_2": "shopify://shop_images/Magnet--Streamline-Twemoji-Emoji.png",
-            "heading_2": "Instant MagSafe snap-on",
-            "icon_3": "truck",
-            "image_3": "shopify://shop_images/Backpack--Streamline-Noto-Emojis.png",
-            "heading_3": "Pocket-sized & lightweight"
-          }
-        },
-        "description_tab": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Product Details",
-            "icon": "clipboard",
-            "content": "<p>Every great shot you almost got — ruined by glare. Water reflections, car windows, bright skies — your iPhone camera sees all of it, and it shows.</p><p>The MagSafe Polarizing Filter snaps magnetically onto your iPhone in seconds, instantly cutting reflections and glare to give your photos the depth and clarity they deserve. No adapters, no tools — just cleaner, richer photos every time.</p><ul><li><strong>Eliminates glare and reflections</strong> from water, glass, and sky — so your photos show what you actually see, not what the light ruins</li><li><strong>Snaps on and off in seconds</strong> with MagSafe magnetic alignment — no threading, no rings, no wasted time</li><li><strong>Works over your existing MagSafe case</strong> — no need to remove anything, just attach and shoot</li><li><strong>Deepens colors and increases contrast</strong> — blues look bluer, greens look richer, skies get detail back</li><li><strong>Works with the native iPhone camera app</strong> — no setup, no extra apps required</li></ul>"
-          }
-        },
-        "compatibility_tab": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Compatibility",
-            "icon": "check_mark",
-            "content": "<p>Compatible with all MagSafe-enabled iPhone models:</p><ul><li>iPhone 12, 12 Mini, 12 Pro, 12 Pro Max</li><li>iPhone 13, 13 Mini, 13 Pro, 13 Pro Max</li><li>iPhone 14, 14 Plus, 14 Pro, 14 Pro Max</li><li>iPhone 15, 15 Plus, 15 Pro, 15 Pro Max</li><li>iPhone 16, 16 Plus, 16 Pro, 16 Pro Max</li></ul><p><em>Requires MagSafe-compatible iPhone or MagSafe case.</em></p>"
-          }
-        },
-        "shipping_tab": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Shipping & Returns",
-            "icon": "truck",
-            "content": "<p><strong>Delivery:</strong> 1–3 business days across Lebanon.</p><p><strong>Free shipping</strong> on all orders over $25.</p><p><strong>Returns:</strong> 30-day money-back guarantee. If you're not satisfied, we'll make it right — no questions asked.</p>"
-          }
-        },
-        "faq_tab": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Common Questions",
-            "icon": "chat_bubble",
-            "content": "<details style=\"border-bottom:1px solid #e8e8e1;padding:10px 0;\"><summary style=\"font-weight:600;cursor:pointer;list-style:none;\">Will it work with my current iPhone case?</summary><p style=\"margin:8px 0 0;color:#555;font-size:14px;\">Yes — as long as your case is MagSafe-compatible (most modern cases are). The filter clicks directly onto the magnetic ring. If your case supports wireless charging alignment, it will work.</p></details><details style=\"border-bottom:1px solid #e8e8e1;padding:10px 0;\"><summary style=\"font-weight:600;cursor:pointer;list-style:none;\">Is this the same product I saw on Instagram?</summary><p style=\"margin:8px 0 0;color:#555;font-size:14px;\">Yes. SaversLeb is the exclusive seller in Lebanon. Same product, delivered locally — no customs fees, no 4-week wait, no risk.</p></details><details style=\"border-bottom:1px solid #e8e8e1;padding:10px 0;\"><summary style=\"font-weight:600;cursor:pointer;list-style:none;\">How do I pay?</summary><p style=\"margin:8px 0 0;color:#555;font-size:14px;\">Cash on delivery — you pay when it arrives at your door. No card required. You can also order directly via WhatsApp if you prefer.</p></details><details style=\"padding:10px 0;\"><summary style=\"font-weight:600;cursor:pointer;list-style:none;\">What if I don't like it?</summary><p style=\"margin:8px 0 0;color:#555;font-size:14px;\">Return it within 30 days for a full refund. No questions asked. We stand behind the product completely.</p></details>"
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
           }
         }
       },
       "block_order": [
         "title",
         "price",
-        "price_anchor",
-        "rating",
-        "summary_text",
-        "exclusive_badge",
-        "live_counter",
-        "inventory",
         "quantity_selector",
-        "buy_buttons",
-        "trust_signals",
-        "whatsapp_button",
-        "icon_with_text",
-        "description_tab",
-        "compatibility_tab",
-        "shipping_tab",
-        "faq_tab"
+        "buy_buttons"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -147,139 +48,21 @@
         "mobile_thumbnails": "hide",
         "media_position": "left",
         "image_zoom": "lightbox",
-        "hide_variants": false,
+        "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 0,
         "padding_bottom": 12
       }
     },
-    "how_it_works": {
-      "type": "multicolumn",
-      "blocks": {
-        "step_1": {
-          "type": "column",
-          "settings": {
-            "title": "1 — Snap It On",
-            "text": "Hold the filter near your iPhone's camera. The MagSafe magnet clicks it perfectly into place in under 2 seconds. No tools, no threading, no adapter rings.",
-            "link_label": "",
-            "link": "",
-            "icon": "none"
-          }
-        },
-        "step_2": {
-          "type": "column",
-          "settings": {
-            "title": "2 — Open Your Camera",
-            "text": "Use the native iPhone camera app exactly as you always do. No settings to change, no extra apps to download. It just works.",
-            "link_label": "",
-            "link": "",
-            "icon": "none"
-          }
-        },
-        "step_3": {
-          "type": "column",
-          "settings": {
-            "title": "3 — Shoot Better Photos",
-            "text": "Point and shoot. Glare disappears, colors deepen, reflections vanish. Every scene looks exactly the way your eye sees it.",
-            "link_label": "",
-            "link": "",
-            "icon": "none"
-          }
-        }
-      },
-      "block_order": ["step_1", "step_2", "step_3"],
-      "settings": {
-        "title": "As Easy as 1, 2, 3",
-        "heading_size": "h2",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "scheme-2",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 52,
-        "padding_bottom": 36
-      }
-    },
-    "video_section": {
-      "type": "video",
-      "settings": {
-        "heading": "See the Difference for Yourself",
-        "heading_size": "h2",
-        "enable_video_looping": false,
-        "video_url": "https://www.youtube.com/watch?v=SWogZGOL_2M",
-        "description": "Watch how the MagSafe Polarizing Filter transforms your iPhone photos.",
-        "full_width": false,
-        "color_scheme": "scheme-2",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "reviews_section": {
-      "type": "multicolumn",
-      "blocks": {
-        "review_1": {
-          "type": "column",
-          "settings": {
-            "title": "\"Completely changed how I shoot\"",
-            "text": "I use it every time I'm near water or shooting through glass. The difference is immediately visible. ⭐⭐⭐⭐⭐\n— Ahmad, Beirut",
-            "link_label": "",
-            "link": "",
-            "icon": "none"
-          }
-        },
-        "review_2": {
-          "type": "column",
-          "settings": {
-            "title": "\"Best iPhone accessory I own\"",
-            "text": "Snaps on perfectly with MagSafe. No lag, no fuss. My travel photos look professional now. ⭐⭐⭐⭐⭐\n— Nour, Jounieh",
-            "link_label": "",
-            "link": "",
-            "icon": "none"
-          }
-        },
-        "review_3": {
-          "type": "column",
-          "settings": {
-            "title": "\"Finally available in Lebanon\"",
-            "text": "I was trying to find one for months. Fast delivery, exactly as described. Worth every penny. ⭐⭐⭐⭐⭐\n— Rami, Tripoli",
-            "link_label": "",
-            "link": "",
-            "icon": "none"
-          }
-        }
-      },
-      "block_order": ["review_1", "review_2", "review_3"],
-      "settings": {
-        "title": "What Customers Are Saying",
-        "heading_size": "h2",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "shadow",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 52,
-        "padding_bottom": 36
-      }
-    },
-    "related_products": {
+    "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You May Also Like",
+        "heading": "You may also like",
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
         "columns_mobile": "2",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -292,9 +75,6 @@
   },
   "order": [
     "main",
-    "how_it_works",
-    "video_section",
-    "reviews_section",
-    "related_products"
+    "related-products"
   ]
 }
