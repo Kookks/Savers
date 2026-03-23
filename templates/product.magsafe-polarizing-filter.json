@@ -68,7 +68,7 @@
         "custom_liquid": "<style>\n  .custom-yt-wrapper {\n    position: relative;\n    width: 100%;\n    max-width: 350px; /* Adjust this value to make the video larger or smaller */\n    aspect-ratio: 9 / 16; \n    border-radius: 12px;\n    overflow: hidden;\n    pointer-events: none; /* Prevents clicking/hovering, which hides the title and controls */\n  }\n  .custom-yt-wrapper iframe {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    border: none;\n  }\n</style>\n\n<div style=\"display: flex; justify-content: center; width: 100%; padding: 20px 0;\">\n  <div class=\"custom-yt-wrapper\">\n    <iframe \n      src=\"https://www.youtube.com/embed/Uzqe6iZJFs4?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&loop=1&playlist=Uzqe6iZJFs4\" \n      allow=\"autoplay; encrypted-media\" \n      allowfullscreen>\n    </iframe>\n  </div>\n</div>",
         "color_scheme": "",
         "padding_top": 24,
-        "padding_bottom": 52
+        "padding_bottom": 0
       }
     },
     "blocks_NEhUX7": {
@@ -124,210 +124,24 @@
       "name": "Filter comparison",
       "settings": {}
     },
-    "rich_text_yaLWNH": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_jzUQnR": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text_m9496K": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
-          }
-        },
-        "button_QjyhVm": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_jzUQnR",
-        "text_m9496K",
-        "button_QjyhVm"
-      ],
-      "name": "t:sections.rich-text.presets.name",
+    "custom_liquid_gYJ6kU": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "",
-        "full_width": true,
-        "padding_top": 40,
+        "custom_liquid": "<style>\n  .iphone-compatibility-grid {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 16px;\n    padding: 30px;\n    background-color: #fafafa;\n    border-radius: 12px;\n    max-width: 100%;\n  }\n\n  .iphone-compatibility-grid h2 {\n    grid-column: 1 / -1;\n    text-align: center;\n    font-size: 22px;\n    margin: 0 0 20px 0;\n    color: #000000;\n  }\n\n  .iphone-model-card {\n    background-color: #fae10a;\n    border: 1px solid #e0e0e0;\n    border-radius: 8px;\n    padding: 16px;\n    text-align: center;\n    font-size: 16px;\n    color: #000000;\n    transition: all 0.3s ease;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);\n  }\n\n  .iphone-model-card:hover {\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n    transform: translateY(-2px);\n  }\n\n  .iphone-compatibility-footer {\n    grid-column: 1 / -1;\n    text-align: center;\n    margin-top: 20px;\n    font-size: 14px;\n    color: #000000;\n    font-weight: 500;\n  }\n</style>\n\n<div class=\"iphone-compatibility-grid\">\n  <h2>📱 Works With Your iPhone</h2>\n  \n  <div class=\"iphone-model-card\">iPhone 16 Pro Max</div>\n  <div class=\"iphone-model-card\">iPhone 16 Pro</div>\n  <div class=\"iphone-model-card\">iPhone 16 Plus</div>\n  <div class=\"iphone-model-card\">iPhone 16</div>\n  <div class=\"iphone-model-card\">iPhone 15 Pro Max</div>\n  <div class=\"iphone-model-card\">iPhone 15 Pro</div>\n  <div class=\"iphone-model-card\">iPhone 15 Plus</div>\n  <div class=\"iphone-model-card\">iPhone 15</div>\n  <div class=\"iphone-model-card\">iPhone 14 Pro Max</div>\n  <div class=\"iphone-model-card\">iPhone 14 Pro</div>\n  <div class=\"iphone-model-card\">iPhone 14 Plus</div>\n  <div class=\"iphone-model-card\">iPhone 14</div>\n  <div class=\"iphone-model-card\">iPhone 13 Series</div>\n  <div class=\"iphone-model-card\">iPhone 12 Series</div>\n  \n  <div class=\"iphone-compatibility-footer\">All MagSafe Cases ✓</div>\n</div>",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
         "padding_bottom": 52
       }
     },
-    "image_with_text_ecdVgJ": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_ANj93W": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image with text",
-            "heading_size": "h1"
-          }
-        },
-        "text_MEytjb": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_style": "body"
-          }
-        },
-        "button_TVy4gd": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_ANj93W",
-        "text_MEytjb",
-        "button_TVy4gd"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
+    "custom_liquid_Mi8hwy": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
       "settings": {
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
+        "custom_liquid": "<style>\n  .conversion-steps-container {\n    text-align: center;\n    padding: 40px 20px; \n    background-color: #fafafa;\n    border-radius: 16px;\n    margin: 15px 0; \n    font-family: inherit;\n  }\n\n  .conversion-headline {\n    font-size: 4rem; /* Massive headline */\n    font-weight: 800;\n    color: #111;\n    margin-bottom: 30px;\n    line-height: 1.1;\n    letter-spacing: -1px;\n  }\n\n  .steps-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Widened to fit larger text */\n    gap: 25px;\n    max-width: 1400px;\n    margin: 0 auto;\n  }\n\n  .step-card {\n    background: #ffffff;\n    padding: 30px 25px; \n    border-radius: 12px;\n    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);\n    transition: transform 0.2s ease, box-shadow 0.2s ease;\n  }\n\n  .step-card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);\n  }\n\n  .step-number {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 70px; /* Much larger number circle */\n    height: 70px;\n    background: #000000;\n    color: #ffffff;\n    border-radius: 50%;\n    font-size: 2.2rem; /* Larger number */\n    font-weight: 700;\n    margin: 0 auto 20px auto;\n  }\n\n  .step-title {\n    font-size: 2.2rem; /* Massive step titles */\n    font-weight: 800;\n    color: #111;\n    margin-bottom: 15px;\n    line-height: 1.2;\n  }\n\n  .step-desc {\n    font-size: 1.4rem; /* Much larger paragraph text */\n    color: #444;\n    line-height: 1.5;\n    margin: 0;\n  }\n\n  /* Mobile adjustment to prevent text from breaking off-screen */\n  @media (max-width: 768px) {\n    .conversion-headline { font-size: 2.8rem; }\n    .step-title { font-size: 1.8rem; }\n    .step-desc { font-size: 1.2rem; }\n    .step-number { width: 55px; height: 55px; font-size: 1.8rem; }\n  }\n</style>\n\n<div class=\"conversion-steps-container\">\n  <h2 class=\"conversion-headline\">Ready to Shoot in 3 Seconds</h2>\n  \n  <div class=\"steps-grid\">\n    <div class=\"step-card\">\n      <div class=\"step-number\">1</div>\n      <h3 class=\"step-title\">Snap It On</h3>\n      <p class=\"step-desc\">Place the filter over your iPhone's camera. The MagSafe magnet clicks it into position instantly.</p>\n    </div>\n\n    <div class=\"step-card\">\n      <div class=\"step-number\">2</div>\n      <h3 class=\"step-title\">Rotate to Perfection</h3>\n      <p class=\"step-desc\">Rotate the 360° ring until reflections disappear and colours reach their peak richness.</p>\n    </div>\n\n    <div class=\"step-card\">\n      <div class=\"step-number\">3</div>\n      <h3 class=\"step-title\">Shoot & Impress</h3>\n      <p class=\"step-desc\">Open your native camera app or any pro app and take the best photo of your life.</p>\n    </div>\n  </div>\n</div>",
         "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "collapsible_content_3WynFM": {
-      "type": "collapsible-content",
-      "blocks": {
-        "collapsible_row_WRxTcq": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
-            "page": ""
-          }
-        },
-        "collapsible_row_eRQFDy": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
-            "page": ""
-          }
-        },
-        "collapsible_row_KnNmxe": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
-            "page": ""
-          }
-        },
-        "collapsible_row_WG8VyT": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_mark",
-            "row_content": "",
-            "page": ""
-          }
-        }
-      },
-      "block_order": [
-        "collapsible_row_WRxTcq",
-        "collapsible_row_eRQFDy",
-        "collapsible_row_KnNmxe",
-        "collapsible_row_WG8VyT"
-      ],
-      "name": "t:sections.collapsible_content.presets.name",
-      "settings": {
-        "caption": "",
-        "heading": "Collapsible content",
-        "heading_size": "h1",
-        "heading_alignment": "center",
-        "layout": "none",
-        "container_color_scheme": "",
-        "color_scheme": "",
-        "open_first_collapsible_row": false,
-        "image_ratio": "adapt",
-        "desktop_layout": "image_second",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn_tcYT9k": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_3R9pqG": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_LLhFA3": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_enwWjC": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_3R9pqG",
-        "column_LLhFA3",
-        "column_enwWjC"
-      ],
-      "name": "t:sections.multicolumn.presets.name",
-      "settings": {
-        "title": "Multicolumn",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "Button label",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "primary",
-        "color_scheme": "",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "related-products": {
@@ -353,10 +167,8 @@
     "main",
     "custom_liquid_Y8FyA8",
     "blocks_NEhUX7",
-    "rich_text_yaLWNH",
-    "image_with_text_ecdVgJ",
-    "collapsible_content_3WynFM",
-    "multicolumn_tcYT9k",
+    "custom_liquid_Mi8hwy",
+    "custom_liquid_gYJ6kU",
     "related-products"
   ]
 }
