@@ -457,8 +457,7 @@
 
       <!-- Shopify Product Form -->
       {%- form 'product', product, id: 'cp-product-form', novalidate: 'novalidate' -%}
-        <input type="hidden" name="id"        id="cp-variant-id" value="{{ current_var.id }}" />
-        <input type="hidden" name="return_to" id="cp-return-to"  value="" />
+        <input type="hidden" name="id" id="cp-variant-id" value="{{ current_var.id }}" />
 
         <!-- Variant Options -->
         {%- unless product.has_only_default_variant -%}
@@ -509,9 +508,7 @@
                     onclick="document.getElementById('cp-return-to').value=''">
               🛒 Add to Cart
             </button>
-            <button type="button" id="cpBuyNow" class="cp-btn cp-btn-dark" onclick="cpBuyNow()">
-              ⚡ Buy Now
-            </button>
+
           {%- else -%}
             <button type="button" class="cp-btn cp-btn-primary" disabled>
               Sold Out
@@ -696,12 +693,6 @@
     cpQty = Math.max(1, cpQty + delta);
     document.getElementById('cpQtyNum').textContent  = cpQty;
     document.getElementById('cpQtyInput').value = cpQty;
-  };
-
-  /* ─── Buy Now — sets return_to then submits the real Shopify form ─── */
-  window.cpBuyNow = function() {
-    document.getElementById('cp-return-to').value = '/checkout';
-    document.getElementById('cp-product-form').submit();
   };
 
   /* ─── Accordion ─── */
