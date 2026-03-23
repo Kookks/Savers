@@ -124,16 +124,6 @@
       "name": "Filter comparison",
       "settings": {}
     },
-    "custom_liquid_gYJ6kU": {
-      "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
-      "settings": {
-        "custom_liquid": "<style>\n  .iphone-compatibility-grid {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 16px;\n    padding: 30px;\n    background-color: #fafafa;\n    border-radius: 12px;\n    max-width: 100%;\n  }\n\n  .iphone-compatibility-grid h2 {\n    grid-column: 1 / -1;\n    text-align: center;\n    font-size: 22px;\n    margin: 0 0 20px 0;\n    color: #000000;\n  }\n\n  .iphone-model-card {\n    background-color: #fae10a;\n    border: 1px solid #e0e0e0;\n    border-radius: 8px;\n    padding: 16px;\n    text-align: center;\n    font-size: 16px;\n    color: #000000;\n    transition: all 0.3s ease;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);\n  }\n\n  .iphone-model-card:hover {\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n    transform: translateY(-2px);\n  }\n\n  .iphone-compatibility-footer {\n    grid-column: 1 / -1;\n    text-align: center;\n    margin-top: 20px;\n    font-size: 14px;\n    color: #000000;\n    font-weight: 500;\n  }\n</style>\n\n<div class=\"iphone-compatibility-grid\">\n  <h2>📱 Works With Your iPhone</h2>\n  \n  <div class=\"iphone-model-card\">iPhone 16 Pro Max</div>\n  <div class=\"iphone-model-card\">iPhone 16 Pro</div>\n  <div class=\"iphone-model-card\">iPhone 16 Plus</div>\n  <div class=\"iphone-model-card\">iPhone 16</div>\n  <div class=\"iphone-model-card\">iPhone 15 Pro Max</div>\n  <div class=\"iphone-model-card\">iPhone 15 Pro</div>\n  <div class=\"iphone-model-card\">iPhone 15 Plus</div>\n  <div class=\"iphone-model-card\">iPhone 15</div>\n  <div class=\"iphone-model-card\">iPhone 14 Pro Max</div>\n  <div class=\"iphone-model-card\">iPhone 14 Pro</div>\n  <div class=\"iphone-model-card\">iPhone 14 Plus</div>\n  <div class=\"iphone-model-card\">iPhone 14</div>\n  <div class=\"iphone-model-card\">iPhone 13 Series</div>\n  <div class=\"iphone-model-card\">iPhone 12 Series</div>\n  \n  <div class=\"iphone-compatibility-footer\">All MagSafe Cases ✓</div>\n</div>",
-        "color_scheme": "scheme-1",
-        "padding_top": 0,
-        "padding_bottom": 52
-      }
-    },
     "custom_liquid_Mi8hwy": {
       "type": "custom-liquid",
       "name": "t:sections.custom-liquid.presets.name",
@@ -142,6 +132,16 @@
         "color_scheme": "",
         "padding_top": 0,
         "padding_bottom": 0
+      }
+    },
+    "custom_liquid_gYJ6kU": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n  .iphone-compatibility-grid {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 16px;\n    padding: 30px;\n    background-color: #fafafa;\n    border-radius: 12px;\n    max-width: 100%;\n  }\n\n  .iphone-compatibility-grid h2 {\n    grid-column: 1 / -1;\n    text-align: center;\n    font-size: 22px;\n    margin: 0 0 20px 0;\n    color: #000000;\n  }\n\n  .iphone-model-card {\n    background-color: #fae10a;\n    border: 1px solid #e0e0e0;\n    border-radius: 8px;\n    padding: 16px;\n    text-align: center;\n    font-size: 16px;\n    color: #000000;\n    transition: all 0.3s ease;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);\n  }\n\n  .iphone-model-card:hover {\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n    transform: translateY(-2px);\n  }\n\n  .iphone-compatibility-footer {\n    grid-column: 1 / -1;\n    text-align: center;\n    margin-top: 20px;\n    font-size: 14px;\n    color: #000000;\n    font-weight: 500;\n  }\n</style>\n\n<div class=\"iphone-compatibility-grid\">\n  <h2>📱 Works With Your iPhone</h2>\n  \n  <div class=\"iphone-model-card\">iPhone 16 Pro Max</div>\n  <div class=\"iphone-model-card\">iPhone 16 Pro</div>\n  <div class=\"iphone-model-card\">iPhone 16 Plus</div>\n  <div class=\"iphone-model-card\">iPhone 16</div>\n  <div class=\"iphone-model-card\">iPhone 15 Pro Max</div>\n  <div class=\"iphone-model-card\">iPhone 15 Pro</div>\n  <div class=\"iphone-model-card\">iPhone 15 Plus</div>\n  <div class=\"iphone-model-card\">iPhone 15</div>\n  <div class=\"iphone-model-card\">iPhone 14 Pro Max</div>\n  <div class=\"iphone-model-card\">iPhone 14 Pro</div>\n  <div class=\"iphone-model-card\">iPhone 14 Plus</div>\n  <div class=\"iphone-model-card\">iPhone 14</div>\n  <div class=\"iphone-model-card\">iPhone 13 Series</div>\n  <div class=\"iphone-model-card\">iPhone 12 Series</div>\n  \n  <div class=\"iphone-compatibility-footer\">All MagSafe Cases ✓</div>\n</div>",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 52
       }
     },
     "related-products": {
@@ -161,6 +161,78 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "collapsible_content_eAEGcP": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_Y4diCh": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Highest Quality",
+            "icon": "star",
+            "row_content": "<p>We test every unit to guarantee uncompromising quality at a price-to-performance ratio that is hard to beat.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_FLCjJt": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Satisfied or Money Back",
+            "icon": "lock",
+            "row_content": "<p>We accept returns with full refund for unopened packages. Contact us on +961 81 807900</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_DQQtbE": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Delivery",
+            "icon": "box",
+            "row_content": "<p>Get your order within 1-3 business days</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_Y4diCh",
+        "collapsible_row_FLCjJt",
+        "collapsible_row_DQQtbE"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "row",
+        "container_color_scheme": "",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_kRFiAE": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div class=\"savers-mobile-optimized\">\n  \n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/></svg>\n    </div>\n    <strong>Trusted Store</strong>\n  </div>\n\n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"/></svg>\n    </div>\n    <strong>24/7 Customer Service</strong>\n  </div>\n\n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><rect x=\"1\" y=\"3\" width=\"15\" height=\"13\"></rect><polygon points=\"16 8 20 8 23 11 23 16 16 16 16 8\"></polygon><circle cx=\"5.5\" cy=\"18.5\" r=\"2.5\"></circle><circle cx=\"18.5\" cy=\"18.5\" r=\"2.5\"></circle></svg>\n    </div>\n    <strong>Fast Shipping</strong>\n  </div>\n\n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><polyline points=\"20 6 9 17 4 12\"></polyline></svg>\n    </div>\n    <strong>Guaranteed Satisfaction</strong>\n  </div>\n\n</div>\n\n<style>\n  .savers-mobile-optimized {\n    /* Increased side padding to 30px and top/bottom to 25px */\n    padding: 25px 30px;\n    max-width: 100%;\n    background: #fff;\n    box-sizing: border-box;\n  }\n\n  .bw-row {\n    display: flex;\n    align-items: center;\n    gap: 16px; /* Slightly wider gap for a cleaner look */\n    padding: 15px 0; /* Added consistent vertical padding inside each row */\n    border-bottom: 0.5px solid #eaeaea;\n  }\n\n  .bw-row:last-child {\n    border-bottom: none;\n    padding-bottom: 0;\n  }\n\n  .bw-row:first-child {\n    padding-top: 0;\n  }\n\n  .bw-svg-icon {\n    width: 20px; /* Scaled up slightly to match the new padding */\n    height: 20px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-shrink: 0;\n  }\n\n  .bw-row strong {\n    font-size: 14px; /* Bumped up slightly for better legibility */\n    font-weight: 600;\n    color: #121212;\n    letter-spacing: 0.2px;\n  }\n\n  /* Adjustments for very small screens */\n  @media screen and (max-width: 380px) {\n    .savers-mobile-optimized {\n      padding: 20px 20px;\n    }\n    .bw-row {\n      gap: 12px;\n    }\n  }\n</style>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "custom_liquid_GCEmAr": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div class=\"savers-store-reviews\">\n  \n  <h2 class=\"section-title\">Customers Review</h2>\n\n  <div class=\"store-review-item\">\n    <div class=\"bw-stars\">★★★★★</div>\n    <p class=\"review-body\">\"Finally found a shop that actually cares about what they sell. Everything I've ordered so far is top quality and exactly as described.\"</p>\n    <span class=\"review-user\">— Anthony S.</span>\n  </div>\n\n  <div class=\"store-review-item\">\n    <div class=\"bw-stars\">★★★★★</div>\n    <p class=\"review-body\">\"Shipping was way faster than I expected. Packaged securely and arrived in perfect condition. Will definitely be a returning customer.\"</p>\n    <span class=\"review-user\">— Sarah K.</span>\n  </div>\n\n  <div class=\"store-review-item\">\n    <div class=\"bw-stars\">★★★★★</div>\n    <p class=\"review-body\">\"Had a small question about my order and it was fixed within minutes via WhatsApp. Best service I've had in a long time.\"</p>\n    <span class=\"review-user\">— Jad B.</span>\n  </div>\n\n</div>\n\n<style>\n  .savers-store-reviews {\n    padding: 30px 15px;\n    max-width: 500px;\n    margin: 0 auto;\n    text-align: center;\n    background: #fff;\n    font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  }\n\n  .section-title {\n    font-size: 14px;\n    font-weight: 800;\n    text-transform: uppercase;\n    letter-spacing: 2px;\n    margin-bottom: 40px;\n    color: #000;\n  }\n\n  .store-review-item {\n    margin-bottom: 35px;\n    padding-bottom: 25px;\n    border-bottom: 0.5px solid #eaeaea;\n  }\n\n  .store-review-item:last-child {\n    border-bottom: none;\n    margin-bottom: 0;\n  }\n\n  .bw-stars {\n    font-size: 14px; /* Shrunk for a cleaner look */\n    color: #000;\n    margin-bottom: 12px;\n    letter-spacing: 2px;\n  }\n\n  .review-body {\n    font-size: 15px;\n    line-height: 1.5;\n    color: #333;\n    font-style: italic;\n    margin: 0 0 10px 0;\n  }\n\n  .review-user {\n    font-size: 12px;\n    font-weight: 700;\n    color: #000;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n  }\n\n  /* Mobile optimization */\n  @media screen and (max-width: 480px) {\n    .review-body { font-size: 14px; }\n    .section-title { margin-bottom: 30px; }\n  }\n</style>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
@@ -169,6 +241,9 @@
     "blocks_NEhUX7",
     "custom_liquid_Mi8hwy",
     "custom_liquid_gYJ6kU",
-    "related-products"
+    "related-products",
+    "collapsible_content_eAEGcP",
+    "custom_liquid_kRFiAE",
+    "custom_liquid_GCEmAr"
   ]
 }
