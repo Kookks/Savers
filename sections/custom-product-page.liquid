@@ -456,7 +456,7 @@
       </div>
 
       <!-- Shopify Product Form -->
-      {%- form 'product', product, id: 'cp-product-form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+      {%- form 'product', product, id: 'cp-product-form', novalidate: 'novalidate' -%}
         <input type="hidden" name="id" id="cp-variant-id" value="{{ current_var.id }}" />
 
         <!-- Variant Options -->
@@ -507,8 +507,7 @@
             <button type="submit" name="add" id="cpAddToCart" class="cp-btn cp-btn-primary">
               🛒 Add to Cart
             </button>
-            <button type="submit" id="cpBuyNow" class="cp-btn cp-btn-dark"
-                    onclick="document.getElementById('cp-product-form').setAttribute('action','{{ routes.cart_url }}'); this.form.submit();">
+            <button type="button" id="cpBuyNow" class="cp-btn cp-btn-dark" onclick="cpBuyNow()">
               ⚡ Buy Now
             </button>
           {%- else -%}
@@ -695,6 +694,29 @@
     cpQty = Math.max(1, cpQty + delta);
     document.getElementById('cpQtyNum').textContent  = cpQty;
     document.getElementById('cpQtyInput').value = cpQty;
+  };
+
+  /* ─── Buy Now (add to cart then go straight to checkout) ─── */
+  window.cpBuyNow = function() {
+    var btn = document.getElementById('cpBuyNow');
+    var variantId = parseInt(document.getElementById('cp-variant-id').value);
+    var qty       = parseInt(document.getElementById('cpQtyInput').value) || 1;
+    btn.disabled  = true;
+    btn.textContent = 'Processing…';
+    fetch('/cart/add.js', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body:    JSON.stringify({ id: variantId, quantity: qty })
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error('cart_add_failed');
+      window.location.href = '/checkout';
+    })
+    .catch(function() {
+      btn.disabled    = false;
+      btn.textContent = '⚡ Buy Now';
+      alert('Something went wrong. Please try again.');
+    });
   };
 
   /* ─── Accordion ─── */
