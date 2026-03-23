@@ -48,18 +48,6 @@
   .cp-wrap *, .cp-wrap *::before, .cp-wrap *::after { box-sizing: border-box; }
   .cp-wrap { font-family: var(--cp-font); color: var(--cp-text); }
 
-  /* ─── Announcement ─── */
-  .cp-announce {
-    background: var(--cp-yellow);
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: .3px;
-    color: var(--cp-black);
-  }
-  .cp-announce span { margin: 0 8px; opacity: .45; }
-
   /* ─── Breadcrumb ─── */
   .cp-breadcrumb {
     padding: 16px 24px 0;
@@ -416,13 +404,6 @@
 
 <div class="cp-wrap">
 
-  <!-- Announcement Bar -->
-  <div class="cp-announce">
-    🚚 Free shipping on orders over $35
-    <span>|</span> 💳 Cash on Delivery available
-    <span>|</span> 🔄 30-Day Money-Back Guarantee
-  </div>
-
   <!-- Breadcrumb -->
   <div class="cp-breadcrumb">
     <a href="{{ routes.root_url }}">Home</a>
@@ -493,11 +474,11 @@
         <p class="cp-subtitle">Pro-grade polarizing filter with 1-second MagSafe attachment.</p>
       {%- endif -%}
 
-      <!-- Ratings (static — replace with a reviews app widget if you have one) -->
+      <!-- Ratings (numbers controlled via Theme Customizer → Section Settings) -->
       <div class="cp-rating">
         <span class="cp-stars">★★★★★</span>
-        <span class="cp-rating-count">4.9 (127 reviews)</span>
-        <span class="cp-rating-sold">500+ sold this month</span>
+        <span class="cp-rating-count">{{ section.settings.review_score }} ({{ section.settings.review_count }} reviews)</span>
+        <span class="cp-rating-sold">{{ section.settings.sold_count }} sold this month</span>
       </div>
 
       <!-- Price -->
@@ -552,7 +533,7 @@
         <!-- Urgency Bar -->
         <div class="cp-urgency">
           <div class="cp-pulse"></div>
-          <span class="cp-urgency-text">⚡ Only 7 units left — 23 people viewing this right now</span>
+          <span class="cp-urgency-text">⚡ Only {{ section.settings.units_left }} units left — hurry before it sells out!</span>
         </div>
 
         <!-- CTA Buttons -->
@@ -679,10 +660,10 @@
         <p class="cp-eyebrow" style="color:var(--cp-yellow-dark)">Customer Reviews</p>
         <h2 class="cp-section-title" style="color:var(--cp-text)">What photographers are saying</h2>
         <div class="cp-overall">
-          <div class="cp-big-score">4.9</div>
+          <div class="cp-big-score">{{ section.settings.review_score }}</div>
           <div>
             <div class="cp-score-stars">★★★★★</div>
-            <div class="cp-score-count">Based on 127 reviews</div>
+            <div class="cp-score-count">Based on {{ section.settings.review_count }} reviews</div>
           </div>
         </div>
       </div>
@@ -841,8 +822,36 @@
       "type": "text",
       "id": "whatsapp_number",
       "label": "WhatsApp Number (with country code, no +)",
-      "default": "96181807900",
+      "default": "96170000000",
       "info": "Example: 96170123456 for Lebanon +961 70 123 456"
+    },
+    {
+      "type": "text",
+      "id": "review_score",
+      "label": "Review Score (e.g. 4.9)",
+      "default": "4.9",
+      "info": "Shown next to the stars near the product title and in the reviews section"
+    },
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "Number of Reviews",
+      "default": 127,
+      "info": "Shown as '(127 reviews)' near the title and 'Based on 127 reviews' in the reviews section"
+    },
+    {
+      "type": "text",
+      "id": "sold_count",
+      "label": "Units Sold This Month (e.g. 500+)",
+      "default": "500+",
+      "info": "Shown as '500+ sold this month' next to the review count"
+    },
+    {
+      "type": "number",
+      "id": "units_left",
+      "label": "Units Left (urgency bar)",
+      "default": 7,
+      "info": "Shown in the yellow urgency bar below the quantity selector"
     }
   ],
   "presets": [
