@@ -42,10 +42,6 @@
           "settings": {
             "custom_liquid": "<div style=\"border-top:1px solid #e8e8e1;padding-top:0px;margin-top:2px;\"><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:10px;\"><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">💵</span><span><strong>Cash on Delivery</strong><br>Pay at your door</span></div><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">🚚</span><span><strong>Fast Delivery</strong><br>1–3 days across Lebanon</span></div><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">🔄</span><span><strong>30-Day Returns</strong><br>No questions asked</span></div><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">🇱🇧</span><span><strong>Lebanon-Wide</strong><br>All regions covered</span></div></div></div>"
           }
-        },
-        "description_cin4mn": {
-          "type": "description",
-          "settings": {}
         }
       },
       "block_order": [
@@ -54,8 +50,7 @@
         "price",
         "quantity_selector",
         "buy_buttons_XRthpp",
-        "custom_liquid_DqCfzL",
-        "description_cin4mn"
+        "custom_liquid_DqCfzL"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -71,6 +66,96 @@
         "enable_video_looping": false,
         "padding_top": 0,
         "padding_bottom": 0
+      }
+    },
+    "custom_liquid_z4Wjb3": {
+      "type": "custom-liquid",
+      "name": "Trusted Store",
+      "settings": {
+        "custom_liquid": "<div class=\"savers-mobile-optimized\">\n  \n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/></svg>\n    </div>\n    <strong>Trusted Store</strong>\n  </div>\n\n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"/></svg>\n    </div>\n    <strong>24/7 Customer Service</strong>\n  </div>\n\n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><rect x=\"1\" y=\"3\" width=\"15\" height=\"13\"></rect><polygon points=\"16 8 20 8 23 11 23 16 16 16 16 8\"></polygon><circle cx=\"5.5\" cy=\"18.5\" r=\"2.5\"></circle><circle cx=\"18.5\" cy=\"18.5\" r=\"2.5\"></circle></svg>\n    </div>\n    <strong>Fast Shipping</strong>\n  </div>\n\n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><polyline points=\"20 6 9 17 4 12\"></polyline></svg>\n    </div>\n    <strong>Guaranteed Satisfaction</strong>\n  </div>\n\n</div>\n\n<style>\n  .savers-mobile-optimized {\n    /* Increased side padding to 30px and top/bottom to 25px */\n    padding: 25px 30px;\n    max-width: 100%;\n    background: #fff;\n    box-sizing: border-box;\n  }\n\n  .bw-row {\n    display: flex;\n    align-items: center;\n    gap: 16px; /* Slightly wider gap for a cleaner look */\n    padding: 15px 0; /* Added consistent vertical padding inside each row */\n    border-bottom: 0.5px solid #eaeaea;\n  }\n\n  .bw-row:last-child {\n    border-bottom: none;\n    padding-bottom: 0;\n  }\n\n  .bw-row:first-child {\n    padding-top: 0;\n  }\n\n  .bw-svg-icon {\n    width: 20px; /* Scaled up slightly to match the new padding */\n    height: 20px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-shrink: 0;\n  }\n\n  .bw-row strong {\n    font-size: 14px; /* Bumped up slightly for better legibility */\n    font-weight: 600;\n    color: #121212;\n    letter-spacing: 0.2px;\n  }\n\n  /* Adjustments for very small screens */\n  @media screen and (max-width: 380px) {\n    .savers-mobile-optimized {\n      padding: 20px 20px;\n    }\n    .bw-row {\n      gap: 12px;\n    }\n  }\n</style>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "177428001137b4a7d2": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_0fab557_ebKDm6": {
+          "type": "ai_gen_block_0fab557",
+          "settings": {
+            "without_filter_title": "Without filter",
+            "with_filter_title": "With this filter",
+            "without_point_1": "Washed out colors",
+            "with_point_1": "Vibrant, saturated colors",
+            "without_point_2": "Harsh glare and reflections",
+            "with_point_2": "Reduced glare and reflections",
+            "without_point_3": "Low contrast",
+            "with_point_3": "Enhanced contrast",
+            "without_point_4": "",
+            "with_point_4": "",
+            "without_point_5": "",
+            "with_point_5": "",
+            "desktop_width_percent": 100,
+            "padding": 20,
+            "column_gap": 15,
+            "row_gap": 10,
+            "border_radius": 8,
+            "background_color": "#ffffff",
+            "header_font_size": 16,
+            "header_font_weight": "700",
+            "header_padding": 12,
+            "header_border_radius": 6,
+            "header_spacing": 20,
+            "without_header_bg": "#f5f5f5",
+            "without_header_text": "#666666",
+            "with_header_bg": "#fae10a",
+            "with_header_text": "#000000",
+            "cell_padding": 12,
+            "cell_border_radius": 4,
+            "text_font_size": 14,
+            "icon_size": 20,
+            "without_cell_bg": "#fef5f5",
+            "without_text_color": "#333333",
+            "without_icon_color": "#dc2626",
+            "with_cell_bg": "#f0fdf4",
+            "with_text_color": "#333333",
+            "with_icon_color": "#16a34a"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_0fab557_ebKDm6"
+      ],
+      "settings": {}
+    },
+    "custom_liquid_wRyFLz": {
+      "type": "custom-liquid",
+      "name": "Customer Reviews",
+      "settings": {
+        "custom_liquid": "<div class=\"savers-store-reviews\">\n  \n  <h2 class=\"section-title\">Customers Review</h2>\n\n  <div class=\"store-review-item\">\n    <div class=\"bw-stars\">★★★★★</div>\n    <p class=\"review-body\">\"Finally found a shop that actually cares about what they sell. Everything I've ordered so far is top quality and exactly as described.\"</p>\n    <span class=\"review-user\">— Anthony S.</span>\n  </div>\n\n  <div class=\"store-review-item\">\n    <div class=\"bw-stars\">★★★★★</div>\n    <p class=\"review-body\">\"Shipping was way faster than I expected. Packaged securely and arrived in perfect condition. Will definitely be a returning customer.\"</p>\n    <span class=\"review-user\">— Sarah K.</span>\n  </div>\n\n  <div class=\"store-review-item\">\n    <div class=\"bw-stars\">★★★★★</div>\n    <p class=\"review-body\">\"Had a small question about my order and it was fixed within minutes via WhatsApp. Best service I've had in a long time.\"</p>\n    <span class=\"review-user\">— Jad B.</span>\n  </div>\n\n</div>\n\n<style>\n  .savers-store-reviews {\n    padding: 30px 15px;\n    max-width: 500px;\n    margin: 0 auto;\n    text-align: center;\n    background: #fff;\n    font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  }\n\n  .section-title {\n    font-size: 14px;\n    font-weight: 800;\n    text-transform: uppercase;\n    letter-spacing: 2px;\n    margin-bottom: 40px;\n    color: #000;\n  }\n\n  .store-review-item {\n    margin-bottom: 35px;\n    padding-bottom: 25px;\n    border-bottom: 0.5px solid #eaeaea;\n  }\n\n  .store-review-item:last-child {\n    border-bottom: none;\n    margin-bottom: 0;\n  }\n\n  .bw-stars {\n    font-size: 14px; /* Shrunk for a cleaner look */\n    color: #000;\n    margin-bottom: 12px;\n    letter-spacing: 2px;\n  }\n\n  .review-body {\n    font-size: 15px;\n    line-height: 1.5;\n    color: #333;\n    font-style: italic;\n    margin: 0 0 10px 0;\n  }\n\n  .review-user {\n    font-size: 12px;\n    font-weight: 700;\n    color: #000;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n  }\n\n  /* Mobile optimization */\n  @media screen and (max-width: 480px) {\n    .review-body { font-size: 14px; }\n    .section-title { margin-bottom: 30px; }\n  }\n</style>",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Hot Selling",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
       }
     },
     "collapsible_content_tREzB4": {
@@ -124,51 +209,14 @@
         "padding_top": 0,
         "padding_bottom": 0
       }
-    },
-    "custom_liquid_z4Wjb3": {
-      "type": "custom-liquid",
-      "name": "Trusted Store",
-      "settings": {
-        "custom_liquid": "<div class=\"savers-mobile-optimized\">\n  \n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/></svg>\n    </div>\n    <strong>Trusted Store</strong>\n  </div>\n\n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"/></svg>\n    </div>\n    <strong>24/7 Customer Service</strong>\n  </div>\n\n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><rect x=\"1\" y=\"3\" width=\"15\" height=\"13\"></rect><polygon points=\"16 8 20 8 23 11 23 16 16 16 16 8\"></polygon><circle cx=\"5.5\" cy=\"18.5\" r=\"2.5\"></circle><circle cx=\"18.5\" cy=\"18.5\" r=\"2.5\"></circle></svg>\n    </div>\n    <strong>Fast Shipping</strong>\n  </div>\n\n  <div class=\"bw-row\">\n    <div class=\"bw-svg-icon\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"black\" stroke-width=\"2.5\"><polyline points=\"20 6 9 17 4 12\"></polyline></svg>\n    </div>\n    <strong>Guaranteed Satisfaction</strong>\n  </div>\n\n</div>\n\n<style>\n  .savers-mobile-optimized {\n    /* Increased side padding to 30px and top/bottom to 25px */\n    padding: 25px 30px;\n    max-width: 100%;\n    background: #fff;\n    box-sizing: border-box;\n  }\n\n  .bw-row {\n    display: flex;\n    align-items: center;\n    gap: 16px; /* Slightly wider gap for a cleaner look */\n    padding: 15px 0; /* Added consistent vertical padding inside each row */\n    border-bottom: 0.5px solid #eaeaea;\n  }\n\n  .bw-row:last-child {\n    border-bottom: none;\n    padding-bottom: 0;\n  }\n\n  .bw-row:first-child {\n    padding-top: 0;\n  }\n\n  .bw-svg-icon {\n    width: 20px; /* Scaled up slightly to match the new padding */\n    height: 20px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-shrink: 0;\n  }\n\n  .bw-row strong {\n    font-size: 14px; /* Bumped up slightly for better legibility */\n    font-weight: 600;\n    color: #121212;\n    letter-spacing: 0.2px;\n  }\n\n  /* Adjustments for very small screens */\n  @media screen and (max-width: 380px) {\n    .savers-mobile-optimized {\n      padding: 20px 20px;\n    }\n    .bw-row {\n      gap: 12px;\n    }\n  }\n</style>",
-        "color_scheme": "",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "custom_liquid_wRyFLz": {
-      "type": "custom-liquid",
-      "name": "Customer Reviews",
-      "settings": {
-        "custom_liquid": "<div class=\"savers-store-reviews\">\n  \n  <h2 class=\"section-title\">Customers Review</h2>\n\n  <div class=\"store-review-item\">\n    <div class=\"bw-stars\">★★★★★</div>\n    <p class=\"review-body\">\"Finally found a shop that actually cares about what they sell. Everything I've ordered so far is top quality and exactly as described.\"</p>\n    <span class=\"review-user\">— Anthony S.</span>\n  </div>\n\n  <div class=\"store-review-item\">\n    <div class=\"bw-stars\">★★★★★</div>\n    <p class=\"review-body\">\"Shipping was way faster than I expected. Packaged securely and arrived in perfect condition. Will definitely be a returning customer.\"</p>\n    <span class=\"review-user\">— Sarah K.</span>\n  </div>\n\n  <div class=\"store-review-item\">\n    <div class=\"bw-stars\">★★★★★</div>\n    <p class=\"review-body\">\"Had a small question about my order and it was fixed within minutes via WhatsApp. Best service I've had in a long time.\"</p>\n    <span class=\"review-user\">— Jad B.</span>\n  </div>\n\n</div>\n\n<style>\n  .savers-store-reviews {\n    padding: 30px 15px;\n    max-width: 500px;\n    margin: 0 auto;\n    text-align: center;\n    background: #fff;\n    font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  }\n\n  .section-title {\n    font-size: 14px;\n    font-weight: 800;\n    text-transform: uppercase;\n    letter-spacing: 2px;\n    margin-bottom: 40px;\n    color: #000;\n  }\n\n  .store-review-item {\n    margin-bottom: 35px;\n    padding-bottom: 25px;\n    border-bottom: 0.5px solid #eaeaea;\n  }\n\n  .store-review-item:last-child {\n    border-bottom: none;\n    margin-bottom: 0;\n  }\n\n  .bw-stars {\n    font-size: 14px; /* Shrunk for a cleaner look */\n    color: #000;\n    margin-bottom: 12px;\n    letter-spacing: 2px;\n  }\n\n  .review-body {\n    font-size: 15px;\n    line-height: 1.5;\n    color: #333;\n    font-style: italic;\n    margin: 0 0 10px 0;\n  }\n\n  .review-user {\n    font-size: 12px;\n    font-weight: 700;\n    color: #000;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n  }\n\n  /* Mobile optimization */\n  @media screen and (max-width: 480px) {\n    .review-body { font-size: 14px; }\n    .section-title { margin-bottom: 30px; }\n  }\n</style>",
-        "color_scheme": "scheme-1",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "heading": "Hot Selling",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 36,
-        "padding_bottom": 28
-      }
     }
   },
   "order": [
     "main",
-    "collapsible_content_tREzB4",
     "custom_liquid_z4Wjb3",
+    "177428001137b4a7d2",
     "custom_liquid_wRyFLz",
-    "related-products"
+    "related-products",
+    "collapsible_content_tREzB4"
   ]
 }

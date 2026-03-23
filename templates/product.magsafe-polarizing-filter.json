@@ -30,13 +30,20 @@
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": true
           }
+        },
+        "custom_liquid_jP7byA": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"border-top:1px solid #e8e8e1;padding-top:0px;margin-top:2px;\"><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:10px;\"><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">💵</span><span><strong>Cash on Delivery</strong><br>Pay at your door</span></div><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">🚚</span><span><strong>Fast Delivery</strong><br>1–3 days across Lebanon</span></div><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">🔄</span><span><strong>30-Day Returns</strong><br>No questions asked</span></div><div style=\"display:flex;align-items:center;gap:8px;font-size:13px;color:#333;\"><span style=\"font-size:16px;\">🇱🇧</span><span><strong>Lebanon-Wide</strong><br>All regions covered</span></div></div></div>"
+          }
         }
       },
       "block_order": [
         "title",
         "price",
         "quantity_selector",
-        "buy_buttons"
+        "buy_buttons",
+        "custom_liquid_jP7byA"
       ],
       "settings": {
         "enable_sticky_info": true,
