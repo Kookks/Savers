@@ -523,6 +523,15 @@
 
       {%- endform -%}
 
+      <!-- Hidden Buy Now Form (posts directly to /cart/add then redirects to checkout) -->
+      <form id="cp-buynow-form" method="post" action="/cart/add" style="display:none">
+        <input type="hidden" name="form_type" value="product" />
+        <input type="hidden" name="utf8" value="✓" />
+        <input type="hidden" name="id"       id="cp-buynow-id"  value="{{ current_var.id }}" />
+        <input type="hidden" name="quantity" id="cp-buynow-qty" value="1" />
+        <input type="hidden" name="return_to" value="/checkout" />
+      </form>
+
       <!-- Trust Grid -->
       <div class="cp-trust">
         <div class="cp-trust-item"><div class="cp-trust-icon">🚚</div><div class="cp-trust-text">Free Shipping<br>Over $25</div></div>
@@ -696,27 +705,11 @@
     document.getElementById('cpQtyInput').value = cpQty;
   };
 
-  /* ─── Buy Now (add to cart then go straight to checkout) ─── */
+  /* ─── Buy Now (native form POST → /cart/add → /checkout) ─── */
   window.cpBuyNow = function() {
-    var btn = document.getElementById('cpBuyNow');
-    var variantId = parseInt(document.getElementById('cp-variant-id').value);
-    var qty       = parseInt(document.getElementById('cpQtyInput').value) || 1;
-    btn.disabled  = true;
-    btn.textContent = 'Processing…';
-    fetch('/cart/add.js', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body:    JSON.stringify({ id: variantId, quantity: qty })
-    })
-    .then(function(res) {
-      if (!res.ok) throw new Error('cart_add_failed');
-      window.location.href = '/checkout';
-    })
-    .catch(function() {
-      btn.disabled    = false;
-      btn.textContent = '⚡ Buy Now';
-      alert('Something went wrong. Please try again.');
-    });
+    document.getElementById('cp-buynow-id').value  = document.getElementById('cp-variant-id').value;
+    document.getElementById('cp-buynow-qty').value = document.getElementById('cpQtyInput').value || 1;
+    document.getElementById('cp-buynow-form').submit();
   };
 
   /* ─── Accordion ─── */
