@@ -48,20 +48,6 @@
   .cp-wrap *, .cp-wrap *::before, .cp-wrap *::after { box-sizing: border-box; }
   .cp-wrap { font-family: var(--cp-font); color: var(--cp-text); }
 
-  /* ─── Breadcrumb ─── */
-  .cp-breadcrumb {
-    padding: 16px 24px 0;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    font-size: 13px;
-    color: var(--cp-light);
-  }
-  .cp-breadcrumb a { color: var(--cp-light); transition: color .2s; }
-  .cp-breadcrumb a:hover { color: var(--cp-text); }
-  .cp-breadcrumb .sep { opacity: .4; }
-  .cp-breadcrumb .current { color: var(--cp-text); font-weight: 500; }
-
   /* ─── Product Layout ─── */
   .cp-product {
     display: grid;
@@ -260,16 +246,6 @@
   .cp-trust-icon { font-size: 22px; margin-bottom: 4px; }
   .cp-trust-text { font-size: 11px; font-weight: 600; line-height: 1.3; color: var(--cp-muted); }
 
-  /* Payment */
-  .cp-payments { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .cp-pay-label { font-size: 12px; color: var(--cp-light); font-weight: 500; }
-  .cp-pay-icon {
-    height: 22px; padding: 2px 6px;
-    background: var(--cp-white); border: 1px solid var(--cp-border);
-    border-radius: 4px; font-size: 10px; font-weight: 700;
-    display: flex; align-items: center; letter-spacing: .5px; color: var(--cp-muted);
-  }
-
   /* Accordion */
   .cp-accordion { border-top: 1px solid var(--cp-border); margin-top: 32px; }
   .cp-acc-item  { border-bottom: 1px solid var(--cp-border); }
@@ -403,17 +379,6 @@
 </style>
 
 <div class="cp-wrap">
-
-  <!-- Breadcrumb -->
-  <div class="cp-breadcrumb">
-    <a href="{{ routes.root_url }}">Home</a>
-    <span class="sep">/</span>
-    {%- if product.collections.first -%}
-      <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
-      <span class="sep">/</span>
-    {%- endif -%}
-    <span class="current">{{ product.title }}</span>
-  </div>
 
   <!-- Product Section -->
   <div class="cp-product">
@@ -561,22 +526,10 @@
 
       <!-- Trust Grid -->
       <div class="cp-trust">
-        <div class="cp-trust-item"><div class="cp-trust-icon">🚚</div><div class="cp-trust-text">Free Shipping<br>Over $35</div></div>
+        <div class="cp-trust-item"><div class="cp-trust-icon">🚚</div><div class="cp-trust-text">Free Shipping<br>Over $25</div></div>
         <div class="cp-trust-item"><div class="cp-trust-icon">🔄</div><div class="cp-trust-text">30-Day<br>Returns</div></div>
-        <div class="cp-trust-item"><div class="cp-trust-icon">🔒</div><div class="cp-trust-text">Secure<br>Checkout</div></div>
         <div class="cp-trust-item"><div class="cp-trust-icon">💵</div><div class="cp-trust-text">Cash on<br>Delivery</div></div>
         <div class="cp-trust-item"><div class="cp-trust-icon">✅</div><div class="cp-trust-text">Money-Back<br>Guarantee</div></div>
-        <div class="cp-trust-item"><div class="cp-trust-icon">📦</div><div class="cp-trust-text">Ships in<br>1–2 Days</div></div>
-      </div>
-
-      <!-- Payments -->
-      <div class="cp-payments">
-        <span class="cp-pay-label">We accept:</span>
-        <span class="cp-pay-icon">VISA</span>
-        <span class="cp-pay-icon">MC</span>
-        <span class="cp-pay-icon">AMEX</span>
-        <span class="cp-pay-icon">PAYPAL</span>
-        <span class="cp-pay-icon">APPLE PAY</span>
       </div>
 
       <!-- Accordion -->
@@ -663,33 +616,32 @@
           <div class="cp-big-score">{{ section.settings.review_score }}</div>
           <div>
             <div class="cp-score-stars">★★★★★</div>
-            <div class="cp-score-count">Based on {{ section.settings.review_count }} reviews</div>
           </div>
         </div>
       </div>
       <div class="cp-reviews-grid">
         <div class="cp-review-card">
           <div class="cp-review-stars">★★★★★</div>
-          <p class="cp-review-text">"Snaps on in a second and the difference in my landscape photos is night and day. The sky shots are unreal."</p>
+          <p class="cp-review-text">"{{ section.settings.review_1_text }}"</p>
           <div class="cp-review-meta">
-            <div class="cp-review-avatar">KM</div>
-            <div><div class="cp-review-name">Khalil M.</div><div class="cp-review-date">March 2026</div><div class="cp-verified">✓ Verified Purchase</div></div>
+            <div class="cp-review-avatar">{{ section.settings.review_1_name | slice: 0 }}{{ section.settings.review_1_name | split: ' ' | last | slice: 0 }}</div>
+            <div><div class="cp-review-name">{{ section.settings.review_1_name }}</div><div class="cp-review-date">{{ section.settings.review_1_date }}</div><div class="cp-verified">✓ Verified Purchase</div></div>
           </div>
         </div>
         <div class="cp-review-card">
           <div class="cp-review-stars">★★★★★</div>
-          <p class="cp-review-text">"Fast shipping and the product quality exceeded my expectations. The aluminium ring feels super premium."</p>
+          <p class="cp-review-text">"{{ section.settings.review_2_text }}"</p>
           <div class="cp-review-meta">
-            <div class="cp-review-avatar">SR</div>
-            <div><div class="cp-review-name">Sara R.</div><div class="cp-review-date">February 2026</div><div class="cp-verified">✓ Verified Purchase</div></div>
+            <div class="cp-review-avatar">{{ section.settings.review_2_name | slice: 0 }}{{ section.settings.review_2_name | split: ' ' | last | slice: 0 }}</div>
+            <div><div class="cp-review-name">{{ section.settings.review_2_name }}</div><div class="cp-review-date">{{ section.settings.review_2_date }}</div><div class="cp-verified">✓ Verified Purchase</div></div>
           </div>
         </div>
         <div class="cp-review-card">
           <div class="cp-review-stars">★★★★★</div>
-          <p class="cp-review-text">"WhatsApp support was super responsive. Great customer service + great product. Will buy again."</p>
+          <p class="cp-review-text">"{{ section.settings.review_3_text }}"</p>
           <div class="cp-review-meta">
-            <div class="cp-review-avatar">NA</div>
-            <div><div class="cp-review-name">Nour A.</div><div class="cp-review-date">February 2026</div><div class="cp-verified">✓ Verified Purchase</div></div>
+            <div class="cp-review-avatar">{{ section.settings.review_3_name | slice: 0 }}{{ section.settings.review_3_name | split: ' ' | last | slice: 0 }}</div>
+            <div><div class="cp-review-name">{{ section.settings.review_3_name }}</div><div class="cp-review-date">{{ section.settings.review_3_date }}</div><div class="cp-verified">✓ Verified Purchase</div></div>
           </div>
         </div>
       </div>
@@ -852,6 +804,72 @@
       "label": "Units Left (urgency bar)",
       "default": 7,
       "info": "Shown in the yellow urgency bar below the quantity selector"
+    },
+    {
+      "type": "header",
+      "content": "Review 1"
+    },
+    {
+      "type": "text",
+      "id": "review_1_name",
+      "label": "Reviewer Name",
+      "default": "Khalil M."
+    },
+    {
+      "type": "text",
+      "id": "review_1_date",
+      "label": "Review Date",
+      "default": "March 2026"
+    },
+    {
+      "type": "textarea",
+      "id": "review_1_text",
+      "label": "Review Text",
+      "default": "Snaps on in a second and the difference in my landscape photos is night and day. The sky shots are unreal."
+    },
+    {
+      "type": "header",
+      "content": "Review 2"
+    },
+    {
+      "type": "text",
+      "id": "review_2_name",
+      "label": "Reviewer Name",
+      "default": "Sara R."
+    },
+    {
+      "type": "text",
+      "id": "review_2_date",
+      "label": "Review Date",
+      "default": "February 2026"
+    },
+    {
+      "type": "textarea",
+      "id": "review_2_text",
+      "label": "Review Text",
+      "default": "Fast shipping and the product quality exceeded my expectations. The aluminium ring feels super premium."
+    },
+    {
+      "type": "header",
+      "content": "Review 3"
+    },
+    {
+      "type": "text",
+      "id": "review_3_name",
+      "label": "Reviewer Name",
+      "default": "Nour A."
+    },
+    {
+      "type": "text",
+      "id": "review_3_date",
+      "label": "Review Date",
+      "default": "February 2026"
+    },
+    {
+      "type": "textarea",
+      "id": "review_3_text",
+      "label": "Review Text",
+      "default": "WhatsApp support was super responsive. Great customer service + great product. Will buy again."
     }
   ],
   "presets": [
