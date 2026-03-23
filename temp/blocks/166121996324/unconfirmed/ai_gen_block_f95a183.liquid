@@ -1,6 +1,349 @@
+{% doc %}
+  @prompt
+    Generate a block that says:
+    
+    📱 Works With Your iPhone
+    iPhone 16 Pro Max
+    iPhone 16 Pro
+    iPhone 16 Plus
+    iPhone 16
+    iPhone 15 Pro Max
+    iPhone 15 Pro
+    iPhone 15 Plus
+    iPhone 15
+    iPhone 14 Pro Max
+    iPhone 14 Pro
+    iPhone 14 Plus
+    iPhone 14
+    iPhone 13 Series
+    iPhone 12 Series
+    All MagSafe Cases ✓
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-iphone-compat-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-iphone-compat__header-{{ ai_gen_id }} {
+    font-size: {{ block.settings.header_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.spacing }}px 0;
+  }
+
+  .ai-iphone-compat__list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.item_spacing }}px;
+  }
+
+  .ai-iphone-compat__item-{{ ai_gen_id }} {
+    font-size: {{ block.settings.item_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.5;
+  }
+
+  .ai-iphone-compat__footer-{{ ai_gen_id }} {
+    font-size: {{ block.settings.item_size }}px;
+    color: {{ block.settings.text_color }};
+    margin-top: {{ block.settings.spacing }}px;
+    font-weight: 500;
+  }
+{% endstyle %}
+
+<div class="ai-iphone-compat-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-iphone-compat__header-{{ ai_gen_id }}">
+    {{ block.settings.header_text }}
+  </div>
+  
+  <ul class="ai-iphone-compat__list-{{ ai_gen_id }}">
+    {% if block.settings.show_iphone_16_pro_max %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 16 Pro Max</li>
+    {% endif %}
+    {% if block.settings.show_iphone_16_pro %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 16 Pro</li>
+    {% endif %}
+    {% if block.settings.show_iphone_16_plus %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 16 Plus</li>
+    {% endif %}
+    {% if block.settings.show_iphone_16 %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 16</li>
+    {% endif %}
+    {% if block.settings.show_iphone_15_pro_max %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 15 Pro Max</li>
+    {% endif %}
+    {% if block.settings.show_iphone_15_pro %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 15 Pro</li>
+    {% endif %}
+    {% if block.settings.show_iphone_15_plus %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 15 Plus</li>
+    {% endif %}
+    {% if block.settings.show_iphone_15 %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 15</li>
+    {% endif %}
+    {% if block.settings.show_iphone_14_pro_max %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 14 Pro Max</li>
+    {% endif %}
+    {% if block.settings.show_iphone_14_pro %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 14 Pro</li>
+    {% endif %}
+    {% if block.settings.show_iphone_14_plus %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 14 Plus</li>
+    {% endif %}
+    {% if block.settings.show_iphone_14 %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 14</li>
+    {% endif %}
+    {% if block.settings.show_iphone_13_series %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 13 Series</li>
+    {% endif %}
+    {% if block.settings.show_iphone_12_series %}
+      <li class="ai-iphone-compat__item-{{ ai_gen_id }}">iPhone 12 Series</li>
+    {% endif %}
+  </ul>
+  
+  {% if block.settings.show_magsafe_footer %}
+    <div class="ai-iphone-compat__footer-{{ ai_gen_id }}">
+      {{ block.settings.footer_text }}
+    </div>
+  {% endif %}
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "iPhone compatibility",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "header_text",
+      "label": "Header text",
+      "default": "📱 Works With Your iPhone"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_16_pro_max",
+      "label": "Show iPhone 16 Pro Max",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_16_pro",
+      "label": "Show iPhone 16 Pro",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_16_plus",
+      "label": "Show iPhone 16 Plus",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_16",
+      "label": "Show iPhone 16",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_15_pro_max",
+      "label": "Show iPhone 15 Pro Max",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_15_pro",
+      "label": "Show iPhone 15 Pro",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_15_plus",
+      "label": "Show iPhone 15 Plus",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_15",
+      "label": "Show iPhone 15",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_14_pro_max",
+      "label": "Show iPhone 14 Pro Max",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_14_pro",
+      "label": "Show iPhone 14 Pro",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_14_plus",
+      "label": "Show iPhone 14 Plus",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_14",
+      "label": "Show iPhone 14",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_13_series",
+      "label": "Show iPhone 13 Series",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_iphone_12_series",
+      "label": "Show iPhone 12 Series",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_magsafe_footer",
+      "label": "Show MagSafe footer",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "All MagSafe Cases ✓"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Section spacing",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "label": "Item spacing",
+      "min": 2,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "header_size",
+      "label": "Header size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "item_size",
+      "label": "Item size",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    }
+  ],
+  "presets": [
+    {
+      "name": "iPhone compatibility"
+    }
+  ]
+}
 {% endschema %}
