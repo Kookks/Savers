@@ -457,7 +457,8 @@
 
       <!-- Shopify Product Form -->
       {%- form 'product', product, id: 'cp-product-form', novalidate: 'novalidate' -%}
-        <input type="hidden" name="id" id="cp-variant-id" value="{{ current_var.id }}" />
+        <input type="hidden" name="id"        id="cp-variant-id" value="{{ current_var.id }}" />
+        <input type="hidden" name="return_to" id="cp-return-to"  value="" />
 
         <!-- Variant Options -->
         {%- unless product.has_only_default_variant -%}
@@ -504,7 +505,8 @@
         <!-- CTA Buttons -->
         <div class="cp-cta-stack" id="cp-cta-area">
           {%- if product.available -%}
-            <button type="submit" name="add" id="cpAddToCart" class="cp-btn cp-btn-primary">
+            <button type="submit" name="add" id="cpAddToCart" class="cp-btn cp-btn-primary"
+                    onclick="document.getElementById('cp-return-to').value=''">
               🛒 Add to Cart
             </button>
             <button type="button" id="cpBuyNow" class="cp-btn cp-btn-dark" onclick="cpBuyNow()">
@@ -522,15 +524,6 @@
         </div>
 
       {%- endform -%}
-
-      <!-- Hidden Buy Now Form (posts directly to /cart/add then redirects to checkout) -->
-      <form id="cp-buynow-form" method="post" action="/cart/add" style="display:none">
-        <input type="hidden" name="form_type" value="product" />
-        <input type="hidden" name="utf8" value="✓" />
-        <input type="hidden" name="id"       id="cp-buynow-id"  value="{{ current_var.id }}" />
-        <input type="hidden" name="quantity" id="cp-buynow-qty" value="1" />
-        <input type="hidden" name="return_to" value="/checkout" />
-      </form>
 
       <!-- Trust Grid -->
       <div class="cp-trust">
@@ -705,11 +698,10 @@
     document.getElementById('cpQtyInput').value = cpQty;
   };
 
-  /* ─── Buy Now (native form POST → /cart/add → /checkout) ─── */
+  /* ─── Buy Now — sets return_to then submits the real Shopify form ─── */
   window.cpBuyNow = function() {
-    document.getElementById('cp-buynow-id').value  = document.getElementById('cp-variant-id').value;
-    document.getElementById('cp-buynow-qty').value = document.getElementById('cpQtyInput').value || 1;
-    document.getElementById('cp-buynow-form').submit();
+    document.getElementById('cp-return-to').value = '/checkout';
+    document.getElementById('cp-product-form').submit();
   };
 
   /* ─── Accordion ─── */
