@@ -185,6 +185,10 @@
   .cp-play-btn{width:72px;height:72px;background:var(--cp-yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:transform .2s;z-index:2;border:none}
   .cp-play-btn:hover{transform:scale(1.1)}
 
+  /* How It Works — optional video */
+  .cp-hiw-video-container{aspect-ratio:16/9;background:#111;border-radius:var(--cp-r-lg);overflow:hidden;margin-top:32px;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid var(--cp-border)}
+  .cp-hiw-video-container iframe,.cp-hiw-video-container video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+
   /* Reviews — Judge.me widget area */
   .cp-reviews-section{padding:80px 24px;background:var(--cp-white)}
   .cp-reviews-header{text-align:center;margin-bottom:40px}
@@ -212,7 +216,7 @@
     .cp-product{
       grid-template-columns:1fr;
       gap:20px;
-      padding:16px 16px 48px;
+      padding:16px 20px 48px;
       width:100%;
       max-width:100%;
     }
@@ -232,7 +236,7 @@
 
     /* Below-fold sections */
     .cp-split,.cp-hiw,.cp-reviews-section,.cp-video-section{
-      padding:40px 16px;
+      padding:40px 20px;
       width:100%;
       max-width:100%;
       overflow-x:hidden;
@@ -261,11 +265,13 @@
     /* Accordion */
     .cp-acc-hd{font-size:13px}
 
-    /* Max-width wrapper */
-    .cp-mx{padding:0;width:100%;max-width:100%}
+    /* Max-width wrapper — NO padding:0 here, or it overrides .cp-product's padding */
+    .cp-mx{width:100%;max-width:100%}
 
-    /* Video section */
+    /* Video — portrait mode on mobile (9:16) */
     .cp-video-wrap{max-width:100%}
+    .cp-video-container{aspect-ratio:9/16}
+    .cp-hiw-video-container{aspect-ratio:9/16}
   }
 
   /* Extra small phones */
@@ -461,12 +467,12 @@
         {%- if section.settings.product_video != blank -%}
           {%- assign video = section.settings.product_video -%}
           {%- if video.type == 'youtube' -%}
-            <iframe src="https://www.youtube.com/embed/{{ video.id }}?autoplay=0&rel=0" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+            <iframe src="https://www.youtube.com/embed/{{ video.id }}?autoplay=1&mute=1&loop=1&playsinline=1&rel=0&playlist={{ video.id }}" frameborder="0" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
           {%- elsif video.type == 'vimeo' -%}
-            <iframe src="https://player.vimeo.com/video/{{ video.id }}" frameborder="0" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+            <iframe src="https://player.vimeo.com/video/{{ video.id }}?autoplay=1&muted=1&loop=1&playsinline=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
           {%- endif -%}
         {%- elsif section.settings.product_video_file != blank -%}
-          <video src="{{ section.settings.product_video_file }}" controls playsinline style="width:100%;height:100%;position:absolute;inset:0;object-fit:cover"></video>
+          <video src="{{ section.settings.product_video_file }}" autoplay muted loop playsinline style="width:100%;height:100%;position:absolute;inset:0;object-fit:cover"></video>
         {%- else -%}
           <button class="cp-play-btn" aria-label="Play video">▶</button>
           <span style="color:rgba(255,255,255,.4);font-size:13px;position:absolute;bottom:20px">Add your YouTube/Vimeo URL in Theme Editor → Video</span>
@@ -482,6 +488,21 @@
         <p class="cp-eyebrow">{{ section.settings.hiw_eyebrow }}</p>
         <h2 class="cp-sec-title">{{ section.settings.hiw_title }}</h2>
       </div>
+      {%- if section.settings.hiw_video != blank or section.settings.hiw_video_file != blank -%}
+        <div class="cp-hiw-video-container">
+          {%- if section.settings.hiw_video != blank -%}
+            {%- assign hv = section.settings.hiw_video -%}
+            {%- if hv.type == 'youtube' -%}
+              <iframe src="https://www.youtube.com/embed/{{ hv.id }}?autoplay=1&mute=1&loop=1&playsinline=1&rel=0&playlist={{ hv.id }}" frameborder="0" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+            {%- elsif hv.type == 'vimeo' -%}
+              <iframe src="https://player.vimeo.com/video/{{ hv.id }}?autoplay=1&muted=1&loop=1&playsinline=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+            {%- endif -%}
+          {%- elsif section.settings.hiw_video_file != blank -%}
+            <video src="{{ section.settings.hiw_video_file }}" autoplay muted loop playsinline style="width:100%;height:100%;position:absolute;inset:0;object-fit:cover"></video>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
       <div class="cp-steps">
         <div class="cp-step-card">
           <div class="cp-step-img">
@@ -715,6 +736,8 @@
     { "type": "header", "content": "── How It Works ──" },
     { "type": "text", "id": "hiw_eyebrow", "label": "How It Works — Eyebrow", "default": "Setup In 3 Seconds" },
     { "type": "text", "id": "hiw_title",   "label": "How It Works — Title",   "default": "Attach. Rotate. Shoot." },
+    { "type": "video_url", "id": "hiw_video",      "label": "How It Works — Video (YouTube or Vimeo, autoplays)", "accept": ["youtube", "vimeo"], "placeholder": "https://www.youtube.com/watch?v=..." },
+    { "type": "text",      "id": "hiw_video_file", "label": "How It Works — OR Shopify-hosted file URL", "placeholder": "https://cdn.shopify.com/s/files/..." },
 
     { "type": "header", "content": "How It Works — Step 1" },
     { "type": "image_picker", "id": "step1_image", "label": "Step 1 — Image" },
