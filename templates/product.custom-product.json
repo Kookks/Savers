@@ -13,19 +13,13 @@
       "type": "custom-product-page",
       "settings": {
         "whatsapp_number": "96181807900",
+        "usp_1": "Snaps on magnetically in 1 second — no adapters needed",
+        "usp_2": "Eliminates glare and boosts colours instantly",
+        "usp_3": "Fits all iPhones 12–16 with any MagSafe case",
         "review_score": "4.9",
-        "review_count": 7,
+        "review_count": 0,
         "sold_count": "15",
-        "units_left": 25,
-        "review_1_name": "Khalil M.",
-        "review_1_date": "March 2026",
-        "review_1_text": "Snaps on in a second and the difference in my landscape photos is insane",
-        "review_2_name": "Sara R.",
-        "review_2_date": "February 2026",
-        "review_2_text": "Fast shipping and the product quality is great.",
-        "review_3_name": "Nour A.",
-        "review_3_date": "February 2026",
-        "review_3_text": "Good Product"
+        "units_left": 25
       }
     }
   },
