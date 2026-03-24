@@ -250,8 +250,6 @@
     .cp-split.reverse .cp-split-inner{direction:ltr}
     .cp-split.reverse .cp-split-inner > *{direction:ltr}
 
-    /* How it works — single column */
-    .cp-steps{grid-template-columns:1fr;gap:16px}
 
     /* Sticky bar — compact on mobile */
     .cp-sticky{padding:8px 16px;gap:10px}
@@ -503,50 +501,6 @@
         </div>
       {%- endif -%}
 
-      <div class="cp-steps">
-        <div class="cp-step-card">
-          <div class="cp-step-img">
-            <span class="cp-step-num">1</span>
-            {%- if section.settings.step1_image -%}
-              <img src="{{ section.settings.step1_image | image_url: width: 600 }}" alt="{{ section.settings.step1_title | escape }}" loading="lazy" />
-            {%- else -%}
-              <span class="ph-icon">🧲</span>Add Step 1 image in Theme Editor
-            {%- endif -%}
-          </div>
-          <div class="cp-step-body">
-            <h3>{{ section.settings.step1_title }}</h3>
-            <p>{{ section.settings.step1_desc }}</p>
-          </div>
-        </div>
-        <div class="cp-step-card">
-          <div class="cp-step-img">
-            <span class="cp-step-num">2</span>
-            {%- if section.settings.step2_image -%}
-              <img src="{{ section.settings.step2_image | image_url: width: 600 }}" alt="{{ section.settings.step2_title | escape }}" loading="lazy" />
-            {%- else -%}
-              <span class="ph-icon">🔄</span>Add Step 2 image in Theme Editor
-            {%- endif -%}
-          </div>
-          <div class="cp-step-body">
-            <h3>{{ section.settings.step2_title }}</h3>
-            <p>{{ section.settings.step2_desc }}</p>
-          </div>
-        </div>
-        <div class="cp-step-card">
-          <div class="cp-step-img">
-            <span class="cp-step-num">3</span>
-            {%- if section.settings.step3_image -%}
-              <img src="{{ section.settings.step3_image | image_url: width: 600 }}" alt="{{ section.settings.step3_title | escape }}" loading="lazy" />
-            {%- else -%}
-              <span class="ph-icon">📸</span>Add Step 3 image in Theme Editor
-            {%- endif -%}
-          </div>
-          <div class="cp-step-body">
-            <h3>{{ section.settings.step3_title }}</h3>
-            <p>{{ section.settings.step3_desc }}</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -739,20 +693,6 @@
     { "type": "video_url", "id": "hiw_video",      "label": "How It Works — Video (YouTube or Vimeo, autoplays)", "accept": ["youtube", "vimeo"], "placeholder": "https://www.youtube.com/watch?v=..." },
     { "type": "text",      "id": "hiw_video_file", "label": "How It Works — OR Shopify-hosted file URL", "placeholder": "https://cdn.shopify.com/s/files/..." },
 
-    { "type": "header", "content": "How It Works — Step 1" },
-    { "type": "image_picker", "id": "step1_image", "label": "Step 1 — Image" },
-    { "type": "text",         "id": "step1_title", "label": "Step 1 — Title",       "default": "Snap On" },
-    { "type": "textarea",     "id": "step1_desc",  "label": "Step 1 — Description", "default": "Hold the filter near the back of your iPhone — magnets grab it automatically and lock it in place." },
-
-    { "type": "header", "content": "How It Works — Step 2" },
-    { "type": "image_picker", "id": "step2_image", "label": "Step 2 — Image" },
-    { "type": "text",         "id": "step2_title", "label": "Step 2 — Title",       "default": "Rotate" },
-    { "type": "textarea",     "id": "step2_desc",  "label": "Step 2 — Description", "default": "Spin the outer ring until glare disappears and colours pop. Watch the effect live on your screen." },
-
-    { "type": "header", "content": "How It Works — Step 3" },
-    { "type": "image_picker", "id": "step3_image", "label": "Step 3 — Image" },
-    { "type": "text",         "id": "step3_title", "label": "Step 3 — Title",       "default": "Shoot" },
-    { "type": "textarea",     "id": "step3_desc",  "label": "Step 3 — Description", "default": "Capture with any camera app — native camera, ProCamera, Halide, and even video. It all works." }
 
   ],
   "presets": [
