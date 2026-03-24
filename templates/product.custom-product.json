@@ -49,17 +49,32 @@
         "hiw_eyebrow": "Setup In 3 Seconds",
         "hiw_title": "Attach. Rotate. Shoot.",
         "hiw_video": "https://www.youtube.com/watch?v=zaMZ0ReLYXo",
-        "hiw_video_file": "",
-        "step1_title": "",
-        "step1_desc": "",
-        "step2_title": "Rotate",
-        "step2_desc": "Spin the outer ring until glare disappears and colours pop. Watch the effect live on your screen.",
-        "step3_title": "Shoot",
-        "step3_desc": "Capture with any camera app — native camera, ProCamera, Halide, and even video. It all works."
+        "hiw_video_file": ""
+      }
+    },
+    "177434295637cd333e": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_tijVd8": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_tijVd8"
+      ],
+      "settings": {
+        "include_margins": true
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "177434295637cd333e"
   ]
 }
