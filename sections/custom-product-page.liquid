@@ -384,9 +384,9 @@
 
       <!-- 3 Trust Badges -->
       <div class="cp-trust">
-        <div class="cp-trust-item"><div class="cp-trust-icon">🚚</div><div class="cp-trust-text">Free Shipping<br>Over $25</div></div>
-        <div class="cp-trust-item"><div class="cp-trust-icon">🔄</div><div class="cp-trust-text">30-Day<br>Returns</div></div>
-        <div class="cp-trust-item"><div class="cp-trust-icon">💵</div><div class="cp-trust-text">Cash on<br>Delivery</div></div>
+        <div class="cp-trust-item"><div class="cp-trust-icon">{{ section.settings.trust1_icon }}</div><div class="cp-trust-text">{{ section.settings.trust1_text }}</div></div>
+        <div class="cp-trust-item"><div class="cp-trust-icon">{{ section.settings.trust2_icon }}</div><div class="cp-trust-text">{{ section.settings.trust2_text }}</div></div>
+        <div class="cp-trust-item"><div class="cp-trust-icon">{{ section.settings.trust3_icon }}</div><div class="cp-trust-text">{{ section.settings.trust3_text }}</div></div>
       </div>
 
       <div class="cp-accordion">
@@ -396,11 +396,11 @@
         </div>
         <div class="cp-acc-item">
           <button class="cp-acc-hd" onclick="cpToggleAcc(this)" type="button">Compatibility <span class="cp-acc-ico">+</span></button>
-          <div class="cp-acc-body">Works with iPhone 12, 13, 14, 15, and 16 series (all models including Pro and Pro Max) when used with a MagSafe-compatible case.</div>
+          <div class="cp-acc-body">{{ section.settings.accordion_compatibility }}</div>
         </div>
         <div class="cp-acc-item">
           <button class="cp-acc-hd" onclick="cpToggleAcc(this)" type="button">Shipping &amp; Returns <span class="cp-acc-ico">+</span></button>
-          <div class="cp-acc-body">Orders processed and shipped within 1–3 business days. Free shipping on orders over $25. Cash on delivery available. 30-day no-questions-asked returns.</div>
+          <div class="cp-acc-body">{{ section.settings.accordion_shipping }}</div>
         </div>
       </div>
     </div>
@@ -410,17 +410,20 @@
   <div class="cp-split">
     <div class="cp-split-inner cp-mx">
       <div class="cp-split-media">
-        {% comment %} REPLACE: Add your image in Shopify (Settings > Files), then paste URL below {% endcomment %}
-        <div class="cp-placeholder"><span class="ph-icon">📸</span>Upload: filter close-up image<br><small>Replace this with your product image</small></div>
+        {%- if section.settings.feat1_image -%}
+          <img src="{{ section.settings.feat1_image | image_url: width: 900 }}" alt="{{ section.settings.feat1_title | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+        {%- else -%}
+          <div class="cp-placeholder"><span class="ph-icon">📸</span>Add image in Theme Editor → Feature 1 Image</div>
+        {%- endif -%}
       </div>
       <div>
-        <p class="cp-eyebrow">Instant Attachment</p>
-        <h2 class="cp-sec-title">Snaps on in 1 second.<br>Stays locked in place.</h2>
-        <p class="cp-sec-desc">Precision N52 neodymium magnets auto-align with your MagSafe case and lock the filter dead-centre over your lens. No clips, no threads, no adapters.</p>
+        <p class="cp-eyebrow">{{ section.settings.feat1_eyebrow }}</p>
+        <h2 class="cp-sec-title">{{ section.settings.feat1_title }}</h2>
+        <p class="cp-sec-desc">{{ section.settings.feat1_desc }}</p>
         <div class="cp-check-list">
-          <div class="cp-check"><span class="cp-check-dot">✓</span> MagSafe magnetic alignment</div>
-          <div class="cp-check"><span class="cp-check-dot">✓</span> Works with any MagSafe case</div>
-          <div class="cp-check"><span class="cp-check-dot">✓</span> Holds firm during movement</div>
+          {%- if section.settings.feat1_bullet_1 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat1_bullet_1 }}</div>{%- endif -%}
+          {%- if section.settings.feat1_bullet_2 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat1_bullet_2 }}</div>{%- endif -%}
+          {%- if section.settings.feat1_bullet_3 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat1_bullet_3 }}</div>{%- endif -%}
         </div>
       </div>
     </div>
@@ -430,16 +433,20 @@
   <div class="cp-split cp-split-dark reverse">
     <div class="cp-split-inner cp-mx">
       <div class="cp-split-media">
-        <div class="cp-placeholder" style="background:linear-gradient(135deg,#333,#222)"><span class="ph-icon">🌅</span><span style="color:rgba(255,255,255,.5)">Upload: before/after sky comparison</span></div>
+        {%- if section.settings.feat2_image -%}
+          <img src="{{ section.settings.feat2_image | image_url: width: 900 }}" alt="{{ section.settings.feat2_title | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+        {%- else -%}
+          <div class="cp-placeholder" style="background:linear-gradient(135deg,#333,#222)"><span class="ph-icon">🌅</span><span style="color:rgba(255,255,255,.5)">Add image in Theme Editor → Feature 2 Image</span></div>
+        {%- endif -%}
       </div>
       <div>
-        <p class="cp-eyebrow">Pro Colour Boost</p>
-        <h2 class="cp-sec-title">See colours the way your eyes do.</h2>
-        <p class="cp-sec-desc">The polarizing glass cuts through atmospheric haze, eliminates reflections from water and glass, and brings out the deep blues and vivid greens that your phone camera normally misses.</p>
+        <p class="cp-eyebrow">{{ section.settings.feat2_eyebrow }}</p>
+        <h2 class="cp-sec-title">{{ section.settings.feat2_title }}</h2>
+        <p class="cp-sec-desc">{{ section.settings.feat2_desc }}</p>
         <div class="cp-check-list">
-          <div class="cp-check"><span class="cp-check-dot">✓</span> Eliminates glare and reflections</div>
-          <div class="cp-check"><span class="cp-check-dot">✓</span> Deepens sky blues naturally</div>
-          <div class="cp-check"><span class="cp-check-dot">✓</span> 360° rotation ring for precise control</div>
+          {%- if section.settings.feat2_bullet_1 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat2_bullet_1 }}</div>{%- endif -%}
+          {%- if section.settings.feat2_bullet_2 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat2_bullet_2 }}</div>{%- endif -%}
+          {%- if section.settings.feat2_bullet_3 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat2_bullet_3 }}</div>{%- endif -%}
         </div>
       </div>
     </div>
@@ -448,16 +455,22 @@
   <!-- ═══ VIDEO SECTION ═══ -->
   <div class="cp-video-section">
     <div class="cp-video-wrap">
-      <p class="cp-eyebrow" style="color:var(--cp-yellow)">See It In Action</p>
-      <h2 class="cp-sec-title" style="color:#fff">Watch the difference in real time</h2>
+      <p class="cp-eyebrow" style="color:var(--cp-yellow)">{{ section.settings.video_eyebrow }}</p>
+      <h2 class="cp-sec-title" style="color:#fff">{{ section.settings.video_title }}</h2>
       <div class="cp-video-container">
-        {% comment %}
-          REPLACE: Embed your video here. Options:
-          1. Upload to Shopify (Settings > Files) and use <video src="URL" controls></video>
-          2. Or paste a YouTube embed: <iframe src="https://www.youtube.com/embed/YOUR_ID" frameborder="0" allowfullscreen></iframe>
-        {% endcomment %}
-        <button class="cp-play-btn" aria-label="Play video">▶</button>
-        <span style="color:rgba(255,255,255,.4);font-size:13px;position:absolute;bottom:20px">Upload your product video here</span>
+        {%- if section.settings.product_video != blank -%}
+          {%- assign video = section.settings.product_video -%}
+          {%- if video.type == 'youtube' -%}
+            <iframe src="https://www.youtube.com/embed/{{ video.id }}?autoplay=0&rel=0" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+          {%- elsif video.type == 'vimeo' -%}
+            <iframe src="https://player.vimeo.com/video/{{ video.id }}" frameborder="0" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+          {%- endif -%}
+        {%- elsif section.settings.product_video_file != blank -%}
+          <video src="{{ section.settings.product_video_file }}" controls playsinline style="width:100%;height:100%;position:absolute;inset:0;object-fit:cover"></video>
+        {%- else -%}
+          <button class="cp-play-btn" aria-label="Play video">▶</button>
+          <span style="color:rgba(255,255,255,.4);font-size:13px;position:absolute;bottom:20px">Add your YouTube/Vimeo URL in Theme Editor → Video</span>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -466,38 +479,50 @@
   <div class="cp-hiw">
     <div class="cp-mx">
       <div class="cp-hiw-header">
-        <p class="cp-eyebrow">Setup In 3 Seconds</p>
-        <h2 class="cp-sec-title">Attach. Rotate. Shoot.</h2>
+        <p class="cp-eyebrow">{{ section.settings.hiw_eyebrow }}</p>
+        <h2 class="cp-sec-title">{{ section.settings.hiw_title }}</h2>
       </div>
       <div class="cp-steps">
         <div class="cp-step-card">
           <div class="cp-step-img">
             <span class="cp-step-num">1</span>
-            <span class="ph-icon">🧲</span>Upload: snap-on photo
+            {%- if section.settings.step1_image -%}
+              <img src="{{ section.settings.step1_image | image_url: width: 600 }}" alt="{{ section.settings.step1_title | escape }}" loading="lazy" />
+            {%- else -%}
+              <span class="ph-icon">🧲</span>Add Step 1 image in Theme Editor
+            {%- endif -%}
           </div>
           <div class="cp-step-body">
-            <h3>Snap On</h3>
-            <p>Hold the filter near the back of your iPhone — magnets grab it automatically and lock it in place.</p>
+            <h3>{{ section.settings.step1_title }}</h3>
+            <p>{{ section.settings.step1_desc }}</p>
           </div>
         </div>
         <div class="cp-step-card">
           <div class="cp-step-img">
             <span class="cp-step-num">2</span>
-            <span class="ph-icon">🔄</span>Upload: rotating photo
+            {%- if section.settings.step2_image -%}
+              <img src="{{ section.settings.step2_image | image_url: width: 600 }}" alt="{{ section.settings.step2_title | escape }}" loading="lazy" />
+            {%- else -%}
+              <span class="ph-icon">🔄</span>Add Step 2 image in Theme Editor
+            {%- endif -%}
           </div>
           <div class="cp-step-body">
-            <h3>Rotate</h3>
-            <p>Spin the outer ring until glare disappears and colours pop. Watch the effect live on your screen.</p>
+            <h3>{{ section.settings.step2_title }}</h3>
+            <p>{{ section.settings.step2_desc }}</p>
           </div>
         </div>
         <div class="cp-step-card">
           <div class="cp-step-img">
             <span class="cp-step-num">3</span>
-            <span class="ph-icon">📸</span>Upload: result photo
+            {%- if section.settings.step3_image -%}
+              <img src="{{ section.settings.step3_image | image_url: width: 600 }}" alt="{{ section.settings.step3_title | escape }}" loading="lazy" />
+            {%- else -%}
+              <span class="ph-icon">📸</span>Add Step 3 image in Theme Editor
+            {%- endif -%}
           </div>
           <div class="cp-step-body">
-            <h3>Shoot</h3>
-            <p>Capture with any camera app — native camera, ProCamera, Halide, and even video. It all works.</p>
+            <h3>{{ section.settings.step3_title }}</h3>
+            <p>{{ section.settings.step3_desc }}</p>
           </div>
         </div>
       </div>
@@ -634,71 +659,81 @@
   "name": "Custom Product Page",
   "tag": "section",
   "settings": [
-    {
-      "type": "header",
-      "content": "WhatsApp"
-    },
-    {
-      "type": "text",
-      "id": "whatsapp_number",
-      "label": "WhatsApp Number (with country code, no +)",
-      "default": "96170000000"
-    },
-    {
-      "type": "header",
-      "content": "Key Selling Points (under title)"
-    },
-    {
-      "type": "text",
-      "id": "usp_1",
-      "label": "Selling Point 1",
-      "default": "Snaps on magnetically in 1 second — no adapters needed"
-    },
-    {
-      "type": "text",
-      "id": "usp_2",
-      "label": "Selling Point 2",
-      "default": "Eliminates glare and boosts colours instantly"
-    },
-    {
-      "type": "text",
-      "id": "usp_3",
-      "label": "Selling Point 3",
-      "default": "Fits all iPhones 12–16 with any MagSafe case"
-    },
-    {
-      "type": "header",
-      "content": "Social Proof"
-    },
-    {
-      "type": "text",
-      "id": "review_score",
-      "label": "Review Score",
-      "default": "4.9"
-    },
-    {
-      "type": "number",
-      "id": "review_count",
-      "label": "Number of Reviews",
-      "default": 127
-    },
-    {
-      "type": "text",
-      "id": "sold_count",
-      "label": "Units Sold (e.g. 500+)",
-      "default": "500+"
-    },
-    {
-      "type": "number",
-      "id": "units_left",
-      "label": "Units Left (urgency bar)",
-      "default": 7
-    }
+
+    { "type": "header", "content": "── WhatsApp ──" },
+    { "type": "text", "id": "whatsapp_number", "label": "WhatsApp Number (country code, no +)", "default": "96170000000" },
+
+    { "type": "header", "content": "── Selling Points (under title) ──" },
+    { "type": "text", "id": "usp_1", "label": "Selling Point 1", "default": "Snaps on magnetically in 1 second — no adapters needed" },
+    { "type": "text", "id": "usp_2", "label": "Selling Point 2", "default": "Eliminates glare and boosts colours instantly" },
+    { "type": "text", "id": "usp_3", "label": "Selling Point 3", "default": "Fits all iPhones 12–16 with any MagSafe case" },
+
+    { "type": "header", "content": "── Social Proof ──" },
+    { "type": "text",   "id": "review_score", "label": "Review Score",            "default": "4.9"  },
+    { "type": "number", "id": "review_count", "label": "Number of Reviews",       "default": 127    },
+    { "type": "text",   "id": "sold_count",   "label": "Units Sold (e.g. 500+)",  "default": "500+" },
+    { "type": "number", "id": "units_left",   "label": "Units Left (urgency bar)","default": 7      },
+
+    { "type": "header", "content": "── Trust Badges ──" },
+    { "type": "text", "id": "trust1_icon", "label": "Badge 1 — Icon (emoji)", "default": "🚚" },
+    { "type": "text", "id": "trust1_text", "label": "Badge 1 — Text",         "default": "Free Shipping<br>Over $25" },
+    { "type": "text", "id": "trust2_icon", "label": "Badge 2 — Icon (emoji)", "default": "🔄" },
+    { "type": "text", "id": "trust2_text", "label": "Badge 2 — Text",         "default": "30-Day<br>Returns" },
+    { "type": "text", "id": "trust3_icon", "label": "Badge 3 — Icon (emoji)", "default": "💵" },
+    { "type": "text", "id": "trust3_text", "label": "Badge 3 — Text",         "default": "Cash on<br>Delivery" },
+
+    { "type": "header", "content": "── Accordion: Compatibility ──" },
+    { "type": "textarea", "id": "accordion_compatibility", "label": "Compatibility Text", "default": "Works with iPhone 12, 13, 14, 15, and 16 series (all models including Pro and Pro Max) when used with a MagSafe-compatible case." },
+
+    { "type": "header", "content": "── Accordion: Shipping & Returns ──" },
+    { "type": "textarea", "id": "accordion_shipping", "label": "Shipping & Returns Text", "default": "Orders processed and shipped within 1–3 business days. Free shipping on orders over $25. Cash on delivery available. 30-day no-questions-asked returns." },
+
+    { "type": "header", "content": "── Feature Section 1 ──" },
+    { "type": "image_picker", "id": "feat1_image",    "label": "Feature 1 — Image" },
+    { "type": "text",         "id": "feat1_eyebrow",  "label": "Feature 1 — Eyebrow Label", "default": "Instant Attachment" },
+    { "type": "text",         "id": "feat1_title",    "label": "Feature 1 — Title",          "default": "Snaps on in 1 second. Stays locked in place." },
+    { "type": "textarea",     "id": "feat1_desc",     "label": "Feature 1 — Description",    "default": "Precision N52 neodymium magnets auto-align with your MagSafe case and lock the filter dead-centre over your lens. No clips, no threads, no adapters." },
+    { "type": "text",         "id": "feat1_bullet_1", "label": "Feature 1 — Bullet 1",       "default": "MagSafe magnetic alignment" },
+    { "type": "text",         "id": "feat1_bullet_2", "label": "Feature 1 — Bullet 2",       "default": "Works with any MagSafe case" },
+    { "type": "text",         "id": "feat1_bullet_3", "label": "Feature 1 — Bullet 3",       "default": "Holds firm during movement" },
+
+    { "type": "header", "content": "── Feature Section 2 (dark) ──" },
+    { "type": "image_picker", "id": "feat2_image",    "label": "Feature 2 — Image" },
+    { "type": "text",         "id": "feat2_eyebrow",  "label": "Feature 2 — Eyebrow Label", "default": "Pro Colour Boost" },
+    { "type": "text",         "id": "feat2_title",    "label": "Feature 2 — Title",          "default": "See colours the way your eyes do." },
+    { "type": "textarea",     "id": "feat2_desc",     "label": "Feature 2 — Description",    "default": "The polarizing glass cuts through atmospheric haze, eliminates reflections from water and glass, and brings out the deep blues and vivid greens that your phone camera normally misses." },
+    { "type": "text",         "id": "feat2_bullet_1", "label": "Feature 2 — Bullet 1",       "default": "Eliminates glare and reflections" },
+    { "type": "text",         "id": "feat2_bullet_2", "label": "Feature 2 — Bullet 2",       "default": "Deepens sky blues naturally" },
+    { "type": "text",         "id": "feat2_bullet_3", "label": "Feature 2 — Bullet 3",       "default": "360° rotation ring for precise control" },
+
+    { "type": "header", "content": "── Video Section ──" },
+    { "type": "text",      "id": "video_eyebrow",      "label": "Video — Eyebrow Label", "default": "See It In Action" },
+    { "type": "text",      "id": "video_title",        "label": "Video — Title",          "default": "Watch the difference in real time" },
+    { "type": "video_url", "id": "product_video",      "label": "Video — YouTube or Vimeo URL", "accept": ["youtube", "vimeo"], "placeholder": "https://www.youtube.com/watch?v=..." },
+    { "type": "text",      "id": "product_video_file", "label": "Video — OR Shopify-hosted file URL (from Settings › Files)", "placeholder": "https://cdn.shopify.com/s/files/..." },
+
+    { "type": "header", "content": "── How It Works ──" },
+    { "type": "text", "id": "hiw_eyebrow", "label": "How It Works — Eyebrow", "default": "Setup In 3 Seconds" },
+    { "type": "text", "id": "hiw_title",   "label": "How It Works — Title",   "default": "Attach. Rotate. Shoot." },
+
+    { "type": "header", "content": "How It Works — Step 1" },
+    { "type": "image_picker", "id": "step1_image", "label": "Step 1 — Image" },
+    { "type": "text",         "id": "step1_title", "label": "Step 1 — Title",       "default": "Snap On" },
+    { "type": "textarea",     "id": "step1_desc",  "label": "Step 1 — Description", "default": "Hold the filter near the back of your iPhone — magnets grab it automatically and lock it in place." },
+
+    { "type": "header", "content": "How It Works — Step 2" },
+    { "type": "image_picker", "id": "step2_image", "label": "Step 2 — Image" },
+    { "type": "text",         "id": "step2_title", "label": "Step 2 — Title",       "default": "Rotate" },
+    { "type": "textarea",     "id": "step2_desc",  "label": "Step 2 — Description", "default": "Spin the outer ring until glare disappears and colours pop. Watch the effect live on your screen." },
+
+    { "type": "header", "content": "How It Works — Step 3" },
+    { "type": "image_picker", "id": "step3_image", "label": "Step 3 — Image" },
+    { "type": "text",         "id": "step3_title", "label": "Step 3 — Title",       "default": "Shoot" },
+    { "type": "textarea",     "id": "step3_desc",  "label": "Step 3 — Description", "default": "Capture with any camera app — native camera, ProCamera, Halide, and even video. It all works." }
+
   ],
   "presets": [
-    {
-      "name": "Custom Product Page"
-    }
+    { "name": "Custom Product Page" }
   ]
 }
 {% endschema %}
