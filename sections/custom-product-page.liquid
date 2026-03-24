@@ -1,18 +1,14 @@
 {% comment %}
   ============================================================
-  Savers – Custom Product Page Section (v3)
-  Theme: Dawn 15.x
-  Changes from expert review:
-    - Thumbnail carousel (1 line, scrollable)
-    - 3 selling points under title
-    - ATC only (no WhatsApp CTA)
-    - 3 trust badges on 1 line
-    - Visual features/how-it-works with image placeholders
-    - Judge.me review widget instead of static reviews
+  Savers – Custom Product Page Section
+  Compatible with: Dawn 15.x
+  Install: Shopify Admin → Online Store → Themes → Edit Code
+           → sections/ → Add new file → paste this content
   ============================================================
 {% endcomment %}
 
 {%- liquid
+  assign product       = section.settings.product | default: product
   assign current_var   = product.selected_or_first_available_variant
   assign compare_price = current_var.compare_at_price
   assign sale_price    = current_var.price
@@ -27,274 +23,468 @@
 -%}
 
 <style>
+  /* ─── Design Tokens ─── */
   :root {
-    --cp-yellow:#FAE10A; --cp-yellow-dk:#D4BC00;
-    --cp-black:#111; --cp-white:#FFF; --cp-bg:#FAFAFA;
-    --cp-text:#111; --cp-muted:#666; --cp-light:#999;
-    --cp-border:#E8E8E8; --cp-green:#22C55E; --cp-danger:#EF4444;
-    --cp-r-sm:6px; --cp-r-md:12px; --cp-r-lg:20px; --cp-r-pill:999px;
-    --cp-shadow:0 4px 16px rgba(0,0,0,.1);
-    --cp-font:'Inter',system-ui,sans-serif;
+    --cp-yellow:      #FAE10A;
+    --cp-yellow-dark: #D4BC00;
+    --cp-black:       #111111;
+    --cp-white:       #FFFFFF;
+    --cp-bg:          #FAFAFA;
+    --cp-text:        #111111;
+    --cp-muted:       #666666;
+    --cp-light:       #999999;
+    --cp-border:      #E8E8E8;
+    --cp-green:       #22C55E;
+    --cp-danger:      #EF4444;
+    --cp-radius-sm:   6px;
+    --cp-radius-md:   12px;
+    --cp-radius-lg:   20px;
+    --cp-radius-pill: 999px;
+    --cp-shadow-sm:   0 1px 3px rgba(0,0,0,.08);
+    --cp-shadow-md:   0 4px 16px rgba(0,0,0,.10);
+    --cp-font:        'Inter', sans-serif;
   }
-  .cp *,.cp *::before,.cp *::after{box-sizing:border-box}
-  .cp{font-family:var(--cp-font);color:var(--cp-text);line-height:1.6}
-  .cp img{max-width:100%;display:block}
-  .cp-mx{max-width:1200px;margin:0 auto}
 
-  /* ─── Product Grid ─── */
-  .cp-product{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;padding:24px 24px 64px}
+  .cp-wrap *, .cp-wrap *::before, .cp-wrap *::after { box-sizing: border-box; }
+  .cp-wrap { font-family: var(--cp-font); color: var(--cp-text); }
+
+  /* ─── Product Layout ─── */
+  .cp-product {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+    padding: 24px 24px 64px;
+  }
 
   /* ─── Gallery ─── */
-  .cp-gallery{position:sticky;top:80px}
-  .cp-main-img{aspect-ratio:1/1;background:var(--cp-white);border-radius:var(--cp-r-lg);border:1px solid var(--cp-border);overflow:hidden;position:relative;margin-bottom:10px}
-  .cp-main-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-  .cp-main-img:hover img{transform:scale(1.04)}
-  .cp-sale-tag,.cp-sold-tag{position:absolute;top:14px;left:14px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--cp-r-pill);letter-spacing:.5px;text-transform:uppercase}
-  .cp-sale-tag{background:var(--cp-yellow);color:var(--cp-black)}
-  .cp-sold-tag{background:var(--cp-danger);color:#fff}
+  .cp-gallery { position: sticky; top: 88px; }
+  .cp-gallery-main {
+    aspect-ratio: 1/1;
+    background: var(--cp-white);
+    border-radius: var(--cp-radius-lg);
+    border: 1px solid var(--cp-border);
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .cp-gallery-main img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+  }
+  .cp-gallery-main:hover img { transform: scale(1.04); }
+  .cp-gallery-sale-badge {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: var(--cp-yellow);
+    color: var(--cp-black);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--cp-radius-pill);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+  .cp-gallery-sold-badge {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: #EF4444;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--cp-radius-pill);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+  .cp-thumbs {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .cp-thumb {
+    aspect-ratio: 1/1;
+    border-radius: var(--cp-radius-sm);
+    border: 2px solid var(--cp-border);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s;
+    background: var(--cp-white);
+  }
+  .cp-thumb.active { border-color: var(--cp-black); }
+  .cp-thumb:hover  { border-color: #aaa; }
+  .cp-thumb img    { width: 100%; height: 100%; object-fit: cover; }
 
-  /* Thumbnail carousel */
-  .cp-thumbs-wrap{position:relative;overflow:hidden}
-  .cp-thumbs{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0}
-  .cp-thumbs::-webkit-scrollbar{display:none}
-  .cp-thumb{flex:0 0 72px;height:72px;border-radius:var(--cp-r-sm);border:2px solid var(--cp-border);overflow:hidden;cursor:pointer;transition:border-color .2s;scroll-snap-align:start}
-  .cp-thumb.active{border-color:var(--cp-black)}
-  .cp-thumb:hover{border-color:#aaa}
-  .cp-thumb img{width:100%;height:100%;object-fit:cover}
-  .cp-thumb-arrow{position:absolute;top:50%;transform:translateY(-50%);width:28px;height:28px;background:rgba(255,255,255,.9);border:1px solid var(--cp-border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;z-index:2;transition:background .2s;box-shadow:0 1px 4px rgba(0,0,0,.1)}
-  .cp-thumb-arrow:hover{background:var(--cp-yellow)}
-  .cp-thumb-arrow.left{left:0}
-  .cp-thumb-arrow.right{right:0}
+  /* ─── Product Info ─── */
+  .cp-info { padding-top: 8px; }
 
-  /* ─── Info ─── */
-  .cp-info{padding-top:4px}
-  .cp-badges{display:flex;gap:8px;margin-bottom:10px}
-  .cp-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--cp-r-pill);letter-spacing:.5px;text-transform:uppercase}
-  .cp-b-yellow{background:var(--cp-yellow);color:var(--cp-black)}
-  .cp-b-dark{background:var(--cp-black);color:var(--cp-white)}
-  .cp-b-green{background:#D1FAE5;color:#065F46}
-  .cp-b-red{background:#FEE2E2;color:#991B1B}
-  .cp-title{font-size:28px;font-weight:800;line-height:1.2;letter-spacing:-.3px;margin-bottom:12px}
+  .cp-badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .cp-badge {
+    font-size: 11px; font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--cp-radius-pill);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+  .cp-badge-yellow { background: var(--cp-yellow); color: var(--cp-black); }
+  .cp-badge-dark   { background: var(--cp-black); color: var(--cp-white); }
+  .cp-badge-green  { background: #D1FAE5; color: #065F46; }
+  .cp-badge-red    { background: #FEE2E2; color: #991B1B; }
 
-  /* Selling points */
-  .cp-usps{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-  .cp-usp{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--cp-text)}
-  .cp-usp-icon{flex:0 0 24px;height:24px;background:var(--cp-yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .cp-title {
+    font-size: 30px; font-weight: 800;
+    line-height: 1.2; letter-spacing: -.5px;
+    margin-bottom: 8px;
+  }
+  .cp-subtitle { font-size: 15px; color: var(--cp-muted); margin-bottom: 20px; }
 
-  .cp-rating{display:flex;align-items:center;gap:8px;margin-bottom:16px}
-  .cp-stars{color:#F59E0B;font-size:14px}
-  .cp-rating-text{font-size:13px;color:var(--cp-muted)}
-  .cp-rating-sold{font-size:13px;color:var(--cp-muted);padding-left:8px;border-left:1px solid var(--cp-border)}
+  .cp-rating {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px;
+  }
+  .cp-stars { color: #F59E0B; font-size: 15px; }
+  .cp-rating-count { font-size: 13px; color: var(--cp-muted); }
+  .cp-rating-sold  { font-size: 13px; color: var(--cp-muted); padding-left: 10px; border-left: 1px solid var(--cp-border); }
 
-  .cp-price{display:flex;align-items:baseline;gap:10px;padding:14px 0;border-top:1px solid var(--cp-border);border-bottom:1px solid var(--cp-border);margin-bottom:20px}
-  .cp-now{font-size:32px;font-weight:800}
-  .cp-was{font-size:17px;color:var(--cp-light);text-decoration:line-through}
-  .cp-save{background:#FEE2E2;color:#991B1B;font-size:12px;font-weight:700;padding:3px 8px;border-radius:var(--cp-r-pill)}
+  .cp-price-row {
+    display: flex; align-items: baseline; gap: 12px;
+    padding: 16px 0;
+    border-top: 1px solid var(--cp-border);
+    border-bottom: 1px solid var(--cp-border);
+    margin-bottom: 24px;
+  }
+  .cp-price-current { font-size: 34px; font-weight: 800; }
+  .cp-price-orig    { font-size: 18px; color: var(--cp-light); text-decoration: line-through; }
+  .cp-price-save    { background: #FEE2E2; color: #991B1B; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: var(--cp-radius-pill); }
 
   /* Variants */
-  .cp-variants{margin-bottom:18px}
-  .cp-var-label{font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-  .cp-var-opts{display:flex;gap:8px;flex-wrap:wrap}
-  .cp-var-opts .swatch-btn{padding:7px 14px;border-radius:var(--cp-r-sm);border:2px solid var(--cp-border);font-size:13px;font-weight:500;background:var(--cp-white);cursor:pointer;transition:all .2s;color:var(--cp-text);font-family:var(--cp-font)}
-  .cp-var-opts .swatch-btn:hover{border-color:#aaa}
-  .cp-var-opts .swatch-btn.active{border-color:var(--cp-black);background:var(--cp-black);color:var(--cp-white)}
+  .cp-variants { margin-bottom: 20px; }
+  .cp-variant-label { font-size: 13px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .cp-variant-options { display: flex; gap: 8px; flex-wrap: wrap; }
+  .cp-variant-options .swatch-btn {
+    padding: 8px 16px;
+    border-radius: var(--cp-radius-sm);
+    border: 2px solid var(--cp-border);
+    font-size: 13px; font-weight: 500;
+    background: var(--cp-white); cursor: pointer;
+    transition: all .2s; color: var(--cp-text);
+  }
+  .cp-variant-options .swatch-btn:hover  { border-color: #aaa; }
+  .cp-variant-options .swatch-btn.active { border-color: var(--cp-black); background: var(--cp-black); color: var(--cp-white); }
 
-  .cp-qty-row{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-  .cp-qty-label{font-size:13px;font-weight:600}
-  .cp-qty-ctrl{display:flex;align-items:center;border:2px solid var(--cp-border);border-radius:var(--cp-r-sm);overflow:hidden}
-  .cp-qty-btn{width:38px;height:38px;background:var(--cp-bg);font-size:17px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;font-family:var(--cp-font);transition:background .2s}
-  .cp-qty-btn:hover{background:var(--cp-border)}
-  .cp-qty-num{width:44px;height:38px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;border-left:2px solid var(--cp-border);border-right:2px solid var(--cp-border)}
+  /* Qty */
+  .cp-qty-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+  .cp-qty-label { font-size: 13px; font-weight: 600; }
+  .cp-qty-ctrl {
+    display: flex; align-items: center;
+    border: 2px solid var(--cp-border);
+    border-radius: var(--cp-radius-sm); overflow: hidden;
+  }
+  .cp-qty-btn {
+    width: 40px; height: 40px;
+    background: var(--cp-bg); font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background .2s; border: none;
+    font-family: var(--cp-font);
+  }
+  .cp-qty-btn:hover { background: var(--cp-border); }
+  .cp-qty-num {
+    width: 48px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 600;
+    border-left: 2px solid var(--cp-border);
+    border-right: 2px solid var(--cp-border);
+  }
 
   /* Urgency */
-  .cp-urgency{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#FFF8DC;border:1px solid #F0D800;border-radius:var(--cp-r-md);margin-bottom:16px}
-  .cp-pulse{width:9px;height:9px;background:var(--cp-danger);border-radius:50%;animation:cpP 1.5s infinite;flex-shrink:0}
-  @keyframes cpP{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
-  .cp-urgency span{font-size:13px;font-weight:600;color:#92400E}
+  .cp-urgency {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    background: #FFF8DC; border: 1px solid #F0D800;
+    border-radius: var(--cp-radius-md); margin-bottom: 20px;
+  }
+  .cp-pulse {
+    width: 10px; height: 10px;
+    background: var(--cp-danger); border-radius: 50%;
+    animation: cpPulse 1.5s infinite; flex-shrink: 0;
+  }
+  @keyframes cpPulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,.4); }
+    50%      { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
+  }
+  .cp-urgency-text { font-size: 13px; font-weight: 600; color: #92400E; }
 
-  /* ATC */
-  .cp-atc-wrap{margin-bottom:16px}
-  .cp-atc{width:100%;padding:16px;border-radius:var(--cp-r-md);font-size:15px;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--cp-font);background:var(--cp-yellow);color:var(--cp-black);transition:all .2s;letter-spacing:.3px}
-  .cp-atc:hover{background:var(--cp-yellow-dk);transform:translateY(-1px);box-shadow:0 4px 12px rgba(250,225,10,.4)}
-  .cp-atc[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+  /* CTA Buttons */
+  .cp-cta-stack { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .cp-btn {
+    width: 100%; padding: 16px;
+    border-radius: var(--cp-radius-md);
+    font-size: 15px; font-weight: 700; letter-spacing: .3px;
+    transition: all .2s; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--cp-font);
+  }
+  .cp-btn-primary  { background: var(--cp-yellow); color: var(--cp-black); }
+  .cp-btn-primary:hover  { background: var(--cp-yellow-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(250,225,10,.4); }
+  .cp-btn-dark     { background: var(--cp-black); color: var(--cp-white); }
+  .cp-btn-dark:hover     { background: #333; transform: translateY(-1px); }
+  .cp-btn-outline  { background: transparent; color: var(--cp-text); border: 2px solid var(--cp-border); }
+  .cp-btn-outline:hover  { border-color: var(--cp-black); }
+  .cp-btn[disabled] { opacity: .5; cursor: not-allowed; transform: none; }
 
-  /* 3 Trust Badges */
-  .cp-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-  .cp-trust-item{text-align:center;padding:12px 6px;background:var(--cp-bg);border-radius:var(--cp-r-md);border:1px solid var(--cp-border)}
-  .cp-trust-icon{font-size:20px;margin-bottom:2px}
-  .cp-trust-text{font-size:10px;font-weight:600;line-height:1.3;color:var(--cp-muted)}
+  /* Trust Grid */
+  .cp-trust {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 12px; margin-bottom: 24px;
+  }
+  .cp-trust-item {
+    text-align: center; padding: 14px 8px;
+    background: var(--cp-bg); border-radius: var(--cp-radius-md);
+    border: 1px solid var(--cp-border);
+  }
+  .cp-trust-icon { font-size: 22px; margin-bottom: 4px; }
+  .cp-trust-text { font-size: 11px; font-weight: 600; line-height: 1.3; color: var(--cp-muted); }
 
   /* Accordion */
-  .cp-accordion{border-top:1px solid var(--cp-border);margin-top:24px}
-  .cp-acc-item{border-bottom:1px solid var(--cp-border)}
-  .cp-acc-hd{width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 0;background:none;font-size:14px;font-weight:600;color:var(--cp-text);cursor:pointer;text-align:left;border:none;font-family:var(--cp-font)}
-  .cp-acc-ico{font-size:18px;transition:transform .3s;color:var(--cp-muted)}
-  .cp-acc-item.open .cp-acc-ico{transform:rotate(45deg)}
-  .cp-acc-body{font-size:14px;color:var(--cp-muted);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
-  .cp-acc-item.open .cp-acc-body{max-height:600px;padding-bottom:14px}
+  .cp-accordion { border-top: 1px solid var(--cp-border); margin-top: 32px; }
+  .cp-acc-item  { border-bottom: 1px solid var(--cp-border); }
+  .cp-acc-header {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 0; background: none; font-size: 14px; font-weight: 600;
+    color: var(--cp-text); cursor: pointer; text-align: left; border: none;
+    font-family: var(--cp-font);
+  }
+  .cp-acc-icon { font-size: 18px; transition: transform .3s; color: var(--cp-muted); }
+  .cp-acc-item.open .cp-acc-icon { transform: rotate(45deg); }
+  .cp-acc-body {
+    font-size: 14px; color: var(--cp-muted); line-height: 1.7;
+    max-height: 0; overflow: hidden;
+    transition: max-height .4s ease, padding .3s;
+  }
+  .cp-acc-item.open .cp-acc-body { max-height: 600px; padding-bottom: 16px; }
 
-  /* ═══════════════════════════════════════ */
-  /*  BELOW THE FOLD — Visual Sections      */
-  /* ═══════════════════════════════════════ */
+  /* ─── Features ─── */
+  .cp-features {
+    background: var(--cp-black); color: var(--cp-white);
+    padding: 80px 24px;
+  }
+  .cp-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--cp-yellow); margin-bottom: 12px; }
+  .cp-section-title { font-size: 38px; font-weight: 800; line-height: 1.15; letter-spacing: -.5px; margin-bottom: 16px; }
+  .cp-section-sub { font-size: 16px; color: rgba(255,255,255,.55); max-width: 540px; margin-bottom: 56px; }
+  .cp-feat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+  .cp-feat-card {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    border-radius: var(--cp-radius-lg); padding: 28px 24px;
+    transition: background .3s, transform .3s;
+  }
+  .cp-feat-card:hover { background: rgba(250,225,10,.08); transform: translateY(-4px); border-color: rgba(250,225,10,.25); }
+  .cp-feat-icon { width: 48px; height: 48px; background: var(--cp-yellow); border-radius: var(--cp-radius-md); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+  .cp-feat-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--cp-white); }
+  .cp-feat-desc  { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.6; }
 
-  /* Split Feature Row */
-  .cp-split{padding:80px 24px}
-  .cp-split-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-  .cp-split.reverse .cp-split-inner{direction:rtl}
-  .cp-split.reverse .cp-split-inner > *{direction:ltr}
-  .cp-split-media{aspect-ratio:4/3;border-radius:var(--cp-r-lg);overflow:hidden;background:var(--cp-border);position:relative}
-  .cp-split-media img,.cp-split-media video{width:100%;height:100%;object-fit:cover}
-  .cp-split-media .cp-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--cp-light);font-size:13px;font-weight:500;background:linear-gradient(135deg,#f5f5f5,#e8e8e8)}
-  .cp-split-media .cp-placeholder .ph-icon{font-size:36px;opacity:.5}
-  .cp-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cp-yellow-dk);margin-bottom:8px}
-  .cp-sec-title{font-size:28px;font-weight:800;line-height:1.2;letter-spacing:-.3px;margin-bottom:12px;color:var(--cp-text)}
-  .cp-sec-desc{font-size:15px;color:var(--cp-muted);line-height:1.7;margin-bottom:20px}
-  .cp-check-list{display:flex;flex-direction:column;gap:8px}
-  .cp-check{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
-  .cp-check-dot{flex:0 0 22px;height:22px;background:var(--cp-yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
+  /* ─── How It Works ─── */
+  .cp-hiw { background: var(--cp-bg); padding: 80px 24px; }
+  .cp-hiw-header { text-align: center; margin-bottom: 56px; }
+  .cp-hiw-title { color: var(--cp-text); }
+  .cp-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; position: relative; }
+  .cp-steps::before {
+    content: ''; position: absolute; top: 28px;
+    left: calc(16.6% + 28px); right: calc(16.6% + 28px);
+    height: 2px; background: linear-gradient(90deg, var(--cp-border), var(--cp-yellow), var(--cp-border));
+  }
+  .cp-step { text-align: center; }
+  .cp-step-num {
+    width: 56px; height: 56px; background: var(--cp-yellow); color: var(--cp-black);
+    border-radius: 50%; font-size: 20px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px; border: 4px solid var(--cp-bg);
+    box-shadow: var(--cp-shadow-md); position: relative; z-index: 1;
+  }
+  .cp-step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .cp-step-desc  { font-size: 13px; color: var(--cp-muted); line-height: 1.6; }
 
-  .cp-split-dark{background:var(--cp-black);color:var(--cp-white)}
-  .cp-split-dark .cp-sec-title{color:var(--cp-white)}
-  .cp-split-dark .cp-sec-desc{color:rgba(255,255,255,.55)}
-  .cp-split-dark .cp-check{color:rgba(255,255,255,.8)}
-  .cp-split-dark .cp-eyebrow{color:var(--cp-yellow)}
+  /* ─── Reviews ─── */
+  .cp-reviews { background: var(--cp-white); padding: 80px 24px; }
+  .cp-reviews-header { text-align: center; margin-bottom: 48px; }
+  .cp-overall { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 16px; }
+  .cp-big-score { font-size: 56px; font-weight: 800; line-height: 1; }
+  .cp-score-stars { color: #F59E0B; font-size: 20px; }
+  .cp-score-count { font-size: 13px; color: var(--cp-muted); margin-top: 4px; }
+  .cp-reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .cp-review-card {
+    background: var(--cp-bg); border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius-lg); padding: 24px;
+    transition: box-shadow .3s, transform .3s;
+  }
+  .cp-review-card:hover { box-shadow: var(--cp-shadow-md); transform: translateY(-2px); }
+  .cp-review-stars { color: #F59E0B; font-size: 14px; margin-bottom: 12px; }
+  .cp-review-text { font-size: 14px; line-height: 1.6; margin-bottom: 16px; font-style: italic; }
+  .cp-review-meta { display: flex; align-items: center; gap: 10px; }
+  .cp-review-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--cp-yellow); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: var(--cp-black); flex-shrink: 0; }
+  .cp-review-name { font-size: 13px; font-weight: 600; }
+  .cp-review-date { font-size: 11px; color: var(--cp-light); }
+  .cp-verified { font-size: 11px; color: var(--cp-green); font-weight: 600; }
 
-  /* How It Works — with images */
-  .cp-hiw{background:var(--cp-bg);padding:80px 24px}
-  .cp-hiw-header{text-align:center;margin-bottom:48px}
-  .cp-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .cp-step-card{background:var(--cp-white);border:1px solid var(--cp-border);border-radius:var(--cp-r-lg);overflow:hidden;transition:box-shadow .3s,transform .3s}
-  .cp-step-card:hover{box-shadow:var(--cp-shadow);transform:translateY(-3px)}
-  .cp-step-img{aspect-ratio:3/2;background:linear-gradient(135deg,#f5f5f5,#e8e8e8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--cp-light);font-size:12px;font-weight:500;position:relative}
-  .cp-step-img .ph-icon{font-size:28px;opacity:.5}
-  .cp-step-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-  .cp-step-num{position:absolute;top:12px;left:12px;width:32px;height:32px;background:var(--cp-yellow);color:var(--cp-black);border-radius:50%;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;z-index:1}
-  .cp-step-body{padding:20px}
-  .cp-step-body h3{font-size:16px;font-weight:700;margin-bottom:6px}
-  .cp-step-body p{font-size:13px;color:var(--cp-muted);line-height:1.6}
+  /* ─── Sticky Bar ─── */
+  .cp-sticky {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--cp-white); border-top: 1px solid var(--cp-border);
+    padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,.1); z-index: 200;
+    transform: translateY(100%); transition: transform .3s ease;
+  }
+  .cp-sticky.visible { transform: translateY(0); }
+  .cp-sticky-product { display: flex; align-items: center; gap: 12px; }
+  .cp-sticky-thumb { width: 44px; height: 44px; background: var(--cp-bg); border-radius: var(--cp-radius-sm); border: 1px solid var(--cp-border); overflow: hidden; }
+  .cp-sticky-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .cp-sticky-name  { font-size: 13px; font-weight: 600; }
+  .cp-sticky-price { font-size: 12px; color: var(--cp-muted); }
+  .cp-sticky-cta {
+    padding: 12px 32px; background: var(--cp-yellow); color: var(--cp-black);
+    border-radius: var(--cp-radius-md); font-size: 14px; font-weight: 700;
+    white-space: nowrap; transition: background .2s; border: none; cursor: pointer;
+    font-family: var(--cp-font);
+  }
+  .cp-sticky-cta:hover { background: var(--cp-yellow-dark); }
 
-  /* Video Section */
-  .cp-video-section{background:var(--cp-black);padding:80px 24px;text-align:center}
-  .cp-video-wrap{max-width:800px;margin:0 auto}
-  .cp-video-container{aspect-ratio:16/9;background:#222;border-radius:var(--cp-r-lg);overflow:hidden;margin-top:32px;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid rgba(255,255,255,.1)}
-  .cp-video-container video,.cp-video-container iframe{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-  .cp-play-btn{width:72px;height:72px;background:var(--cp-yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:transform .2s;z-index:2;border:none}
-  .cp-play-btn:hover{transform:scale(1.1)}
-
-  /* Reviews — Judge.me widget area */
-  .cp-reviews-section{padding:80px 24px;background:var(--cp-white)}
-  .cp-reviews-header{text-align:center;margin-bottom:40px}
-  .cp-judgeme-widget{max-width:1000px;margin:0 auto;min-height:200px}
-
-  /* Sticky Bar */
-  .cp-sticky{position:fixed;bottom:0;left:0;right:0;background:var(--cp-white);border-top:1px solid var(--cp-border);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -4px 20px rgba(0,0,0,.1);z-index:200;transform:translateY(100%);transition:transform .3s ease}
-  .cp-sticky.visible{transform:translateY(0)}
-  .cp-sticky-info{display:flex;align-items:center;gap:10px}
-  .cp-sticky-thumb{width:40px;height:40px;background:var(--cp-bg);border-radius:var(--cp-r-sm);border:1px solid var(--cp-border);overflow:hidden}
-  .cp-sticky-thumb img{width:100%;height:100%;object-fit:cover}
-  .cp-sticky-name{font-size:13px;font-weight:600}
-  .cp-sticky-price{font-size:12px;color:var(--cp-muted)}
-  .cp-sticky-btn{padding:10px 28px;background:var(--cp-yellow);color:var(--cp-black);border-radius:var(--cp-r-md);font-size:14px;font-weight:700;white-space:nowrap;border:none;cursor:pointer;font-family:var(--cp-font);transition:background .2s}
-  .cp-sticky-btn:hover{background:var(--cp-yellow-dk)}
-
-  /* WhatsApp Float */
-  .cp-wa{position:fixed;bottom:80px;right:24px;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:190;transition:transform .2s;text-decoration:none}
-  .cp-wa:hover{transform:scale(1.1)}
+  /* WhatsApp */
+  .cp-whatsapp {
+    position: fixed; bottom: 88px; right: 24px;
+    width: 52px; height: 52px; background: #25D366;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 26px; box-shadow: 0 4px 16px rgba(37,211,102,.4); z-index: 190;
+    transition: transform .2s, box-shadow .2s; text-decoration: none;
+  }
+  .cp-whatsapp:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(37,211,102,.5); }
 
   /* ─── Responsive ─── */
-  @media(max-width:768px){
-    .cp-product{grid-template-columns:1fr;gap:28px;padding:16px 16px 48px}
-    .cp-gallery{position:static}
-    .cp-title{font-size:22px}
-    .cp-now{font-size:26px}
-    .cp-split-inner{grid-template-columns:1fr;gap:24px}
-    .cp-split.reverse .cp-split-inner{direction:ltr}
-    .cp-sec-title{font-size:24px}
-    .cp-steps{grid-template-columns:1fr}
-    .cp-split,.cp-hiw,.cp-reviews-section,.cp-video-section{padding:48px 16px}
+  @media (max-width: 768px) {
+    .cp-product { grid-template-columns: 1fr; gap: 32px; padding: 16px 16px 48px; }
+    .cp-gallery { position: static; }
+    .cp-title { font-size: 24px; }
+    .cp-price-current { font-size: 28px; }
+    .cp-section-title { font-size: 28px; }
+    .cp-feat-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .cp-steps { grid-template-columns: 1fr; }
+    .cp-steps::before { display: none; }
+    .cp-reviews-grid { grid-template-columns: 1fr; }
+    .cp-hiw, .cp-features, .cp-reviews { padding: 56px 16px; }
+  }
+  @media (max-width: 480px) {
+    .cp-feat-grid { grid-template-columns: 1fr; }
+    .cp-thumbs { grid-template-columns: repeat(4,1fr); }
   }
 </style>
 
-<div class="cp">
+<div class="cp-wrap">
 
-  <!-- ═══ PRODUCT SECTION ═══ -->
-  <div class="cp-product cp-mx">
+  <!-- Product Section -->
+  <div class="cp-product">
 
     <!-- Gallery -->
     <div class="cp-gallery">
-      <div class="cp-main-img">
+      <div class="cp-gallery-main" id="cp-main-img-wrap">
         {%- if product.featured_image -%}
-          <img id="cpMainImg" src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape }}" width="800" height="800" loading="eager" />
+          <img id="cpMainImg"
+               src="{{ product.featured_image | image_url: width: 800 }}"
+               alt="{{ product.featured_image.alt | escape }}"
+               width="800" height="800" loading="eager" />
         {%- else -%}
-          {{ 'product-1' | placeholder_svg_tag }}
+          {{ 'product-1' | placeholder_svg_tag: 'cp-placeholder-img' }}
         {%- endif -%}
-        {%- if on_sale -%}<span class="cp-sale-tag">{{ discount_pct }}% OFF</span>
-        {%- elsif product.available == false -%}<span class="cp-sold-tag">Sold Out</span>{%- endif -%}
+
+        {%- if on_sale -%}
+          <span class="cp-gallery-sale-badge">{{ discount_pct }}% OFF</span>
+        {%- elsif product.available == false -%}
+          <span class="cp-gallery-sold-badge">Sold Out</span>
+        {%- endif -%}
       </div>
 
       {%- if product.images.size > 1 -%}
-        <div class="cp-thumbs-wrap">
-          <button class="cp-thumb-arrow left" onclick="cpScrollThumbs(-1)" aria-label="Previous">&#8249;</button>
-          <div class="cp-thumbs" id="cpThumbTrack">
-            {%- for image in product.images -%}
-              <div class="cp-thumb {% if forloop.first %}active{% endif %}" onclick="cpSwapImg(this,'{{ image | image_url: width: 800 }}')">
-                <img src="{{ image | image_url: width: 150 }}" alt="{{ image.alt | escape }}" width="72" height="72" loading="lazy" />
-              </div>
-            {%- endfor -%}
-          </div>
-          <button class="cp-thumb-arrow right" onclick="cpScrollThumbs(1)" aria-label="Next">&#8250;</button>
+        <div class="cp-thumbs">
+          {%- for image in product.images limit: 5 -%}
+            <div class="cp-thumb {% if forloop.first %}active{% endif %}"
+                 onclick="cpSwapImg(this, '{{ image | image_url: width: 800 }}')">
+              <img src="{{ image | image_url: width: 150 }}"
+                   alt="{{ image.alt | escape }}"
+                   width="150" height="150" loading="lazy" />
+            </div>
+          {%- endfor -%}
         </div>
       {%- endif -%}
     </div>
 
     <!-- Info Panel -->
     <div class="cp-info">
-      <div class="cp-badges">
-        {%- if on_sale -%}<span class="cp-badge cp-b-yellow">Sale</span>{%- endif -%}
-        <span class="cp-badge cp-b-dark">MagSafe</span>
-        {%- if product.available -%}<span class="cp-badge cp-b-green">In Stock</span>
-        {%- else -%}<span class="cp-badge cp-b-red">Sold Out</span>{%- endif -%}
-      </div>
 
-      <h1 class="cp-title">{{ product.title }}</h1>
-
-      <!-- 3 Key Selling Points -->
-      <div class="cp-usps">
-        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_1 }}</div>
-        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_2 }}</div>
-        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_3 }}</div>
-      </div>
-
-      <div class="cp-rating">
-        <span class="cp-stars">★★★★★</span>
-        <span class="cp-rating-text">{{ section.settings.review_score }} ({{ section.settings.review_count }} reviews)</span>
-        <span class="cp-rating-sold">{{ section.settings.sold_count }} sold</span>
-      </div>
-
-      <div class="cp-price">
-        <span class="cp-now">{{ current_var.price | money }}</span>
+      <!-- Badges -->
+      <div class="cp-badge-row">
         {%- if on_sale -%}
-          <span class="cp-was">{{ current_var.compare_at_price | money }}</span>
-          <span class="cp-save">Save {{ discount_pct }}%</span>
+          <span class="cp-badge cp-badge-yellow">Sale</span>
+        {%- endif -%}
+        <span class="cp-badge cp-badge-dark">MagSafe</span>
+        {%- if product.available -%}
+          <span class="cp-badge cp-badge-green">In Stock</span>
+        {%- else -%}
+          <span class="cp-badge cp-badge-red">Sold Out</span>
         {%- endif -%}
       </div>
 
+      <h1 class="cp-title">{{ product.title }}</h1>
+      {%- if product.metafields.custom.subtitle -%}
+        <p class="cp-subtitle">{{ product.metafields.custom.subtitle }}</p>
+      {%- else -%}
+        <p class="cp-subtitle">Pro-grade polarizing filter with 1-second MagSafe attachment.</p>
+      {%- endif -%}
+
+      <!-- Ratings (numbers controlled via Theme Customizer → Section Settings) -->
+      <div class="cp-rating">
+        <span class="cp-stars">★★★★★</span>
+        <span class="cp-rating-count">{{ section.settings.review_score }} ({{ section.settings.review_count }} reviews)</span>
+        <span class="cp-rating-sold">{{ section.settings.sold_count }} sold this month</span>
+      </div>
+
+      <!-- Price -->
+      <div class="cp-price-row" id="cp-price-row">
+        <span class="cp-price-current">{{ current_var.price | money }}</span>
+        {%- if on_sale -%}
+          <span class="cp-price-orig">{{ current_var.compare_at_price | money }}</span>
+          <span class="cp-price-save">Save {{ discount_pct }}%</span>
+        {%- endif -%}
+      </div>
+
+      <!-- Shopify Product Form -->
       {%- form 'product', product, id: 'cp-product-form', novalidate: 'novalidate' -%}
         <input type="hidden" name="id" id="cp-variant-id" value="{{ current_var.id }}" />
 
+        <!-- Variant Options -->
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
             <div class="cp-variants">
-              <div class="cp-var-label">{{ option.name }} <span id="cp-sel-{{ forloop.index }}" style="color:var(--cp-muted);font-weight:400">— {{ option.selected_value }}</span></div>
-              <div class="cp-var-opts" data-option-index="{{ forloop.index0 }}">
+              <div class="cp-variant-label">
+                {{ option.name }}
+                <span id="cp-sel-{{ forloop.index }}" style="color:var(--cp-muted);font-weight:400">
+                  — {{ option.selected_value }}
+                </span>
+              </div>
+              <div class="cp-variant-options" data-option-index="{{ forloop.index0 }}">
                 {%- for value in option.values -%}
-                  <button type="button" class="swatch-btn {% if option.selected_value == value %}active{% endif %}" data-value="{{ value }}" data-option-index="{{ forloop.parentloop.index0 }}" onclick="cpSelectOption(this)">{{ value }}</button>
+                  <button type="button"
+                          class="swatch-btn {% if option.selected_value == value %}active{% endif %}"
+                          data-value="{{ value }}"
+                          data-option-index="{{ forloop.parentloop.index0 }}"
+                          onclick="cpSelectOption(this)">
+                    {{ value }}
+                  </button>
                 {%- endfor -%}
               </div>
             </div>
           {%- endfor -%}
         {%- endunless -%}
 
+        <!-- Quantity -->
         <div class="cp-qty-row">
           <span class="cp-qty-label">Quantity</span>
           <div class="cp-qty-ctrl">
@@ -305,264 +495,271 @@
           <input type="hidden" name="quantity" id="cpQtyInput" value="1" />
         </div>
 
+        <!-- Urgency Bar -->
         <div class="cp-urgency">
           <div class="cp-pulse"></div>
-          <span>Only {{ section.settings.units_left }} units left — order now!</span>
+          <span class="cp-urgency-text">⚡ Only {{ section.settings.units_left }} units left — hurry before it sells out!</span>
         </div>
 
-        <div class="cp-atc-wrap" id="cp-cta-area">
+        <!-- CTA Buttons -->
+        <div class="cp-cta-stack" id="cp-cta-area">
           {%- if product.available -%}
-            <button type="submit" name="add" id="cpAddToCart" class="cp-atc">Add to Cart — {{ current_var.price | money }}</button>
+            <button type="submit" name="add" id="cpAddToCart" class="cp-btn cp-btn-primary"
+                    onclick="document.getElementById('cp-return-to').value=''">
+              🛒 Add to Cart
+            </button>
+
           {%- else -%}
-            <button type="button" class="cp-atc" disabled>Sold Out</button>
+            <button type="button" class="cp-btn cp-btn-primary" disabled>
+              Sold Out
+            </button>
           {%- endif -%}
+          <a href="https://wa.me/{{ section.settings.whatsapp_number }}?text=Hi!%20I%20want%20to%20order%20{{ product.title | url_encode }}"
+             target="_blank" class="cp-btn cp-btn-outline" style="text-decoration:none;">
+            💬 Order via WhatsApp
+          </a>
         </div>
+
       {%- endform -%}
 
-      <!-- 3 Trust Badges -->
+      <!-- Trust Grid -->
       <div class="cp-trust">
         <div class="cp-trust-item"><div class="cp-trust-icon">🚚</div><div class="cp-trust-text">Free Shipping<br>Over $25</div></div>
         <div class="cp-trust-item"><div class="cp-trust-icon">🔄</div><div class="cp-trust-text">30-Day<br>Returns</div></div>
         <div class="cp-trust-item"><div class="cp-trust-icon">💵</div><div class="cp-trust-text">Cash on<br>Delivery</div></div>
+        <div class="cp-trust-item"><div class="cp-trust-icon">✅</div><div class="cp-trust-text">Money-Back<br>Guarantee</div></div>
       </div>
 
+      <!-- Accordion -->
       <div class="cp-accordion">
         <div class="cp-acc-item open">
-          <button class="cp-acc-hd" onclick="cpToggleAcc(this)" type="button">Product Details <span class="cp-acc-ico">+</span></button>
-          <div class="cp-acc-body">{{ product.description }}</div>
+          <button class="cp-acc-header" onclick="cpToggleAcc(this)" type="button">
+            Product Details <span class="cp-acc-icon">+</span>
+          </button>
+          <div class="cp-acc-body">
+            {{ product.description }}
+          </div>
         </div>
         <div class="cp-acc-item">
-          <button class="cp-acc-hd" onclick="cpToggleAcc(this)" type="button">Compatibility <span class="cp-acc-ico">+</span></button>
-          <div class="cp-acc-body">Works with iPhone 12, 13, 14, 15, and 16 series (all models including Pro and Pro Max) when used with a MagSafe-compatible case.</div>
+          <button class="cp-acc-header" onclick="cpToggleAcc(this)" type="button">
+            Compatibility <span class="cp-acc-icon">+</span>
+          </button>
+          <div class="cp-acc-body">
+            Works with iPhone 12, 13, 14, 15, and 16 series (all models including Pro and Pro Max)
+            when used with a MagSafe-compatible case.
+          </div>
         </div>
         <div class="cp-acc-item">
-          <button class="cp-acc-hd" onclick="cpToggleAcc(this)" type="button">Shipping &amp; Returns <span class="cp-acc-ico">+</span></button>
-          <div class="cp-acc-body">Orders processed and shipped within 1–3 business days. Free shipping on orders over $25. Cash on delivery available. 30-day no-questions-asked returns.</div>
+          <button class="cp-acc-header" onclick="cpToggleAcc(this)" type="button">
+            Shipping &amp; Returns <span class="cp-acc-icon">+</span>
+          </button>
+          <div class="cp-acc-body">
+            Orders processed and shipped within 1–3 business days. Free shipping on orders over $25.
+            Cash on delivery available. 30-day no-questions-asked returns.
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ FEATURE 1: Split left image / right text ═══ -->
-  <div class="cp-split">
-    <div class="cp-split-inner cp-mx">
-      <div class="cp-split-media">
-        {% comment %} REPLACE: Add your image in Shopify (Settings > Files), then paste URL below {% endcomment %}
-        <div class="cp-placeholder"><span class="ph-icon">📸</span>Upload: filter close-up image<br><small>Replace this with your product image</small></div>
-      </div>
-      <div>
-        <p class="cp-eyebrow">Instant Attachment</p>
-        <h2 class="cp-sec-title">Snaps on in 1 second.<br>Stays locked in place.</h2>
-        <p class="cp-sec-desc">Precision N52 neodymium magnets auto-align with your MagSafe case and lock the filter dead-centre over your lens. No clips, no threads, no adapters.</p>
-        <div class="cp-check-list">
-          <div class="cp-check"><span class="cp-check-dot">✓</span> MagSafe magnetic alignment</div>
-          <div class="cp-check"><span class="cp-check-dot">✓</span> Works with any MagSafe case</div>
-          <div class="cp-check"><span class="cp-check-dot">✓</span> Holds firm during movement</div>
-        </div>
+  <!-- Features Section -->
+  <div class="cp-features">
+    <div style="max-width:1200px;margin:0 auto">
+      <p class="cp-eyebrow">Why It Works</p>
+      <h2 class="cp-section-title">Photography-grade optics,<br>phone-simple to use.</h2>
+      <p class="cp-section-sub">Everything you'd expect from a professional camera filter — now magnetic, pocket-sized, and made for iPhone.</p>
+      <div class="cp-feat-grid">
+        <div class="cp-feat-card"><div class="cp-feat-icon">🧲</div><div class="cp-feat-title">1-Second MagSafe Clip</div><div class="cp-feat-desc">Precision magnets align and lock the filter instantly. No threads, no adapters.</div></div>
+        <div class="cp-feat-card"><div class="cp-feat-icon">🎨</div><div class="cp-feat-title">Pro Colour Boost</div><div class="cp-feat-desc">Eliminates haze, deepens sky blues, and makes foliage greens vivid.</div></div>
+        <div class="cp-feat-card"><div class="cp-feat-icon">🔄</div><div class="cp-feat-title">360° Rotation Ring</div><div class="cp-feat-desc">Dial in exactly the right polarization angle with smooth, click-free rotation.</div></div>
+        <div class="cp-feat-card"><div class="cp-feat-icon">✈️</div><div class="cp-feat-title">Pocket-Sized</div><div class="cp-feat-desc">Weighs just 28g and fits in any pocket. Comes with a carry pouch.</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ FEATURE 2: Split right image / left text (reversed, dark) ═══ -->
-  <div class="cp-split cp-split-dark reverse">
-    <div class="cp-split-inner cp-mx">
-      <div class="cp-split-media">
-        <div class="cp-placeholder" style="background:linear-gradient(135deg,#333,#222)"><span class="ph-icon">🌅</span><span style="color:rgba(255,255,255,.5)">Upload: before/after sky comparison</span></div>
-      </div>
-      <div>
-        <p class="cp-eyebrow">Pro Colour Boost</p>
-        <h2 class="cp-sec-title">See colours the way your eyes do.</h2>
-        <p class="cp-sec-desc">The polarizing glass cuts through atmospheric haze, eliminates reflections from water and glass, and brings out the deep blues and vivid greens that your phone camera normally misses.</p>
-        <div class="cp-check-list">
-          <div class="cp-check"><span class="cp-check-dot">✓</span> Eliminates glare and reflections</div>
-          <div class="cp-check"><span class="cp-check-dot">✓</span> Deepens sky blues naturally</div>
-          <div class="cp-check"><span class="cp-check-dot">✓</span> 360° rotation ring for precise control</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ VIDEO SECTION ═══ -->
-  <div class="cp-video-section">
-    <div class="cp-video-wrap">
-      <p class="cp-eyebrow" style="color:var(--cp-yellow)">See It In Action</p>
-      <h2 class="cp-sec-title" style="color:#fff">Watch the difference in real time</h2>
-      <div class="cp-video-container">
-        {% comment %}
-          REPLACE: Embed your video here. Options:
-          1. Upload to Shopify (Settings > Files) and use <video src="URL" controls></video>
-          2. Or paste a YouTube embed: <iframe src="https://www.youtube.com/embed/YOUR_ID" frameborder="0" allowfullscreen></iframe>
-        {% endcomment %}
-        <button class="cp-play-btn" aria-label="Play video">▶</button>
-        <span style="color:rgba(255,255,255,.4);font-size:13px;position:absolute;bottom:20px">Upload your product video here</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ HOW IT WORKS (with image cards) ═══ -->
+  <!-- How It Works -->
   <div class="cp-hiw">
-    <div class="cp-mx">
+    <div style="max-width:1200px;margin:0 auto">
       <div class="cp-hiw-header">
-        <p class="cp-eyebrow">Setup In 3 Seconds</p>
-        <h2 class="cp-sec-title">Attach. Rotate. Shoot.</h2>
+        <p class="cp-eyebrow" style="color:var(--cp-yellow-dark)">Setup in 3 Seconds</p>
+        <h2 class="cp-section-title cp-hiw-title">Attach. Rotate. Shoot.</h2>
       </div>
       <div class="cp-steps">
-        <div class="cp-step-card">
-          <div class="cp-step-img">
-            <span class="cp-step-num">1</span>
-            <span class="ph-icon">🧲</span>Upload: snap-on photo
-          </div>
-          <div class="cp-step-body">
-            <h3>Snap On</h3>
-            <p>Hold the filter near the back of your iPhone — magnets grab it automatically and lock it in place.</p>
-          </div>
+        <div class="cp-step">
+          <div class="cp-step-num">1</div>
+          <h3 class="cp-step-title">Snap on Your Filter</h3>
+          <p class="cp-step-desc">Hold the filter near the back of your MagSafe case — the magnets grab it automatically and lock in place.</p>
         </div>
-        <div class="cp-step-card">
-          <div class="cp-step-img">
-            <span class="cp-step-num">2</span>
-            <span class="ph-icon">🔄</span>Upload: rotating photo
-          </div>
-          <div class="cp-step-body">
-            <h3>Rotate</h3>
-            <p>Spin the outer ring until glare disappears and colours pop. Watch the effect live on your screen.</p>
-          </div>
+        <div class="cp-step">
+          <div class="cp-step-num">2</div>
+          <h3 class="cp-step-title">Rotate to Adjust</h3>
+          <p class="cp-step-desc">Spin the outer ring until glare disappears or your sky reaches maximum depth. Watch the effect live on screen.</p>
         </div>
-        <div class="cp-step-card">
-          <div class="cp-step-img">
-            <span class="cp-step-num">3</span>
-            <span class="ph-icon">📸</span>Upload: result photo
-          </div>
-          <div class="cp-step-body">
-            <h3>Shoot</h3>
-            <p>Capture with any camera app — native camera, ProCamera, Halide, and even video. It all works.</p>
-          </div>
+        <div class="cp-step">
+          <div class="cp-step-num">3</div>
+          <h3 class="cp-step-title">Capture &amp; Share</h3>
+          <p class="cp-step-desc">Shoot in any camera app — works with native camera, third-party apps, and video too.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ REVIEWS — Judge.me Widget ═══ -->
-  <div class="cp-reviews-section">
-    <div class="cp-mx">
+  <!-- Reviews -->
+  <div class="cp-reviews">
+    <div style="max-width:1200px;margin:0 auto">
       <div class="cp-reviews-header">
-        <p class="cp-eyebrow">Customer Reviews</p>
-        <h2 class="cp-sec-title">What our customers are saying</h2>
+        <p class="cp-eyebrow" style="color:var(--cp-yellow-dark)">Customer Reviews</p>
+        <h2 class="cp-section-title" style="color:var(--cp-text)">What photographers are saying</h2>
+        <div class="cp-overall">
+          <div class="cp-big-score">{{ section.settings.review_score }}</div>
+          <div>
+            <div class="cp-score-stars">★★★★★</div>
+          </div>
+        </div>
       </div>
-      <div class="cp-judgeme-widget">
-        {% comment %}
-          ═══════════════════════════════════════════════════════
-          HOW TO ADD REAL REVIEWS WITH JUDGE.ME (free plan):
-
-          1. Go to Shopify Admin → Apps → Search "Judge.me"
-          2. Install the free "Judge.me Product Reviews" app
-          3. Once installed, Judge.me automatically adds its
-             review widget to every product page.
-          4. To show it HERE specifically, replace this comment
-             block with one of these:
-
-             Option A — Auto widget (recommended):
-             <div class="jdgm-widget jdgm-review-widget"
-                  data-product-title="{{ product.title | escape }}"
-                  data-id="{{ product.id }}">
-             </div>
-
-             Option B — Preview badge + widget:
-             <div class="jdgm-widget jdgm-preview-badge"
-                  data-id="{{ product.id }}">
-             </div>
-             <div class="jdgm-widget jdgm-review-widget"
-                  data-id="{{ product.id }}">
-             </div>
-
-          5. Ask customers for reviews with photos & videos —
-             Judge.me supports image + video reviews out of
-             the box. These make your page look real and
-             trustworthy instead of AI-generated.
-
-          6. Import reviews: Judge.me can also import reviews
-             from AliExpress if you're dropshipping.
-          ═══════════════════════════════════════════════════════
-        {% endcomment %}
-
-        <!-- Temporary placeholder — remove once Judge.me is installed -->
-        <div style="text-align:center;padding:40px 20px;background:var(--cp-bg);border:2px dashed var(--cp-border);border-radius:var(--cp-r-lg)">
-          <p style="font-size:16px;font-weight:600;margin-bottom:8px;color:var(--cp-text)">Reviews widget loads here</p>
-          <p style="font-size:13px;color:var(--cp-muted);max-width:400px;margin:0 auto">Install <strong>Judge.me</strong> (free) from the Shopify App Store to display real customer reviews with photos and videos.</p>
+      <div class="cp-reviews-grid">
+        <div class="cp-review-card">
+          <div class="cp-review-stars">★★★★★</div>
+          <p class="cp-review-text">"{{ section.settings.review_1_text }}"</p>
+          <div class="cp-review-meta">
+            <div class="cp-review-avatar">{{ section.settings.review_1_name | slice: 0 }}{{ section.settings.review_1_name | split: ' ' | last | slice: 0 }}</div>
+            <div><div class="cp-review-name">{{ section.settings.review_1_name }}</div><div class="cp-review-date">{{ section.settings.review_1_date }}</div><div class="cp-verified">✓ Verified Purchase</div></div>
+          </div>
+        </div>
+        <div class="cp-review-card">
+          <div class="cp-review-stars">★★★★★</div>
+          <p class="cp-review-text">"{{ section.settings.review_2_text }}"</p>
+          <div class="cp-review-meta">
+            <div class="cp-review-avatar">{{ section.settings.review_2_name | slice: 0 }}{{ section.settings.review_2_name | split: ' ' | last | slice: 0 }}</div>
+            <div><div class="cp-review-name">{{ section.settings.review_2_name }}</div><div class="cp-review-date">{{ section.settings.review_2_date }}</div><div class="cp-verified">✓ Verified Purchase</div></div>
+          </div>
+        </div>
+        <div class="cp-review-card">
+          <div class="cp-review-stars">★★★★★</div>
+          <p class="cp-review-text">"{{ section.settings.review_3_text }}"</p>
+          <div class="cp-review-meta">
+            <div class="cp-review-avatar">{{ section.settings.review_3_name | slice: 0 }}{{ section.settings.review_3_name | split: ' ' | last | slice: 0 }}</div>
+            <div><div class="cp-review-name">{{ section.settings.review_3_name }}</div><div class="cp-review-date">{{ section.settings.review_3_date }}</div><div class="cp-verified">✓ Verified Purchase</div></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-</div>
+</div><!-- end .cp-wrap -->
 
-<!-- Sticky ATC Bar -->
+<!-- Sticky Bar -->
 <div class="cp-sticky" id="cpStickyBar">
-  <div class="cp-sticky-info">
+  <div class="cp-sticky-product">
     <div class="cp-sticky-thumb">
-      {%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 88 }}" alt="{{ product.title }}" />{%- endif -%}
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | image_url: width: 88 }}" alt="{{ product.title }}" width="44" height="44" />
+      {%- endif -%}
     </div>
     <div>
       <div class="cp-sticky-name">{{ product.title }}</div>
-      <div class="cp-sticky-price">{{ current_var.price | money }}{%- if on_sale -%} <s style="color:#999;font-size:11px">{{ current_var.compare_at_price | money }}</s>{%- endif -%}</div>
+      <div class="cp-sticky-price">{{ current_var.price | money }}
+        {%- if on_sale -%} <s style="color:#999;font-size:11px">{{ current_var.compare_at_price | money }}</s>{%- endif -%}
+      </div>
     </div>
   </div>
-  <button class="cp-sticky-btn" onclick="document.getElementById('cpAddToCart').click()">Add to Cart</button>
+  <button class="cp-sticky-cta" onclick="document.getElementById('cpAddToCart').click()">
+    🛒 Add to Cart
+  </button>
 </div>
 
-<!-- WhatsApp Float (for support chat, not ordering) -->
-<a href="https://wa.me/{{ section.settings.whatsapp_number }}" class="cp-wa" target="_blank" title="Chat on WhatsApp">💬</a>
+<!-- WhatsApp Float -->
+<a href="https://wa.me/{{ section.settings.whatsapp_number }}"
+   class="cp-whatsapp" target="_blank" title="Chat on WhatsApp">💬</a>
 
-<script type="application/json" id="cpVariantsData">{{ product.variants | json }}</script>
+<!-- Shopify Variant Data (JSON) -->
+<script type="application/json" id="cpVariantsData">
+  {{ product.variants | json }}
+</script>
 
 <script>
-(function(){
-  /* Gallery */
-  window.cpSwapImg=function(t,src){
-    document.querySelectorAll('.cp-thumb').forEach(function(el){el.classList.remove('active')});
-    t.classList.add('active');
-    document.getElementById('cpMainImg').src=src;
+(function() {
+
+  /* ─── Gallery ─── */
+  window.cpSwapImg = function(thumb, src) {
+    document.querySelectorAll('.cp-thumb').forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+    document.getElementById('cpMainImg').src = src;
   };
-  /* Thumbnail carousel scroll */
-  window.cpScrollThumbs=function(dir){
-    var track=document.getElementById('cpThumbTrack');
-    if(track) track.scrollBy({left:dir*160,behavior:'smooth'});
+
+  /* ─── Quantity ─── */
+  var cpQty = 1;
+  window.cpChangeQty = function(delta) {
+    cpQty = Math.max(1, cpQty + delta);
+    document.getElementById('cpQtyNum').textContent  = cpQty;
+    document.getElementById('cpQtyInput').value = cpQty;
   };
-  /* Quantity */
-  var qty=1;
-  window.cpChangeQty=function(d){
-    qty=Math.max(1,qty+d);
-    document.getElementById('cpQtyNum').textContent=qty;
-    document.getElementById('cpQtyInput').value=qty;
+
+  /* ─── Accordion ─── */
+  window.cpToggleAcc = function(btn) {
+    btn.closest('.cp-acc-item').classList.toggle('open');
   };
-  /* Accordion */
-  window.cpToggleAcc=function(b){b.closest('.cp-acc-item').classList.toggle('open')};
-  /* Variants */
-  var vars=JSON.parse(document.getElementById('cpVariantsData').textContent);
-  var sel={};
-  document.querySelectorAll('.cp-var-opts').forEach(function(g){
-    var a=g.querySelector('.swatch-btn.active');
-    if(a) sel[g.dataset.optionIndex]=a.dataset.value;
+
+  /* ─── Variant Selection ─── */
+  var cpVariants   = JSON.parse(document.getElementById('cpVariantsData').textContent);
+  var cpSelections = {};
+
+  // initialise selections from active buttons
+  document.querySelectorAll('.cp-variant-options').forEach(function(group) {
+    var active = group.querySelector('.swatch-btn.active');
+    if (active) cpSelections[group.dataset.optionIndex] = active.dataset.value;
   });
-  window.cpSelectOption=function(btn){
-    var i=btn.dataset.optionIndex;
-    btn.closest('.cp-var-opts').querySelectorAll('.swatch-btn').forEach(function(b){b.classList.remove('active')});
+
+  window.cpSelectOption = function(btn) {
+    var idx = btn.dataset.optionIndex;
+    btn.closest('.cp-variant-options').querySelectorAll('.swatch-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
-    sel[i]=btn.dataset.value;
-    var lbl=document.getElementById('cp-sel-'+(parseInt(i)+1));
-    if(lbl) lbl.textContent='— '+btn.dataset.value;
-    var m=vars.find(function(v){return v.options.every(function(o,idx){return sel[String(idx)]===o})});
-    if(m){
-      document.getElementById('cp-variant-id').value=m.id;
-      var p=document.querySelector('.cp-now');if(p)p.textContent='$'+(m.price/100).toFixed(2);
-      var b=document.getElementById('cpAddToCart');
-      if(b){b.disabled=!m.available;b.textContent=m.available?'Add to Cart — $'+(m.price/100).toFixed(2):'Sold Out'}
+    cpSelections[idx] = btn.dataset.value;
+
+    // Update displayed label
+    var label = document.getElementById('cp-sel-' + (parseInt(idx)+1));
+    if (label) label.textContent = '— ' + btn.dataset.value;
+
+    // Find matching variant
+    var match = cpVariants.find(function(v) {
+      return v.options.every(function(opt, i) {
+        return cpSelections[String(i)] === opt || cpSelections[i] === opt;
+      });
+    });
+
+    if (match) {
+      document.getElementById('cp-variant-id').value = match.id;
+
+      // Update price
+      var priceEl = document.querySelector('.cp-price-current');
+      if (priceEl) {
+        priceEl.textContent = formatMoney(match.price);
+      }
+
+      // Toggle availability
+      var atcBtn = document.getElementById('cpAddToCart');
+      if (atcBtn) {
+        atcBtn.disabled  = !match.available;
+        atcBtn.textContent = match.available ? '🛒 Add to Cart' : 'Sold Out';
+      }
     }
   };
-  /* Sticky bar */
-  var sb=document.getElementById('cpStickyBar'),ca=document.getElementById('cp-cta-area');
-  if(sb&&ca){window.addEventListener('scroll',function(){
-    sb.classList.toggle('visible',ca.getBoundingClientRect().bottom<0);
-  })}
+
+  function formatMoney(cents) {
+    return '$' + (cents / 100).toFixed(2);
+  }
+
+  /* ─── Sticky Bar ─── */
+  var stickyBar = document.getElementById('cpStickyBar');
+  var ctaArea   = document.getElementById('cp-cta-area');
+  if (stickyBar && ctaArea) {
+    window.addEventListener('scroll', function() {
+      var bottom = ctaArea.getBoundingClientRect().bottom;
+      if (bottom < 0) { stickyBar.classList.add('visible'); }
+      else             { stickyBar.classList.remove('visible'); }
+    });
+  }
+
 })();
 </script>
 
@@ -572,64 +769,105 @@
   "tag": "section",
   "settings": [
     {
-      "type": "header",
-      "content": "WhatsApp"
-    },
-    {
       "type": "text",
       "id": "whatsapp_number",
       "label": "WhatsApp Number (with country code, no +)",
-      "default": "96170000000"
-    },
-    {
-      "type": "header",
-      "content": "Key Selling Points (under title)"
-    },
-    {
-      "type": "text",
-      "id": "usp_1",
-      "label": "Selling Point 1",
-      "default": "Snaps on magnetically in 1 second — no adapters needed"
-    },
-    {
-      "type": "text",
-      "id": "usp_2",
-      "label": "Selling Point 2",
-      "default": "Eliminates glare and boosts colours instantly"
-    },
-    {
-      "type": "text",
-      "id": "usp_3",
-      "label": "Selling Point 3",
-      "default": "Fits all iPhones 12–16 with any MagSafe case"
-    },
-    {
-      "type": "header",
-      "content": "Social Proof"
+      "default": "96170000000",
+      "info": "Example: 96170123456 for Lebanon +961 70 123 456"
     },
     {
       "type": "text",
       "id": "review_score",
-      "label": "Review Score",
-      "default": "4.9"
+      "label": "Review Score (e.g. 4.9)",
+      "default": "4.9",
+      "info": "Shown next to the stars near the product title and in the reviews section"
     },
     {
       "type": "number",
       "id": "review_count",
       "label": "Number of Reviews",
-      "default": 127
+      "default": 127,
+      "info": "Shown as '(127 reviews)' near the title and 'Based on 127 reviews' in the reviews section"
     },
     {
       "type": "text",
       "id": "sold_count",
-      "label": "Units Sold (e.g. 500+)",
-      "default": "500+"
+      "label": "Units Sold This Month (e.g. 500+)",
+      "default": "500+",
+      "info": "Shown as '500+ sold this month' next to the review count"
     },
     {
       "type": "number",
       "id": "units_left",
       "label": "Units Left (urgency bar)",
-      "default": 7
+      "default": 7,
+      "info": "Shown in the yellow urgency bar below the quantity selector"
+    },
+    {
+      "type": "header",
+      "content": "Review 1"
+    },
+    {
+      "type": "text",
+      "id": "review_1_name",
+      "label": "Reviewer Name",
+      "default": "Khalil M."
+    },
+    {
+      "type": "text",
+      "id": "review_1_date",
+      "label": "Review Date",
+      "default": "March 2026"
+    },
+    {
+      "type": "textarea",
+      "id": "review_1_text",
+      "label": "Review Text",
+      "default": "Snaps on in a second and the difference in my landscape photos is night and day. The sky shots are unreal."
+    },
+    {
+      "type": "header",
+      "content": "Review 2"
+    },
+    {
+      "type": "text",
+      "id": "review_2_name",
+      "label": "Reviewer Name",
+      "default": "Sara R."
+    },
+    {
+      "type": "text",
+      "id": "review_2_date",
+      "label": "Review Date",
+      "default": "February 2026"
+    },
+    {
+      "type": "textarea",
+      "id": "review_2_text",
+      "label": "Review Text",
+      "default": "Fast shipping and the product quality exceeded my expectations. The aluminium ring feels super premium."
+    },
+    {
+      "type": "header",
+      "content": "Review 3"
+    },
+    {
+      "type": "text",
+      "id": "review_3_name",
+      "label": "Reviewer Name",
+      "default": "Nour A."
+    },
+    {
+      "type": "text",
+      "id": "review_3_date",
+      "label": "Review Date",
+      "default": "February 2026"
+    },
+    {
+      "type": "textarea",
+      "id": "review_3_text",
+      "label": "Review Text",
+      "default": "WhatsApp support was super responsive. Great customer service + great product. Will buy again."
     }
   ],
   "presets": [
