@@ -189,10 +189,6 @@
   .cp-hiw-video-container{aspect-ratio:16/9;background:#111;border-radius:var(--cp-r-lg);overflow:hidden;margin-top:32px;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid var(--cp-border)}
   .cp-hiw-video-container iframe,.cp-hiw-video-container video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 
-  /* Reviews — Judge.me widget area */
-  .cp-reviews-section{padding:80px 24px;background:var(--cp-white)}
-  .cp-reviews-header{text-align:center;margin-bottom:40px}
-  .cp-judgeme-widget{max-width:1000px;margin:0 auto;min-height:200px}
 
   /* Sticky Bar */
   .cp-sticky{position:fixed;bottom:0;left:0;right:0;background:var(--cp-white);border-top:1px solid var(--cp-border);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -4px 20px rgba(0,0,0,.1);z-index:200;transform:translateY(100%);transition:transform .3s ease}
@@ -235,7 +231,7 @@
     .cp-trust-icon{font-size:18px}
 
     /* Below-fold sections */
-    .cp-split,.cp-hiw,.cp-reviews-section,.cp-video-section{
+    .cp-split,.cp-hiw,.cp-video-section{
       padding:40px 20px;
       width:100%;
       max-width:100%;
@@ -504,57 +500,6 @@
     </div>
   </div>
 
-  <!-- ═══ REVIEWS — Judge.me Widget ═══ -->
-  <div class="cp-reviews-section">
-    <div class="cp-mx">
-      <div class="cp-reviews-header">
-        <p class="cp-eyebrow">Customer Reviews</p>
-        <h2 class="cp-sec-title">What our customers are saying</h2>
-      </div>
-      <div class="cp-judgeme-widget">
-        {% comment %}
-          ═══════════════════════════════════════════════════════
-          HOW TO ADD REAL REVIEWS WITH JUDGE.ME (free plan):
-
-          1. Go to Shopify Admin → Apps → Search "Judge.me"
-          2. Install the free "Judge.me Product Reviews" app
-          3. Once installed, Judge.me automatically adds its
-             review widget to every product page.
-          4. To show it HERE specifically, replace this comment
-             block with one of these:
-
-             Option A — Auto widget (recommended):
-             <div class="jdgm-widget jdgm-review-widget"
-                  data-product-title="{{ product.title | escape }}"
-                  data-id="{{ product.id }}">
-             </div>
-
-             Option B — Preview badge + widget:
-             <div class="jdgm-widget jdgm-preview-badge"
-                  data-id="{{ product.id }}">
-             </div>
-             <div class="jdgm-widget jdgm-review-widget"
-                  data-id="{{ product.id }}">
-             </div>
-
-          5. Ask customers for reviews with photos & videos —
-             Judge.me supports image + video reviews out of
-             the box. These make your page look real and
-             trustworthy instead of AI-generated.
-
-          6. Import reviews: Judge.me can also import reviews
-             from AliExpress if you're dropshipping.
-          ═══════════════════════════════════════════════════════
-        {% endcomment %}
-
-        <!-- Temporary placeholder — remove once Judge.me is installed -->
-        <div style="text-align:center;padding:40px 20px;background:var(--cp-bg);border:2px dashed var(--cp-border);border-radius:var(--cp-r-lg)">
-          <p style="font-size:16px;font-weight:600;margin-bottom:8px;color:var(--cp-text)">Reviews widget loads here</p>
-          <p style="font-size:13px;color:var(--cp-muted);max-width:400px;margin:0 auto">Install <strong>Judge.me</strong> (free) from the Shopify App Store to display real customer reviews with photos and videos.</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </div>
 
