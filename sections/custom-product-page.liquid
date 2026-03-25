@@ -185,6 +185,16 @@
   .cp-play-btn{width:72px;height:72px;background:var(--cp-yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:transform .2s;z-index:2;border:none}
   .cp-play-btn:hover{transform:scale(1.1)}
 
+  /* FAQs */
+  .cp-faq-section{padding:80px 24px;background:var(--cp-bg)}
+  .cp-faq-header{text-align:center;margin-bottom:48px}
+  .cp-faq-list{max-width:760px;margin:0 auto;border-top:1px solid var(--cp-border)}
+  .cp-faq-item{border-bottom:1px solid var(--cp-border)}
+  .cp-faq-hd{width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 0;background:none;font-size:15px;font-weight:600;color:var(--cp-text);cursor:pointer;text-align:left;border:none;font-family:var(--cp-font);gap:16px}
+  .cp-faq-hd .cp-acc-ico{flex-shrink:0}
+  .cp-faq-item.open .cp-faq-hd .cp-acc-ico{transform:rotate(45deg)}
+  .cp-faq-body{font-size:14px;color:var(--cp-muted);line-height:1.8}
+
   /* How It Works — optional video */
   .cp-hiw-video-container{aspect-ratio:16/9;background:#111;border-radius:var(--cp-r-lg);overflow:hidden;margin-top:32px;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid var(--cp-border)}
   .cp-hiw-video-container iframe,.cp-hiw-video-container video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
@@ -231,7 +241,7 @@
     .cp-trust-icon{font-size:18px}
 
     /* Below-fold sections */
-    .cp-split,.cp-hiw,.cp-video-section{
+    .cp-split,.cp-hiw,.cp-video-section,.cp-faq-section{
       padding:40px 20px;
       width:100%;
       max-width:100%;
@@ -319,27 +329,29 @@
         {%- else -%}<span class="cp-badge cp-b-red">Sold Out</span>{%- endif -%}
       </div>
 
-      <h1 class="cp-title">{{ product.title }}</h1>
-
-      <!-- 3 Key Selling Points -->
-      <div class="cp-usps">
-        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_1 }}</div>
-        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_2 }}</div>
-        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_3 }}</div>
-      </div>
-
+      <!-- 1) Star rating ABOVE title -->
       <div class="cp-rating">
         <span class="cp-stars">★★★★★</span>
         <span class="cp-rating-text">{{ section.settings.review_score }} ({{ section.settings.review_count }} reviews)</span>
         <span class="cp-rating-sold">{{ section.settings.sold_count }} sold</span>
       </div>
 
+      <h1 class="cp-title">{{ product.title }}</h1>
+
+      <!-- 2) Price directly under title -->
       <div class="cp-price">
         <span class="cp-now">{{ current_var.price | money }}</span>
         {%- if on_sale -%}
           <span class="cp-was">{{ current_var.compare_at_price | money }}</span>
           <span class="cp-save">Save {{ discount_pct }}%</span>
         {%- endif -%}
+      </div>
+
+      <!-- 3 Key Selling Points -->
+      <div class="cp-usps">
+        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_1 }}</div>
+        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_2 }}</div>
+        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_3 }}</div>
       </div>
 
       {%- form 'product', product, id: 'cp-product-form', novalidate: 'novalidate' -%}
@@ -500,6 +512,33 @@
     </div>
   </div>
 
+  <!-- ═══ FAQs ═══ -->
+  {%- if section.settings.faq_title != blank -%}
+  <div class="cp-faq-section">
+    <div class="cp-mx">
+      <div class="cp-faq-header">
+        <p class="cp-eyebrow">{{ section.settings.faq_eyebrow }}</p>
+        <h2 class="cp-sec-title">{{ section.settings.faq_title }}</h2>
+      </div>
+      <div class="cp-faq-list">
+        {%- for i in (1..6) -%}
+          {%- assign q_key = 'faq_' | append: i | append: '_q' -%}
+          {%- assign a_key = 'faq_' | append: i | append: '_a' -%}
+          {%- assign q_val = section.settings[q_key] -%}
+          {%- assign a_val = section.settings[a_key] -%}
+          {%- if q_val != blank and a_val != blank -%}
+            <div class="cp-faq-item">
+              <button class="cp-faq-hd" onclick="cpToggleAcc(this)" type="button">
+                {{ q_val }}<span class="cp-acc-ico">+</span>
+              </button>
+              <div class="cp-acc-body cp-faq-body">{{ a_val }}</div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  {%- endif -%}
 
 </div>
 
@@ -517,8 +556,6 @@
   <button class="cp-sticky-btn" onclick="document.getElementById('cpAddToCart').click()">Add to Cart</button>
 </div>
 
-<!-- WhatsApp Float (for support chat, not ordering) -->
-<a href="https://wa.me/{{ section.settings.whatsapp_number }}" class="cp-wa" target="_blank" title="Chat on WhatsApp">💬</a>
 
 <script type="application/json" id="cpVariantsData">{{ product.variants | json }}</script>
 
@@ -580,10 +617,7 @@
   "tag": "section",
   "settings": [
 
-    { "type": "header", "content": "── WhatsApp ──" },
-    { "type": "text", "id": "whatsapp_number", "label": "WhatsApp Number (country code, no +)", "default": "96170000000" },
-
-    { "type": "header", "content": "── Selling Points (under title) ──" },
+{ "type": "header", "content": "── Selling Points (under title) ──" },
     { "type": "text", "id": "usp_1", "label": "Selling Point 1", "default": "Snaps on magnetically in 1 second — no adapters needed" },
     { "type": "text", "id": "usp_2", "label": "Selling Point 2", "default": "Eliminates glare and boosts colours instantly" },
     { "type": "text", "id": "usp_3", "label": "Selling Point 3", "default": "Fits all iPhones 12–16 with any MagSafe case" },
@@ -638,6 +672,33 @@
     { "type": "video_url", "id": "hiw_video",      "label": "How It Works — Video (YouTube or Vimeo, autoplays)", "accept": ["youtube", "vimeo"], "placeholder": "https://www.youtube.com/watch?v=..." },
     { "type": "text",      "id": "hiw_video_file", "label": "How It Works — OR Shopify-hosted file URL", "placeholder": "https://cdn.shopify.com/s/files/..." },
 
+    { "type": "header",   "content": "── FAQs Section ──" },
+    { "type": "text",     "id": "faq_eyebrow", "label": "FAQs — Eyebrow Label", "default": "Got Questions?" },
+    { "type": "text",     "id": "faq_title",   "label": "FAQs — Title (leave blank to hide section)", "default": "Frequently Asked Questions" },
+
+    { "type": "header",   "content": "FAQ 1" },
+    { "type": "text",     "id": "faq_1_q", "label": "Question 1", "default": "Does it work with a phone case?" },
+    { "type": "textarea", "id": "faq_1_a", "label": "Answer 1",   "default": "Yes — as long as your case is MagSafe-compatible, the filter snaps on securely. It works with cases from Apple, Moment, Peak Design, and most third-party MagSafe brands." },
+
+    { "type": "header",   "content": "FAQ 2" },
+    { "type": "text",     "id": "faq_2_q", "label": "Question 2", "default": "Which iPhones are supported?" },
+    { "type": "textarea", "id": "faq_2_a", "label": "Answer 2",   "default": "iPhone 12, 13, 14, 15, and 16 — all models (standard, Plus, Pro, and Pro Max). It uses the built-in MagSafe magnet array, so no adapter or modification is needed." },
+
+    { "type": "header",   "content": "FAQ 3" },
+    { "type": "text",     "id": "faq_3_q", "label": "Question 3", "default": "Will it affect autofocus or image quality?" },
+    { "type": "textarea", "id": "faq_3_a", "label": "Answer 3",   "default": "No — the 52mm optical glass is colour-neutral and precision ground to avoid vignetting. Autofocus and Night Mode work exactly as normal." },
+
+    { "type": "header",   "content": "FAQ 4" },
+    { "type": "text",     "id": "faq_4_q", "label": "Question 4", "default": "How do I clean or store it?" },
+    { "type": "textarea", "id": "faq_4_a", "label": "Answer 4",   "default": "Use the included microfibre pouch to wipe the lens. Store it in the protective cap when not in use. Avoid touching the glass surface directly." },
+
+    { "type": "header",   "content": "FAQ 5" },
+    { "type": "text",     "id": "faq_5_q", "label": "Question 5", "default": "What is your return policy?" },
+    { "type": "textarea", "id": "faq_5_a", "label": "Answer 5",   "default": "30-day no-questions-asked returns. If you are not happy with your purchase, contact us and we will arrange a full refund or replacement." },
+
+    { "type": "header",   "content": "FAQ 6 (optional)" },
+    { "type": "text",     "id": "faq_6_q", "label": "Question 6", "default": "" },
+    { "type": "textarea", "id": "faq_6_a", "label": "Answer 6",   "default": "" }
 
   ],
   "presets": [
