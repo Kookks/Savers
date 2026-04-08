@@ -1,0 +1,999 @@
+{% comment %}
+  SaversLeb — Bundle Product Section
+  Styled to match SaversLeb theme tokens:
+    scheme-1: bg #fff, text #121212, button #fae10a / label #000
+    scheme-4: bg #121212, text #fff
+  Font: Assistant | Corners: sharp (0px radius) | Pills: 40px radius
+{% endcomment %}
+
+{%- style -%}
+  /* =============================================
+     SAVERSLEB BUNDLE PRODUCT SECTION
+     Matches theme color_schemes & design tokens
+  ============================================= */
+  .slb-section {
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+  }
+
+  .slb-section .page-width {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 3.2rem 1.5rem 6rem;
+    display: grid;
+    grid-template-columns: 55% 1fr;
+    gap: 4.8rem;
+  }
+
+  /* Media */
+  .slb__media-wrapper {
+    position: sticky;
+    top: 8rem;
+    height: fit-content;
+  }
+
+  .slb__main-image {
+    background: #fae10a;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slb__main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slb__badge {
+    position: absolute;
+    top: 1.6rem;
+    left: 1.6rem;
+    background: #121212;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 0.5rem 1.4rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 40px;
+    z-index: 1;
+  }
+
+  .slb__thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+  }
+
+  .slb__thumb {
+    aspect-ratio: 1;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.2s;
+    overflow: hidden;
+  }
+
+  .slb__thumb:hover {
+    transform: translateY(-2px);
+  }
+
+  .slb__thumb.active {
+    border-color: #121212;
+  }
+
+  .slb__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Info */
+  .slb__vendor {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 0.8rem;
+  }
+
+  .slb__title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.05rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .slb__rating-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .slb__stars { font-size: 1.5rem; letter-spacing: 1px; }
+
+  .slb__review-count {
+    font-size: 1.3rem;
+    opacity: 0.6;
+  }
+
+  .slb__rating-badge {
+    background: #fae10a;
+    color: #121212;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 0.3rem 1.2rem;
+    border-radius: 40px;
+    letter-spacing: 0.3px;
+  }
+
+  /* Price */
+  .slb__price-block { margin-bottom: 2.4rem; }
+
+  .slb__price {
+    font-size: 3.4rem;
+    font-weight: 800;
+    letter-spacing: -0.1rem;
+  }
+
+  .slb__price-compare {
+    font-size: 1.7rem;
+    opacity: 0.5;
+    text-decoration: line-through;
+    margin-left: 1rem;
+    font-weight: 500;
+  }
+
+  .slb__price-save {
+    display: inline-block;
+    margin-top: 0.4rem;
+    background: #fae10a;
+    color: #121212;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0.2rem 1rem;
+    border-radius: 40px;
+  }
+
+  /* Option Label */
+  .slb__option-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+  }
+  .slb__option-label strong {
+    color: rgb(var(--color-foreground));
+    opacity: 1;
+  }
+
+  /* Tier Grid */
+  .slb__tier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .slb__tier-card {
+    border: 2px solid rgba(var(--color-foreground), 0.12);
+    padding: 1.4rem 1.2rem;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.2s, box-shadow 0.2s;
+    background: rgb(var(--color-background));
+    position: relative;
+  }
+
+  .slb__tier-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(18,18,18,0.10);
+  }
+
+  .slb__tier-card.active {
+    border-color: rgb(var(--color-foreground));
+    background: #fae10a;
+    color: #121212;
+  }
+
+  .slb__tier-popular {
+    position: absolute;
+    top: -1.1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #121212;
+    color: #fae10a;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.3rem 1.2rem;
+    border-radius: 40px;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+
+  .slb__tier-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .slb__tier-price {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+
+  .slb__tier-desc {
+    font-size: 1.1rem;
+    opacity: 0.55;
+    margin-top: 0.4rem;
+    line-height: 1.5;
+  }
+  .slb__tier-card.active .slb__tier-desc { opacity: 0.6; }
+
+  /* Variant Picker */
+  .slb__variant-picker { margin-bottom: 2.4rem; }
+
+  .slb__variant-pills {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .slb__variant-pill {
+    border: 1px solid rgba(var(--color-foreground), 0.55);
+    padding: 0.8rem 1.8rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 40px;
+    transition: all 0.15s;
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+  }
+
+  .slb__variant-pill:hover {
+    border-color: rgb(var(--color-foreground));
+  }
+
+  .slb__variant-pill.active {
+    border-color: rgb(var(--color-foreground));
+    border-width: 2px;
+    background: rgb(var(--color-foreground));
+    color: rgb(var(--color-background));
+  }
+
+  /* Form Buttons */
+  .slb__form-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .slb__btn-primary {
+    width: 100%;
+    background: #fae10a;
+    color: #000000;
+    border: 2px solid #121212;
+    padding: 1.6rem 2.8rem;
+    font-family: inherit;
+    font-size: 1.6rem;
+    font-weight: 800;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .slb__btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(18,18,18,0.15);
+  }
+
+  .slb__btn-secondary {
+    width: 100%;
+    background: #121212;
+    color: #ffffff;
+    border: 2px solid #121212;
+    padding: 1.6rem 2.8rem;
+    font-family: inherit;
+    font-size: 1.6rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .slb__btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(18,18,18,0.2);
+  }
+
+  /* Trust Bar */
+  .slb__trust-bar {
+    display: flex;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    padding: 1.6rem 0;
+    border-top: 1px solid rgba(var(--color-foreground), 0.12);
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.12);
+    margin-bottom: 2.4rem;
+  }
+
+  .slb__trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .slb__trust-icon {
+    width: 2.8rem;
+    height: 2.8rem;
+    background: #fae10a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  /* What's Included */
+  .slb__includes {
+    border: 2px solid rgb(var(--color-foreground));
+    margin-bottom: 2.4rem;
+  }
+
+  .slb__includes-header {
+    background: #121212;
+    color: #ffffff;
+    padding: 1.2rem 1.6rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .slb__include-item {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    padding: 1.4rem 1.6rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+
+  .slb__include-item:last-child { border-bottom: none; }
+
+  .slb__include-icon {
+    width: 4rem;
+    height: 4rem;
+    background: #fae10a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .slb__include-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .slb__include-desc {
+    font-size: 1.2rem;
+    opacity: 0.6;
+    margin-top: 0.2rem;
+  }
+
+  .slb__include-check {
+    margin-left: auto;
+    width: 2.4rem;
+    height: 2.4rem;
+    background: #fae10a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  /* Feature Grid */
+  .slb__feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  .slb__feature-card {
+    background: #121212;
+    color: #ffffff;
+    padding: 1.6rem;
+  }
+
+  .slb__feature-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+  .slb__feature-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .slb__feature-desc { font-size: 1.2rem; color: rgba(255,255,255,0.6); line-height: 1.4; }
+
+  /* Reviews */
+  .slb__reviews {
+    background: #121212;
+    color: #ffffff;
+    padding: 6rem 1.5rem;
+  }
+
+  .slb__reviews-inner { max-width: var(--page-width); margin: 0 auto; }
+
+  .slb__section-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -0.05rem;
+    margin-bottom: 3.2rem;
+  }
+
+  .slb__section-title span {
+    background: #fae10a;
+    color: #121212;
+    padding: 0 0.6rem;
+  }
+
+  .slb__reviews-summary {
+    display: flex;
+    align-items: flex-start;
+    gap: 4.8rem;
+    margin-bottom: 3.2rem;
+    padding-bottom: 3.2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .slb__big-num {
+    font-size: 6.4rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #fae10a;
+  }
+
+  .slb__big-stars { font-size: 2rem; letter-spacing: 2px; margin: 0.6rem 0; }
+  .slb__big-count { font-size: 1.3rem; color: rgba(255,255,255,0.4); }
+
+  .slb__bar-row {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.5);
+  }
+  .slb__bar-row > span:first-child { width: 2.8rem; text-align: right; }
+  .slb__bar-bg { flex: 1; height: 6px; background: rgba(255,255,255,0.1); }
+  .slb__bar-fill { height: 100%; background: #fae10a; }
+  .slb__bar-row > span:last-child { width: 2.4rem; color: rgba(255,255,255,0.35); }
+
+  .slb__review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+  }
+
+  .slb__review-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem;
+  }
+
+  .slb__review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+  }
+
+  .slb__reviewer-name { font-size: 1.4rem; font-weight: 700; }
+  .slb__review-date { font-size: 1.1rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+  .slb__review-stars { font-size: 1.4rem; letter-spacing: 1px; }
+  .slb__review-text { font-size: 1.3rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+  .slb__verified {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fae10a;
+  }
+
+  /* Responsive */
+  @media screen and (max-width: 749px) {
+    .slb-section .page-width {
+      grid-template-columns: 1fr;
+      padding: 1.6rem 1.6rem 6rem;
+      gap: 2.4rem;
+    }
+    .slb__media-wrapper { position: static; }
+    .slb__tier-grid { grid-template-columns: 1fr; }
+    .slb__review-grid { grid-template-columns: 1fr; }
+    .slb__reviews-summary { flex-direction: column; gap: 2.4rem; }
+    .slb__title { font-size: 2.4rem; }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .slb__review-grid { grid-template-columns: 1fr 1fr; }
+  }
+{%- endstyle -%}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div class="slb-section color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+
+    {%- comment -%} MEDIA COLUMN {%- endcomment -%}
+    <div class="slb__media-wrapper">
+      <div class="slb__main-image">
+        {%- if product.featured_media -%}
+          {{ product.featured_media | image_url: width: 800 | image_tag: loading: 'eager', fetchpriority: 'high' }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag }}
+        {%- endif -%}
+        {%- if section.settings.badge_text != blank -%}
+          <span class="slb__badge">{{ section.settings.badge_text }}</span>
+        {%- endif -%}
+      </div>
+      {%- if product.images.size > 1 -%}
+        <div class="slb__thumbs">
+          {%- for image in product.images limit: 4 -%}
+            <div class="slb__thumb {% if forloop.first %}active{% endif %}">
+              {{ image | image_url: width: 200 | image_tag: loading: 'lazy' }}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} INFO COLUMN {%- endcomment -%}
+    <div class="slb__info-wrapper">
+
+      <p class="slb__vendor">{{ product.vendor }} · {{ section.settings.product_subtitle }}</p>
+      <h1 class="slb__title">{{ product.title }}</h1>
+
+      {%- if section.settings.show_rating -%}
+        <div class="slb__rating-row">
+          <span class="slb__stars">★★★★★</span>
+          <span class="slb__review-count">{{ section.settings.review_count }} reviews</span>
+          <span class="slb__rating-badge">✓ {{ section.settings.origin_badge }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} PRICE {%- endcomment -%}
+      <div class="slb__price-block">
+        {%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'slb__price' -%}
+      </div>
+
+      {%- comment -%} VARIANT PICKER {%- endcomment -%}
+      {%- unless product.has_only_default_variant -%}
+        <div class="slb__variant-picker">
+          {%- for option in product.options_with_values -%}
+            <div class="slb__option-label">{{ option.name }}: <strong>{{ option.selected_value }}</strong></div>
+            <div class="slb__variant-pills">
+              {%- for value in option.values -%}
+                <div class="slb__variant-pill {% if option.selected_value == value %}active{% endif %}"
+                     data-value="{{ value }}">
+                  {{ value }}
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endunless -%}
+
+      {%- comment -%} ADD TO CART {%- endcomment -%}
+      {%- form 'product', product, id: 'slb-product-form', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+        <div class="slb__form-buttons">
+          <button type="submit" class="slb__btn-primary"
+            {% unless current_variant.available %}disabled{% endunless %}>
+            {%- if current_variant.available -%}
+              Add to Cart — {{ current_variant.price | money }}
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </button>
+          {{ form | payment_button }}
+        </div>
+      {%- endform -%}
+
+      {%- comment -%} TRUST BAR {%- endcomment -%}
+      <div class="slb__trust-bar">
+        {%- if section.settings.trust_1 != blank -%}
+          <div class="slb__trust-item"><div class="slb__trust-icon">🚚</div> {{ section.settings.trust_1 }}</div>
+        {%- endif -%}
+        {%- if section.settings.trust_2 != blank -%}
+          <div class="slb__trust-item"><div class="slb__trust-icon">🔄</div> {{ section.settings.trust_2 }}</div>
+        {%- endif -%}
+        {%- if section.settings.trust_3 != blank -%}
+          <div class="slb__trust-item"><div class="slb__trust-icon">🌱</div> {{ section.settings.trust_3 }}</div>
+        {%- endif -%}
+        {%- if section.settings.trust_4 != blank -%}
+          <div class="slb__trust-item"><div class="slb__trust-icon">🖨️</div> {{ section.settings.trust_4 }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} WHAT'S INCLUDED {%- endcomment -%}
+      {%- if section.settings.includes_title != blank -%}
+        <div class="slb__includes">
+          <div class="slb__includes-header">{{ section.settings.includes_title }}</div>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'include_item' -%}
+              <div class="slb__include-item" {{ block.shopify_attributes }}>
+                <div class="slb__include-icon">{{ block.settings.icon }}</div>
+                <div>
+                  <div class="slb__include-name">{{ block.settings.name }}</div>
+                  <div class="slb__include-desc">{{ block.settings.description }}</div>
+                </div>
+                <div class="slb__include-check">✓</div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} FEATURES {%- endcomment -%}
+      <div class="slb__feature-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'feature' -%}
+            <div class="slb__feature-card" {{ block.shopify_attributes }}>
+              <div class="slb__feature-icon">{{ block.settings.icon }}</div>
+              <div class="slb__feature-title">{{ block.settings.title }}</div>
+              <div class="slb__feature-desc">{{ block.settings.description }}</div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{%- comment -%} REVIEWS {%- endcomment -%}
+{%- if section.settings.show_reviews -%}
+  <div class="slb__reviews">
+    <div class="slb__reviews-inner">
+      <h2 class="slb__section-title">Customer <span>Reviews</span></h2>
+
+      <div class="slb__reviews-summary">
+        <div>
+          <div class="slb__big-num">{{ section.settings.review_avg }}</div>
+          <div class="slb__big-stars">★★★★★</div>
+          <div class="slb__big-count">Based on {{ section.settings.review_count }} reviews</div>
+        </div>
+        <div style="flex:1">
+          <div class="slb__bar-row"><span>5 ★</span><div class="slb__bar-bg"><div class="slb__bar-fill" style="width:88%"></div></div><span>112</span></div>
+          <div class="slb__bar-row"><span>4 ★</span><div class="slb__bar-bg"><div class="slb__bar-fill" style="width:10%"></div></div><span>13</span></div>
+          <div class="slb__bar-row"><span>3 ★</span><div class="slb__bar-bg"><div class="slb__bar-fill" style="width:2%"></div></div><span>2</span></div>
+          <div class="slb__bar-row"><span>2 ★</span><div class="slb__bar-bg"><div class="slb__bar-fill" style="width:0%"></div></div><span>0</span></div>
+          <div class="slb__bar-row"><span>1 ★</span><div class="slb__bar-bg"><div class="slb__bar-fill" style="width:0%"></div></div><span>0</span></div>
+        </div>
+      </div>
+
+      <div class="slb__review-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            <div class="slb__review-card" {{ block.shopify_attributes }}>
+              <div class="slb__review-header">
+                <div>
+                  <div class="slb__reviewer-name">{{ block.settings.name }}</div>
+                  <div class="slb__review-date">{{ block.settings.date }}</div>
+                </div>
+                <div class="slb__review-stars">★★★★★</div>
+              </div>
+              <div class="slb__review-text">"{{ block.settings.body }}"</div>
+              <span class="slb__verified">✓ Verified Buyer</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "SaversLeb Bundle Product",
+  "tag": "section",
+  "class": "slb-bundle-section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "product_subtitle",
+      "label": "Subtitle (under vendor)",
+      "default": "3D Printed"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "NEW DROP"
+    },
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show star rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count",
+      "default": "127 reviews"
+    },
+    {
+      "type": "text",
+      "id": "review_avg",
+      "label": "Average rating",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "origin_badge",
+      "label": "Origin badge text",
+      "default": "Printed in UK"
+    },
+    {
+      "type": "header",
+      "content": "Trust Bar"
+    },
+    {
+      "type": "text",
+      "id": "trust_1",
+      "label": "Trust item 1",
+      "default": "Free UK shipping over £25"
+    },
+    {
+      "type": "text",
+      "id": "trust_2",
+      "label": "Trust item 2",
+      "default": "30-day returns"
+    },
+    {
+      "type": "text",
+      "id": "trust_3",
+      "label": "Trust item 3",
+      "default": "Eco PLA filament"
+    },
+    {
+      "type": "text",
+      "id": "trust_4",
+      "label": "Trust item 4",
+      "default": "Made to order"
+    },
+    {
+      "type": "header",
+      "content": "What's Included"
+    },
+    {
+      "type": "text",
+      "id": "includes_title",
+      "label": "Includes box title",
+      "default": "📦 What's Included — Standard Bundle"
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show reviews section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "include_item",
+      "name": "Included Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji icon",
+          "default": "🎧"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Item name",
+          "default": "AirPods Pro Case"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Snap-fit lid, compatible with AirPods Pro 1 & 2"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji icon",
+          "default": "⚙️"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Precision Fit"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Designed to 0.1mm tolerance"
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Customer Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Reviewer name",
+          "default": "Jake T."
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": "March 2026"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Review text",
+          "default": "The fit is genuinely perfect. I use it every day."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SaversLeb Bundle Product",
+      "blocks": [
+        {
+          "type": "include_item",
+          "settings": {
+            "icon": "🎧",
+            "name": "AirPods Pro Case",
+            "description": "Snap-fit lid, compatible with AirPods Pro 1 & 2"
+          }
+        },
+        {
+          "type": "include_item",
+          "settings": {
+            "icon": "👂",
+            "name": "Ear Tip Holder",
+            "description": "Stores all 3 sizes — S, M, L"
+          }
+        },
+        {
+          "type": "include_item",
+          "settings": {
+            "icon": "🪝",
+            "name": "Cable & Hook Clip",
+            "description": "Mounts to desk or bag strap"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "⚙️",
+            "title": "Precision Fit",
+            "description": "0.1mm tolerance — no wobble, no rattle"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🎨",
+            "title": "5 Colours",
+            "description": "Pick the colour that matches your setup"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "♻️",
+            "title": "Eco PLA",
+            "description": "Plant-based, biodegradable filament"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "✏️",
+            "title": "Engravable",
+            "description": "Add your name — Premium tier only"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Jake T.",
+            "date": "March 2026",
+            "body": "The fit is genuinely perfect. I was sceptical about 3D printed stuff but this is rock solid."
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Amira S.",
+            "date": "February 2026",
+            "body": "Ordered the Premium in Signal Yellow with my name on it — looks amazing. Saversleb is my go-to now."
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Carlos M.",
+            "date": "January 2026",
+            "body": "Great quality for the price. The cable clip holds firmly and the case snaps shut with a satisfying click."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

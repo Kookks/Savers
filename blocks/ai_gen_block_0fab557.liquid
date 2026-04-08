@@ -1,0 +1,546 @@
+{% doc %}
+  @prompt
+    generate a comparaison between "WITHOUT FILTER" and "WITH THIS FILTER", No I want to compare bullet points
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-comparison-table-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ai-comparison-table__container-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: {{ block.settings.padding }}px;
+  }
+
+  .ai-comparison-table__header-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ block.settings.column_gap }}px;
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-comparison-table__column-header-{{ ai_gen_id }} {
+    text-align: center;
+    padding: {{ block.settings.header_padding }}px;
+    border-radius: {{ block.settings.header_border_radius }}px;
+  }
+
+  .ai-comparison-table__column-header-{{ ai_gen_id }}--without {
+    background-color: {{ block.settings.without_header_bg }};
+  }
+
+  .ai-comparison-table__column-header-{{ ai_gen_id }}--with {
+    background-color: {{ block.settings.with_header_bg }};
+  }
+
+  .ai-comparison-table__column-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.header_font_size }}px;
+    font-weight: {{ block.settings.header_font_weight }};
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-comparison-table__column-title-{{ ai_gen_id }}--without {
+    color: {{ block.settings.without_header_text }};
+  }
+
+  .ai-comparison-table__column-title-{{ ai_gen_id }}--with {
+    color: {{ block.settings.with_header_text }};
+  }
+
+  .ai-comparison-table__rows-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.row_gap }}px;
+  }
+
+  .ai-comparison-table__row-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ block.settings.column_gap }}px;
+    align-items: center;
+  }
+
+  .ai-comparison-table__cell-{{ ai_gen_id }} {
+    padding: {{ block.settings.cell_padding }}px;
+    border-radius: {{ block.settings.cell_border_radius }}px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 50px;
+  }
+
+  .ai-comparison-table__cell-{{ ai_gen_id }}--without {
+    background-color: {{ block.settings.without_cell_bg }};
+  }
+
+  .ai-comparison-table__cell-{{ ai_gen_id }}--with {
+    background-color: {{ block.settings.with_cell_bg }};
+  }
+
+  .ai-comparison-table__icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-top: 2px;
+  }
+
+  .ai-comparison-table__icon-{{ ai_gen_id }}--without {
+    color: {{ block.settings.without_icon_color }};
+  }
+
+  .ai-comparison-table__icon-{{ ai_gen_id }}--with {
+    color: {{ block.settings.with_icon_color }};
+  }
+
+  .ai-comparison-table__text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_font_size }}px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .ai-comparison-table__text-{{ ai_gen_id }}--without {
+    color: {{ block.settings.without_text_color }};
+  }
+
+  .ai-comparison-table__text-{{ ai_gen_id }}--with {
+    color: {{ block.settings.with_text_color }};
+  }
+
+  .ai-comparison-table__empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-comparison-table__container-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding | times: 0.7 }}px;
+    }
+
+    .ai-comparison-table__column-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.header_font_size | times: 0.85 }}px;
+    }
+
+    .ai-comparison-table__text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_font_size | times: 0.9 }}px;
+    }
+
+    .ai-comparison-table__cell-{{ ai_gen_id }} {
+      padding: {{ block.settings.cell_padding | times: 0.8 }}px;
+    }
+
+    .ai-comparison-table__icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size | times: 0.85 }}px;
+      height: {{ block.settings.icon_size | times: 0.85 }}px;
+    }
+  }
+{% endstyle %}
+
+<div
+  class="ai-comparison-table-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-comparison-table__container-{{ ai_gen_id }}">
+    <div class="ai-comparison-table__header-{{ ai_gen_id }}">
+      <div class="ai-comparison-table__column-header-{{ ai_gen_id }} ai-comparison-table__column-header-{{ ai_gen_id }}--without">
+        <h3 class="ai-comparison-table__column-title-{{ ai_gen_id }} ai-comparison-table__column-title-{{ ai_gen_id }}--without">
+          {{ block.settings.without_filter_title }}
+        </h3>
+      </div>
+      <div class="ai-comparison-table__column-header-{{ ai_gen_id }} ai-comparison-table__column-header-{{ ai_gen_id }}--with">
+        <h3 class="ai-comparison-table__column-title-{{ ai_gen_id }} ai-comparison-table__column-title-{{ ai_gen_id }}--with">
+          {{ block.settings.with_filter_title }}
+        </h3>
+      </div>
+    </div>
+
+    {% assign has_content = false %}
+    {% for i in (1..5) %}
+      {% assign without_key = 'without_point_' | append: i %}
+      {% assign with_key = 'with_point_' | append: i %}
+      {% assign without_point = block.settings[without_key] %}
+      {% assign with_point = block.settings[with_key] %}
+      
+      {% if without_point != blank or with_point != blank %}
+        {% assign has_content = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% if has_content %}
+      <div class="ai-comparison-table__rows-{{ ai_gen_id }}">
+        {% for i in (1..5) %}
+          {% assign without_key = 'without_point_' | append: i %}
+          {% assign with_key = 'with_point_' | append: i %}
+          {% assign without_point = block.settings[without_key] %}
+          {% assign with_point = block.settings[with_key] %}
+          
+          {% if without_point != blank or with_point != blank %}
+            <div class="ai-comparison-table__row-{{ ai_gen_id }}">
+              <div class="ai-comparison-table__cell-{{ ai_gen_id }} ai-comparison-table__cell-{{ ai_gen_id }}--without">
+                <svg class="ai-comparison-table__icon-{{ ai_gen_id }} ai-comparison-table__icon-{{ ai_gen_id }}--without" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+                <p class="ai-comparison-table__text-{{ ai_gen_id }} ai-comparison-table__text-{{ ai_gen_id }}--without">
+                  {{ without_point }}
+                </p>
+              </div>
+              <div class="ai-comparison-table__cell-{{ ai_gen_id }} ai-comparison-table__cell-{{ ai_gen_id }}--with">
+                <svg class="ai-comparison-table__icon-{{ ai_gen_id }} ai-comparison-table__icon-{{ ai_gen_id }}--with" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <p class="ai-comparison-table__text-{{ ai_gen_id }} ai-comparison-table__text-{{ ai_gen_id }}--with">
+                  {{ with_point }}
+                </p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="ai-comparison-table__empty-state-{{ ai_gen_id }}">
+        Add comparison points to get started
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Filter comparison",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Column titles"
+    },
+    {
+      "type": "text",
+      "id": "without_filter_title",
+      "label": "Without filter title",
+      "default": "Without filter"
+    },
+    {
+      "type": "text",
+      "id": "with_filter_title",
+      "label": "With filter title",
+      "default": "With this filter"
+    },
+    {
+      "type": "header",
+      "content": "Comparison point 1"
+    },
+    {
+      "type": "text",
+      "id": "without_point_1",
+      "label": "Without filter",
+      "default": "Washed out colors"
+    },
+    {
+      "type": "text",
+      "id": "with_point_1",
+      "label": "With filter",
+      "default": "Vibrant, saturated colors"
+    },
+    {
+      "type": "header",
+      "content": "Comparison point 2"
+    },
+    {
+      "type": "text",
+      "id": "without_point_2",
+      "label": "Without filter",
+      "default": "Harsh glare and reflections"
+    },
+    {
+      "type": "text",
+      "id": "with_point_2",
+      "label": "With filter",
+      "default": "Reduced glare and reflections"
+    },
+    {
+      "type": "header",
+      "content": "Comparison point 3"
+    },
+    {
+      "type": "text",
+      "id": "without_point_3",
+      "label": "Without filter",
+      "default": "Low contrast"
+    },
+    {
+      "type": "text",
+      "id": "with_point_3",
+      "label": "With filter",
+      "default": "Enhanced contrast"
+    },
+    {
+      "type": "header",
+      "content": "Comparison point 4"
+    },
+    {
+      "type": "text",
+      "id": "without_point_4",
+      "label": "Without filter"
+    },
+    {
+      "type": "text",
+      "id": "with_point_4",
+      "label": "With filter"
+    },
+    {
+      "type": "header",
+      "content": "Comparison point 5"
+    },
+    {
+      "type": "text",
+      "id": "without_point_5",
+      "label": "Without filter"
+    },
+    {
+      "type": "text",
+      "id": "with_point_5",
+      "label": "With filter"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Container padding",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "label": "Row gap",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Container border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Header style"
+    },
+    {
+      "type": "range",
+      "id": "header_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "header_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "header_padding",
+      "label": "Padding",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "header_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Bottom spacing",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "without_header_bg",
+      "label": "Without filter background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "without_header_text",
+      "label": "Without filter text",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "with_header_bg",
+      "label": "With filter background",
+      "default": "#fae10a"
+    },
+    {
+      "type": "color",
+      "id": "with_header_text",
+      "label": "With filter text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Cell style"
+    },
+    {
+      "type": "range",
+      "id": "cell_padding",
+      "label": "Padding",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "cell_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "without_cell_bg",
+      "label": "Without filter background",
+      "default": "#fef5f5"
+    },
+    {
+      "type": "color",
+      "id": "without_text_color",
+      "label": "Without filter text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "without_icon_color",
+      "label": "Without filter icon",
+      "default": "#dc2626"
+    },
+    {
+      "type": "color",
+      "id": "with_cell_bg",
+      "label": "With filter background",
+      "default": "#f0fdf4"
+    },
+    {
+      "type": "color",
+      "id": "with_text_color",
+      "label": "With filter text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "with_icon_color",
+      "label": "With filter icon",
+      "default": "#16a34a"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Filter comparison"
+    }
+  ]
+}
+{% endschema %}

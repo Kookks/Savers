@@ -1,0 +1,200 @@
+{% doc %}
+  @prompt
+    Create a live view counter block for product pages that displays "X people are viewing this product right now" where X is a random number between 2 and 10. The number should regenerate each time the page loads or refreshes. Include customization options for the text message, minimum and maximum view count range, text color, background color, and font size. Make it visually appealing with an eye icon or similar indicator.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-live-view-counter-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-live-view-counter__wrapper-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-live-view-counter__icon-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .ai-live-view-counter__icon-{{ ai_gen_id }} svg {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-live-view-counter__text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .ai-live-view-counter__count-{{ ai_gen_id }} {
+    font-weight: 700;
+  }
+{% endstyle %}
+
+<live-view-counter-{{ ai_gen_id }}
+  class="ai-live-view-counter-{{ ai_gen_id }}"
+  data-min="{{ block.settings.min_count }}"
+  data-max="{{ block.settings.max_count }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-live-view-counter__wrapper-{{ ai_gen_id }}">
+    <div class="ai-live-view-counter__icon-{{ ai_gen_id }}">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    </div>
+    <p class="ai-live-view-counter__text-{{ ai_gen_id }}">
+      <span class="ai-live-view-counter__count-{{ ai_gen_id }}"></span>
+      <span>{{ block.settings.message_text }}</span>
+    </p>
+  </div>
+</live-view-counter-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class LiveViewCounter{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.min = parseInt(this.dataset.min) || 2;
+        this.max = parseInt(this.dataset.max) || 10;
+        this.countElement = this.querySelector('.ai-live-view-counter__count-{{ ai_gen_id }}');
+        this.generateRandomCount();
+      }
+
+      generateRandomCount() {
+        const randomCount = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
+        if (this.countElement) {
+          this.countElement.textContent = randomCount;
+        }
+      }
+    }
+
+    customElements.define('live-view-counter-{{ ai_gen_id }}', LiveViewCounter{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Live view counter",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "message_text",
+      "label": "Message text",
+      "default": "people are viewing this product right now"
+    },
+    {
+      "type": "range",
+      "id": "min_count",
+      "label": "Minimum view count",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "max_count",
+      "label": "Maximum view count",
+      "min": 2,
+      "max": 100,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#fae10a"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Live view counter"
+    }
+  ]
+}
+{% endschema %}
