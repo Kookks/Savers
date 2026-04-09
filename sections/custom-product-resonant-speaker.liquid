@@ -1,0 +1,665 @@
+{% comment %}
+  ============================================================
+  Savers – Resonant Bluetooth Speaker Product Page Section
+  Theme: Dawn 15.x
+  Product: Bone Conduction Resonant Bluetooth Speaker (2-Pack)
+  Based on: custom-product-page.liquid v3
+  ============================================================
+{% endcomment %}
+
+{%- liquid
+  assign current_var   = product.selected_or_first_available_variant
+  assign compare_price = current_var.compare_at_price
+  assign sale_price    = current_var.price
+  assign on_sale       = false
+  if compare_price > sale_price
+    assign on_sale = true
+  endif
+  assign discount_pct = 0
+  if on_sale and compare_price > 0
+    assign discount_pct = compare_price | minus: sale_price | times: 100 | divided_by: compare_price
+  endif
+-%}
+
+<style>
+  :root {
+    --cp-yellow:#FAE10A; --cp-yellow-dk:#D4BC00;
+    --cp-black:#111; --cp-white:#FFF; --cp-bg:#FAFAFA;
+    --cp-text:#111; --cp-muted:#666; --cp-light:#999;
+    --cp-border:#E8E8E8; --cp-green:#22C55E; --cp-danger:#EF4444;
+    --cp-r-sm:6px; --cp-r-md:12px; --cp-r-lg:20px; --cp-r-pill:999px;
+    --cp-shadow:0 4px 16px rgba(0,0,0,.1);
+    --cp-font:'Inter',system-ui,sans-serif;
+  }
+  .cp *,.cp *::before,.cp *::after{box-sizing:border-box;word-break:break-word;overflow-wrap:anywhere}
+  .cp{font-family:var(--cp-font);color:var(--cp-text);line-height:1.6;width:100%;overflow-x:hidden;max-width:100vw}
+  .cp img{max-width:100%;display:block}
+  .cp-mx{max-width:1200px;margin:0 auto;width:100%}
+
+  /* ─── Product Grid ─── */
+  .cp-product{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;padding:24px 24px 64px}
+  .cp-gallery,.cp-info{min-width:0;width:100%}
+
+  /* ─── Gallery ─── */
+  .cp-gallery{position:sticky;top:80px}
+  .cp-main-img{aspect-ratio:1/1;background:var(--cp-white);border-radius:var(--cp-r-lg);border:1px solid var(--cp-border);overflow:hidden;position:relative;margin-bottom:10px}
+  .cp-main-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .cp-main-img:hover img{transform:scale(1.04)}
+  .cp-sale-tag,.cp-sold-tag{position:absolute;top:14px;left:14px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--cp-r-pill);letter-spacing:.5px;text-transform:uppercase}
+  .cp-sale-tag{background:var(--cp-yellow);color:var(--cp-black)}
+  .cp-sold-tag{background:var(--cp-danger);color:#fff}
+
+  /* Thumbnail carousel */
+  .cp-thumbs-wrap{position:relative;overflow:hidden}
+  .cp-thumbs{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0}
+  .cp-thumbs::-webkit-scrollbar{display:none}
+  .cp-thumb{flex:0 0 72px;height:72px;border-radius:var(--cp-r-sm);border:2px solid var(--cp-border);overflow:hidden;cursor:pointer;transition:border-color .2s;scroll-snap-align:start}
+  .cp-thumb.active{border-color:var(--cp-black)}
+  .cp-thumb:hover{border-color:#aaa}
+  .cp-thumb img{width:100%;height:100%;object-fit:cover}
+  .cp-thumb-arrow{position:absolute;top:50%;transform:translateY(-50%);width:28px;height:28px;background:rgba(255,255,255,.9);border:1px solid var(--cp-border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;z-index:2;transition:background .2s;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  .cp-thumb-arrow:hover{background:var(--cp-yellow)}
+  .cp-thumb-arrow.left{left:0}
+  .cp-thumb-arrow.right{right:0}
+
+  /* ─── Info ─── */
+  .cp-info{padding-top:4px}
+  .cp-badges{display:flex;gap:8px;margin-bottom:10px}
+  .cp-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--cp-r-pill);letter-spacing:.5px;text-transform:uppercase}
+  .cp-b-yellow{background:var(--cp-yellow);color:var(--cp-black)}
+  .cp-b-dark{background:var(--cp-black);color:var(--cp-white)}
+  .cp-b-green{background:#D1FAE5;color:#065F46}
+  .cp-b-red{background:#FEE2E2;color:#991B1B}
+  .cp-title{font-size:28px;font-weight:800;line-height:1.2;letter-spacing:-.3px;margin-bottom:12px}
+
+  /* Selling points */
+  .cp-usps{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+  .cp-usp{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--cp-text)}
+  .cp-usp-icon{flex:0 0 24px;height:24px;background:var(--cp-yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
+
+  .cp-rating{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+  .cp-stars{color:#F59E0B;font-size:14px}
+  .cp-rating-text{font-size:13px;color:var(--cp-muted)}
+  .cp-rating-sold{font-size:13px;color:var(--cp-muted);padding-left:8px;border-left:1px solid var(--cp-border)}
+
+  .cp-price{display:flex;align-items:baseline;gap:10px;padding:14px 0;border-top:1px solid var(--cp-border);border-bottom:1px solid var(--cp-border);margin-bottom:20px}
+  .cp-now{font-size:32px;font-weight:800}
+  .cp-was{font-size:17px;color:var(--cp-light);text-decoration:line-through}
+  .cp-save{background:#FEE2E2;color:#991B1B;font-size:12px;font-weight:700;padding:3px 8px;border-radius:var(--cp-r-pill)}
+
+  /* Variants */
+  .cp-variants{margin-bottom:18px}
+  .cp-var-label{font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .cp-var-opts{display:flex;gap:8px;flex-wrap:wrap}
+  .cp-var-opts .swatch-btn{padding:7px 14px;border-radius:var(--cp-r-sm);border:2px solid var(--cp-border);font-size:13px;font-weight:500;background:var(--cp-white);cursor:pointer;transition:all .2s;color:var(--cp-text);font-family:var(--cp-font)}
+  .cp-var-opts .swatch-btn:hover{border-color:#aaa}
+  .cp-var-opts .swatch-btn.active{border-color:var(--cp-black);background:var(--cp-black);color:var(--cp-white)}
+
+  .cp-qty-row{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .cp-qty-label{font-size:13px;font-weight:600}
+  .cp-qty-ctrl{display:flex;align-items:center;border:2px solid var(--cp-border);border-radius:var(--cp-r-sm);overflow:hidden}
+  .cp-qty-btn{width:38px;height:38px;background:var(--cp-bg);font-size:17px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;font-family:var(--cp-font);transition:background .2s}
+  .cp-qty-btn:hover{background:var(--cp-border)}
+  .cp-qty-num{width:44px;height:38px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;border-left:2px solid var(--cp-border);border-right:2px solid var(--cp-border)}
+
+  /* Urgency */
+  .cp-urgency{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#FFF8DC;border:1px solid #F0D800;border-radius:var(--cp-r-md);margin-bottom:16px}
+  .cp-pulse{width:9px;height:9px;background:var(--cp-danger);border-radius:50%;animation:cpP 1.5s infinite;flex-shrink:0}
+  @keyframes cpP{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+  .cp-urgency span{font-size:13px;font-weight:600;color:#92400E}
+
+  /* ATC */
+  .cp-atc-wrap{margin-bottom:16px}
+  .cp-atc{width:100%;padding:16px;border-radius:var(--cp-r-md);font-size:15px;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--cp-font);background:var(--cp-yellow);color:var(--cp-black);transition:all .2s;letter-spacing:.3px}
+  .cp-atc:hover{background:var(--cp-yellow-dk);transform:translateY(-1px);box-shadow:0 4px 12px rgba(250,225,10,.4)}
+  .cp-atc[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+
+  /* 3 Trust Badges */
+  .cp-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+  .cp-trust-item{text-align:center;padding:12px 6px;background:var(--cp-bg);border-radius:var(--cp-r-md);border:1px solid var(--cp-border)}
+  .cp-trust-icon{font-size:20px;margin-bottom:2px}
+  .cp-trust-text{font-size:10px;font-weight:600;line-height:1.3;color:var(--cp-muted)}
+
+  /* Accordion */
+  .cp-accordion{border-top:1px solid var(--cp-border);margin-top:24px}
+  .cp-acc-item{border-bottom:1px solid var(--cp-border)}
+  .cp-acc-hd{width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 0;background:none;font-size:14px;font-weight:600;color:var(--cp-text);cursor:pointer;text-align:left;border:none;font-family:var(--cp-font)}
+  .cp-acc-ico{font-size:18px;transition:transform .3s;color:var(--cp-muted)}
+  .cp-acc-item.open .cp-acc-ico{transform:rotate(45deg)}
+  .cp-acc-body{font-size:14px;color:var(--cp-muted);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+  .cp-acc-item.open .cp-acc-body{max-height:600px;padding-bottom:14px}
+
+  /* ═══════════════════════════════════════ */
+  /*  BELOW THE FOLD — Visual Sections      */
+  /* ═══════════════════════════════════════ */
+
+  /* Split Feature Row */
+  .cp-split{padding:80px 24px}
+  .cp-split-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .cp-split-inner > *{min-width:0}
+  .cp-split.reverse .cp-split-inner{direction:rtl}
+  .cp-split.reverse .cp-split-inner > *{direction:ltr}
+  .cp-split-media{aspect-ratio:4/3;border-radius:var(--cp-r-lg);overflow:hidden;background:var(--cp-border);position:relative}
+  .cp-split-media img,.cp-split-media video{width:100%;height:100%;object-fit:cover}
+  .cp-split-media .cp-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--cp-light);font-size:13px;font-weight:500;background:linear-gradient(135deg,#f5f5f5,#e8e8e8)}
+  .cp-split-media .cp-placeholder .ph-icon{font-size:36px;opacity:.5}
+  .cp-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cp-yellow-dk);margin-bottom:8px}
+  .cp-sec-title{font-size:28px;font-weight:800;line-height:1.2;letter-spacing:-.3px;margin-bottom:12px;color:var(--cp-text)}
+  .cp-sec-desc{font-size:15px;color:var(--cp-muted);line-height:1.7;margin-bottom:20px}
+  .cp-check-list{display:flex;flex-direction:column;gap:8px}
+  .cp-check{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
+  .cp-check-dot{flex:0 0 22px;height:22px;background:var(--cp-yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
+
+  .cp-split-dark{background:var(--cp-black);color:var(--cp-white)}
+  .cp-split-dark .cp-sec-title{color:var(--cp-white)}
+  .cp-split-dark .cp-sec-desc{color:rgba(255,255,255,.55)}
+  .cp-split-dark .cp-check{color:rgba(255,255,255,.8)}
+  .cp-split-dark .cp-eyebrow{color:var(--cp-yellow)}
+
+  /* How It Works — with images */
+  .cp-hiw{background:var(--cp-bg);padding:80px 24px}
+  .cp-hiw-header{text-align:center;margin-bottom:48px}
+  .cp-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .cp-step-card{background:var(--cp-white);border:1px solid var(--cp-border);border-radius:var(--cp-r-lg);overflow:hidden;transition:box-shadow .3s,transform .3s}
+  .cp-step-card:hover{box-shadow:var(--cp-shadow);transform:translateY(-3px)}
+  .cp-step-img{aspect-ratio:3/2;background:linear-gradient(135deg,#f5f5f5,#e8e8e8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--cp-light);font-size:12px;font-weight:500;position:relative}
+  .cp-step-img .ph-icon{font-size:28px;opacity:.5}
+  .cp-step-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+  .cp-step-num{position:absolute;top:12px;left:12px;width:32px;height:32px;background:var(--cp-yellow);color:var(--cp-black);border-radius:50%;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;z-index:1}
+  .cp-step-body{padding:20px}
+  .cp-step-body h3{font-size:16px;font-weight:700;margin-bottom:6px}
+  .cp-step-body p{font-size:13px;color:var(--cp-muted);line-height:1.6}
+
+  /* Video Section */
+  .cp-video-section{background:var(--cp-black);padding:80px 24px;text-align:center}
+  .cp-video-wrap{max-width:800px;margin:0 auto}
+  .cp-video-container{aspect-ratio:16/9;background:#222;border-radius:var(--cp-r-lg);overflow:hidden;margin-top:32px;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid rgba(255,255,255,.1)}
+  .cp-video-container video,.cp-video-container iframe{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+  .cp-play-btn{width:72px;height:72px;background:var(--cp-yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:transform .2s;z-index:2;border:none}
+  .cp-play-btn:hover{transform:scale(1.1)}
+
+  .cp-hiw-video-container{aspect-ratio:16/9;background:#111;border-radius:var(--cp-r-lg);overflow:hidden;margin-top:32px;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid var(--cp-border)}
+  .cp-hiw-video-container iframe,.cp-hiw-video-container video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+
+  /* Sticky Bar */
+  .cp-sticky{position:fixed;bottom:0;left:0;right:0;background:var(--cp-white);border-top:1px solid var(--cp-border);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -4px 20px rgba(0,0,0,.1);z-index:200;transform:translateY(100%);transition:transform .3s ease}
+  .cp-sticky.visible{transform:translateY(0)}
+  .cp-sticky-info{display:flex;align-items:center;gap:10px}
+  .cp-sticky-thumb{width:40px;height:40px;background:var(--cp-bg);border-radius:var(--cp-r-sm);border:1px solid var(--cp-border);overflow:hidden}
+  .cp-sticky-thumb img{width:100%;height:100%;object-fit:cover}
+  .cp-sticky-name{font-size:13px;font-weight:600}
+  .cp-sticky-price{font-size:12px;color:var(--cp-muted)}
+  .cp-sticky-btn{padding:10px 28px;background:var(--cp-yellow);color:var(--cp-black);border-radius:var(--cp-r-md);font-size:14px;font-weight:700;white-space:nowrap;border:none;cursor:pointer;font-family:var(--cp-font);transition:background .2s}
+  .cp-sticky-btn:hover{background:var(--cp-yellow-dk)}
+
+  /* WhatsApp Float */
+  .cp-wa{position:fixed;bottom:80px;right:24px;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:190;transition:transform .2s;text-decoration:none}
+  .cp-wa:hover{transform:scale(1.1)}
+
+  /* ─── Responsive ─── */
+  @media(max-width:768px){
+    .cp{overflow-x:hidden}
+    .cp-product{grid-template-columns:1fr;gap:20px;padding:16px 20px 48px;width:100%;max-width:100%}
+    .cp-gallery{position:static;width:100%;max-width:100%}
+    .cp-info{width:100%;max-width:100%}
+    .cp-title{font-size:20px}
+    .cp-now{font-size:24px}
+    .cp-sec-title{font-size:22px}
+    .cp-trust{grid-template-columns:repeat(3,1fr);gap:6px}
+    .cp-trust-item{padding:10px 4px}
+    .cp-trust-text{font-size:9px}
+    .cp-trust-icon{font-size:18px}
+    .cp-split,.cp-hiw,.cp-video-section{padding:40px 20px;width:100%;max-width:100%;overflow-x:hidden}
+    .cp-split-inner{grid-template-columns:1fr;gap:20px;width:100%}
+    .cp-split.reverse .cp-split-inner{direction:ltr}
+    .cp-split.reverse .cp-split-inner > *{direction:ltr}
+    .cp-steps{grid-template-columns:1fr}
+    .cp-sticky{padding:8px 16px;gap:10px}
+    .cp-sticky-name{font-size:12px}
+    .cp-sticky-price{display:none}
+    .cp-sticky-btn{padding:9px 18px;font-size:13px}
+    .cp-wa{bottom:70px;right:14px;width:44px;height:44px;font-size:20px}
+    .cp-acc-hd{font-size:13px}
+    .cp-mx{width:100%;max-width:100%}
+    .cp-video-wrap{max-width:100%}
+    .cp-video-container{aspect-ratio:9/16}
+    .cp-hiw-video-container{aspect-ratio:9/16}
+  }
+
+  @media(max-width:380px){
+    .cp-title{font-size:18px}
+    .cp-now{font-size:22px}
+    .cp-trust{gap:4px}
+    .cp-trust-text{font-size:8px}
+    .cp-badges{flex-wrap:wrap;gap:6px}
+  }
+</style>
+
+<div class="cp">
+
+  <!-- ═══ PRODUCT SECTION ═══ -->
+  <div class="cp-product cp-mx">
+
+    <!-- Gallery -->
+    <div class="cp-gallery">
+      <div class="cp-main-img">
+        {%- if product.featured_image -%}
+          <img id="cpMainImg" src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape }}" style="width:100%;height:100%;object-fit:cover" loading="eager" />
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag }}
+        {%- endif -%}
+        {%- if on_sale -%}<span class="cp-sale-tag">{{ discount_pct }}% OFF</span>
+        {%- elsif product.available == false -%}<span class="cp-sold-tag">Sold Out</span>{%- endif -%}
+      </div>
+
+      {%- if product.images.size > 1 -%}
+        <div class="cp-thumbs-wrap">
+          <button class="cp-thumb-arrow left" onclick="cpScrollThumbs(-1)" aria-label="Previous">&#8249;</button>
+          <div class="cp-thumbs" id="cpThumbTrack">
+            {%- for image in product.images -%}
+              <div class="cp-thumb {% if forloop.first %}active{% endif %}" onclick="cpSwapImg(this,'{{ image | image_url: width: 800 }}')">
+                <img src="{{ image | image_url: width: 150 }}" alt="{{ image.alt | escape }}" width="72" height="72" loading="lazy" />
+              </div>
+            {%- endfor -%}
+          </div>
+          <button class="cp-thumb-arrow right" onclick="cpScrollThumbs(1)" aria-label="Next">&#8250;</button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Info Panel -->
+    <div class="cp-info">
+      <div class="cp-badges">
+        {%- if on_sale -%}<span class="cp-badge cp-b-yellow">Sale</span>{%- endif -%}
+        <span class="cp-badge cp-b-dark">Wireless</span>
+        {%- if product.available -%}<span class="cp-badge cp-b-green">In Stock</span>
+        {%- else -%}<span class="cp-badge cp-b-red">Sold Out</span>{%- endif -%}
+      </div>
+
+      <h1 class="cp-title">{{ product.title }}</h1>
+
+      <!-- 3 Key Selling Points -->
+      <div class="cp-usps">
+        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_1 }}</div>
+        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_2 }}</div>
+        <div class="cp-usp"><span class="cp-usp-icon">✓</span> {{ section.settings.usp_3 }}</div>
+      </div>
+
+      <div class="cp-rating">
+        <span class="cp-stars">★★★★★</span>
+        <span class="cp-rating-text">{{ section.settings.review_score }} ({{ section.settings.review_count }} reviews)</span>
+        <span class="cp-rating-sold">{{ section.settings.sold_count }} sold</span>
+      </div>
+
+      <div class="cp-price">
+        <span class="cp-now">{{ current_var.price | money }}</span>
+        {%- if on_sale -%}
+          <span class="cp-was">{{ current_var.compare_at_price | money }}</span>
+          <span class="cp-save">Save {{ discount_pct }}%</span>
+        {%- endif -%}
+      </div>
+
+      {%- form 'product', product, id: 'cp-product-form', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" id="cp-variant-id" value="{{ current_var.id }}" />
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="cp-variants">
+              <div class="cp-var-label">{{ option.name }} <span id="cp-sel-{{ forloop.index }}" style="color:var(--cp-muted);font-weight:400">— {{ option.selected_value }}</span></div>
+              <div class="cp-var-opts" data-option-index="{{ forloop.index0 }}">
+                {%- for value in option.values -%}
+                  <button type="button" class="swatch-btn {% if option.selected_value == value %}active{% endif %}" data-value="{{ value }}" data-option-index="{{ forloop.parentloop.index0 }}" onclick="cpSelectOption(this)">{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <div class="cp-qty-row">
+          <span class="cp-qty-label">Quantity</span>
+          <div class="cp-qty-ctrl">
+            <button type="button" class="cp-qty-btn" onclick="cpChangeQty(-1)">−</button>
+            <div class="cp-qty-num" id="cpQtyNum">1</div>
+            <button type="button" class="cp-qty-btn" onclick="cpChangeQty(1)">+</button>
+          </div>
+          <input type="hidden" name="quantity" id="cpQtyInput" value="1" />
+        </div>
+
+        <div class="cp-urgency">
+          <div class="cp-pulse"></div>
+          <span>Only {{ section.settings.units_left }} units left — order now!</span>
+        </div>
+
+        <div class="cp-atc-wrap" id="cp-cta-area">
+          {%- if product.available -%}
+            <button type="submit" name="add" id="cpAddToCart" class="cp-atc">Add to Cart — {{ current_var.price | money }}</button>
+          {%- else -%}
+            <button type="button" class="cp-atc" disabled>Sold Out</button>
+          {%- endif -%}
+        </div>
+      {%- endform -%}
+
+      <!-- 3 Trust Badges -->
+      <div class="cp-trust">
+        <div class="cp-trust-item"><div class="cp-trust-icon">{{ section.settings.trust1_icon }}</div><div class="cp-trust-text">{{ section.settings.trust1_text }}</div></div>
+        <div class="cp-trust-item"><div class="cp-trust-icon">{{ section.settings.trust2_icon }}</div><div class="cp-trust-text">{{ section.settings.trust2_text }}</div></div>
+        <div class="cp-trust-item"><div class="cp-trust-icon">{{ section.settings.trust3_icon }}</div><div class="cp-trust-text">{{ section.settings.trust3_text }}</div></div>
+      </div>
+
+      <div class="cp-accordion">
+        <div class="cp-acc-item open">
+          <button class="cp-acc-hd" onclick="cpToggleAcc(this)" type="button">Product Details <span class="cp-acc-ico">+</span></button>
+          <div class="cp-acc-body">{{ product.description }}</div>
+        </div>
+        <div class="cp-acc-item">
+          <button class="cp-acc-hd" onclick="cpToggleAcc(this)" type="button">Compatible Surfaces <span class="cp-acc-ico">+</span></button>
+          <div class="cp-acc-body">{{ section.settings.accordion_surfaces }}</div>
+        </div>
+        <div class="cp-acc-item">
+          <button class="cp-acc-hd" onclick="cpToggleAcc(this)" type="button">Shipping &amp; Returns <span class="cp-acc-ico">+</span></button>
+          <div class="cp-acc-body">{{ section.settings.accordion_shipping }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FEATURE 1: Image left / text right ═══ -->
+  <div class="cp-split">
+    <div class="cp-split-inner cp-mx">
+      <div class="cp-split-media">
+        {%- if section.settings.feat1_image -%}
+          <img src="{{ section.settings.feat1_image | image_url: width: 900 }}" alt="{{ section.settings.feat1_title | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+        {%- else -%}
+          <div class="cp-placeholder"><span class="ph-icon">🔊</span>Add image in Theme Editor → Feature 1 Image</div>
+        {%- endif -%}
+      </div>
+      <div>
+        <p class="cp-eyebrow">{{ section.settings.feat1_eyebrow }}</p>
+        <h2 class="cp-sec-title">{{ section.settings.feat1_title }}</h2>
+        <p class="cp-sec-desc">{{ section.settings.feat1_desc }}</p>
+        <div class="cp-check-list">
+          {%- if section.settings.feat1_bullet_1 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat1_bullet_1 }}</div>{%- endif -%}
+          {%- if section.settings.feat1_bullet_2 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat1_bullet_2 }}</div>{%- endif -%}
+          {%- if section.settings.feat1_bullet_3 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat1_bullet_3 }}</div>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FEATURE 2: Image right / text left — dark ═══ -->
+  <div class="cp-split cp-split-dark reverse">
+    <div class="cp-split-inner cp-mx">
+      <div class="cp-split-media">
+        {%- if section.settings.feat2_image -%}
+          <img src="{{ section.settings.feat2_image | image_url: width: 900 }}" alt="{{ section.settings.feat2_title | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+        {%- else -%}
+          <div class="cp-placeholder" style="background:linear-gradient(135deg,#333,#222)"><span class="ph-icon">🎵</span><span style="color:rgba(255,255,255,.5)">Add image in Theme Editor → Feature 2 Image</span></div>
+        {%- endif -%}
+      </div>
+      <div>
+        <p class="cp-eyebrow">{{ section.settings.feat2_eyebrow }}</p>
+        <h2 class="cp-sec-title">{{ section.settings.feat2_title }}</h2>
+        <p class="cp-sec-desc">{{ section.settings.feat2_desc }}</p>
+        <div class="cp-check-list">
+          {%- if section.settings.feat2_bullet_1 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat2_bullet_1 }}</div>{%- endif -%}
+          {%- if section.settings.feat2_bullet_2 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat2_bullet_2 }}</div>{%- endif -%}
+          {%- if section.settings.feat2_bullet_3 != blank -%}<div class="cp-check"><span class="cp-check-dot">✓</span> {{ section.settings.feat2_bullet_3 }}</div>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ VIDEO SECTION ═══ -->
+  <div class="cp-video-section">
+    <div class="cp-video-wrap">
+      <p class="cp-eyebrow" style="color:var(--cp-yellow)">{{ section.settings.video_eyebrow }}</p>
+      <h2 class="cp-sec-title" style="color:#fff">{{ section.settings.video_title }}</h2>
+      <div class="cp-video-container">
+        {%- if section.settings.product_video != blank -%}
+          {%- assign video = section.settings.product_video -%}
+          {%- if video.type == 'youtube' -%}
+            <iframe src="https://www.youtube.com/embed/{{ video.id }}?autoplay=1&mute=1&loop=1&playsinline=1&rel=0&playlist={{ video.id }}" frameborder="0" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+          {%- elsif video.type == 'vimeo' -%}
+            <iframe src="https://player.vimeo.com/video/{{ video.id }}?autoplay=1&muted=1&loop=1&playsinline=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+          {%- endif -%}
+        {%- elsif section.settings.product_video_file != blank -%}
+          <video src="{{ section.settings.product_video_file }}" autoplay muted loop playsinline style="width:100%;height:100%;position:absolute;inset:0;object-fit:cover"></video>
+        {%- else -%}
+          <button class="cp-play-btn" aria-label="Play video">▶</button>
+          <span style="color:rgba(255,255,255,.4);font-size:13px;position:absolute;bottom:20px">Add your YouTube/Vimeo URL in Theme Editor → Video</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <div class="cp-hiw">
+    <div class="cp-mx">
+      <div class="cp-hiw-header">
+        <p class="cp-eyebrow">{{ section.settings.hiw_eyebrow }}</p>
+        <h2 class="cp-sec-title">{{ section.settings.hiw_title }}</h2>
+      </div>
+
+      <div class="cp-steps">
+        <div class="cp-step-card">
+          <div class="cp-step-img">
+            <span class="cp-step-num">1</span>
+            {%- if section.settings.hiw_step1_image -%}
+              <img src="{{ section.settings.hiw_step1_image | image_url: width: 600 }}" alt="Step 1" loading="lazy" />
+            {%- else -%}
+              <span class="ph-icon">📌</span><span>Add Step 1 image</span>
+            {%- endif -%}
+          </div>
+          <div class="cp-step-body">
+            <h3>{{ section.settings.hiw_step1_title }}</h3>
+            <p>{{ section.settings.hiw_step1_desc }}</p>
+          </div>
+        </div>
+
+        <div class="cp-step-card">
+          <div class="cp-step-img">
+            <span class="cp-step-num">2</span>
+            {%- if section.settings.hiw_step2_image -%}
+              <img src="{{ section.settings.hiw_step2_image | image_url: width: 600 }}" alt="Step 2" loading="lazy" />
+            {%- else -%}
+              <span class="ph-icon">📶</span><span>Add Step 2 image</span>
+            {%- endif -%}
+          </div>
+          <div class="cp-step-body">
+            <h3>{{ section.settings.hiw_step2_title }}</h3>
+            <p>{{ section.settings.hiw_step2_desc }}</p>
+          </div>
+        </div>
+
+        <div class="cp-step-card">
+          <div class="cp-step-img">
+            <span class="cp-step-num">3</span>
+            {%- if section.settings.hiw_step3_image -%}
+              <img src="{{ section.settings.hiw_step3_image | image_url: width: 600 }}" alt="Step 3" loading="lazy" />
+            {%- else -%}
+              <span class="ph-icon">🎶</span><span>Add Step 3 image</span>
+            {%- endif -%}
+          </div>
+          <div class="cp-step-body">
+            <h3>{{ section.settings.hiw_step3_title }}</h3>
+            <p>{{ section.settings.hiw_step3_desc }}</p>
+          </div>
+        </div>
+      </div>
+
+      {%- if section.settings.hiw_video != blank or section.settings.hiw_video_file != blank -%}
+        <div class="cp-hiw-video-container" style="margin-top:48px">
+          {%- if section.settings.hiw_video != blank -%}
+            {%- assign hv = section.settings.hiw_video -%}
+            {%- if hv.type == 'youtube' -%}
+              <iframe src="https://www.youtube.com/embed/{{ hv.id }}?autoplay=1&mute=1&loop=1&playsinline=1&rel=0&playlist={{ hv.id }}" frameborder="0" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+            {%- elsif hv.type == 'vimeo' -%}
+              <iframe src="https://player.vimeo.com/video/{{ hv.id }}?autoplay=1&muted=1&loop=1&playsinline=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+            {%- endif -%}
+          {%- elsif section.settings.hiw_video_file != blank -%}
+            <video src="{{ section.settings.hiw_video_file }}" autoplay muted loop playsinline style="width:100%;height:100%;position:absolute;inset:0;object-fit:cover"></video>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+</div>
+
+<!-- Sticky ATC Bar -->
+<div class="cp-sticky" id="cpStickyBar">
+  <div class="cp-sticky-info">
+    <div class="cp-sticky-thumb">
+      {%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 88 }}" alt="{{ product.title }}" />{%- endif -%}
+    </div>
+    <div>
+      <div class="cp-sticky-name">{{ product.title }}</div>
+      <div class="cp-sticky-price">{{ current_var.price | money }}{%- if on_sale -%} <s style="color:#999;font-size:11px">{{ current_var.compare_at_price | money }}</s>{%- endif -%}</div>
+    </div>
+  </div>
+  <button class="cp-sticky-btn" onclick="document.getElementById('cpAddToCart').click()">Add to Cart</button>
+</div>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/{{ section.settings.whatsapp_number }}" class="cp-wa" target="_blank" title="Chat on WhatsApp">💬</a>
+
+<script type="application/json" id="cpVariantsData">{{ product.variants | json }}</script>
+
+<script>
+(function(){
+  /* Gallery */
+  window.cpSwapImg=function(t,src){
+    document.querySelectorAll('.cp-thumb').forEach(function(el){el.classList.remove('active')});
+    t.classList.add('active');
+    document.getElementById('cpMainImg').src=src;
+  };
+  window.cpScrollThumbs=function(dir){
+    var track=document.getElementById('cpThumbTrack');
+    if(track) track.scrollBy({left:dir*160,behavior:'smooth'});
+  };
+  /* Quantity */
+  var qty=1;
+  window.cpChangeQty=function(d){
+    qty=Math.max(1,qty+d);
+    document.getElementById('cpQtyNum').textContent=qty;
+    document.getElementById('cpQtyInput').value=qty;
+  };
+  /* Accordion */
+  window.cpToggleAcc=function(b){b.closest('.cp-acc-item').classList.toggle('open')};
+  /* Variants */
+  var vars=JSON.parse(document.getElementById('cpVariantsData').textContent);
+  var sel={};
+  document.querySelectorAll('.cp-var-opts').forEach(function(g){
+    var a=g.querySelector('.swatch-btn.active');
+    if(a) sel[g.dataset.optionIndex]=a.dataset.value;
+  });
+  window.cpSelectOption=function(btn){
+    var i=btn.dataset.optionIndex;
+    btn.closest('.cp-var-opts').querySelectorAll('.swatch-btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    sel[i]=btn.dataset.value;
+    var lbl=document.getElementById('cp-sel-'+(parseInt(i)+1));
+    if(lbl) lbl.textContent='— '+btn.dataset.value;
+    var m=vars.find(function(v){return v.options.every(function(o,idx){return sel[String(idx)]===o})});
+    if(m){
+      document.getElementById('cp-variant-id').value=m.id;
+      var p=document.querySelector('.cp-now');if(p)p.textContent='$'+(m.price/100).toFixed(2);
+      var b=document.getElementById('cpAddToCart');
+      if(b){b.disabled=!m.available;b.textContent=m.available?'Add to Cart — $'+(m.price/100).toFixed(2):'Sold Out'}
+    }
+  };
+  /* Sticky bar */
+  var sb=document.getElementById('cpStickyBar'),ca=document.getElementById('cp-cta-area');
+  if(sb&&ca){window.addEventListener('scroll',function(){
+    sb.classList.toggle('visible',ca.getBoundingClientRect().bottom<0);
+  })}
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Resonant Speaker Page",
+  "tag": "section",
+  "settings": [
+
+    { "type": "header", "content": "── WhatsApp ──" },
+    { "type": "text", "id": "whatsapp_number", "label": "WhatsApp Number (country code, no +)", "default": "96181807900" },
+
+    { "type": "header", "content": "── Selling Points (under title) ──" },
+    { "type": "text", "id": "usp_1", "label": "Selling Point 1", "default": "Bone Conduction Tech — turns any surface into a speaker" },
+    { "type": "text", "id": "usp_2", "label": "Selling Point 2", "default": "True Wireless Stereo — 2 speakers auto-pair instantly" },
+    { "type": "text", "id": "usp_3", "label": "Selling Point 3", "default": "USB-C Rechargeable — 6+ hours playtime per charge" },
+
+    { "type": "header", "content": "── Social Proof ──" },
+    { "type": "text",   "id": "review_score", "label": "Review Score",            "default": "4.8"  },
+    { "type": "number", "id": "review_count", "label": "Number of Reviews",       "default": 127    },
+    { "type": "text",   "id": "sold_count",   "label": "Units Sold (e.g. 300+)",  "default": "300+" },
+    { "type": "number", "id": "units_left",   "label": "Units Left (urgency bar)","default": 12     },
+
+    { "type": "header", "content": "── Trust Badges ──" },
+    { "type": "text", "id": "trust1_icon", "label": "Badge 1 — Icon (emoji)", "default": "🚚" },
+    { "type": "text", "id": "trust1_text", "label": "Badge 1 — Text",         "default": "Free Shipping<br>Over $25" },
+    { "type": "text", "id": "trust2_icon", "label": "Badge 2 — Icon (emoji)", "default": "🔄" },
+    { "type": "text", "id": "trust2_text", "label": "Badge 2 — Text",         "default": "30-Day<br>Returns" },
+    { "type": "text", "id": "trust3_icon", "label": "Badge 3 — Icon (emoji)", "default": "💵" },
+    { "type": "text", "id": "trust3_text", "label": "Badge 3 — Text",         "default": "Cash on<br>Delivery" },
+
+    { "type": "header", "content": "── Accordion: Compatible Surfaces ──" },
+    { "type": "textarea", "id": "accordion_surfaces", "label": "Compatible Surfaces Text", "default": "Works on any hollow surface — wooden tables, glass windows, laptop lids, plastic containers, cardboard boxes, metal shelves, and more. Dense solid surfaces (thick concrete, solid stone) won't resonate as effectively." },
+
+    { "type": "header", "content": "── Accordion: Shipping & Returns ──" },
+    { "type": "textarea", "id": "accordion_shipping", "label": "Shipping & Returns Text", "default": "Orders processed and shipped within 1–3 business days. Free shipping on orders over $25. Cash on delivery available. 30-day no-questions-asked returns." },
+
+    { "type": "header", "content": "── Feature Section 1 ──" },
+    { "type": "image_picker", "id": "feat1_image",    "label": "Feature 1 — Image" },
+    { "type": "text",         "id": "feat1_eyebrow",  "label": "Feature 1 — Eyebrow Label", "default": "Surface Sound Technology" },
+    { "type": "text",         "id": "feat1_title",    "label": "Feature 1 — Title",          "default": "Stick it anywhere. Sound fills the room." },
+    { "type": "textarea",     "id": "feat1_desc",     "label": "Feature 1 — Description",    "default": "Most Bluetooth speakers trap audio inside a tiny plastic box. The Resonant Speaker works differently — it attaches to any hollow surface and uses it as a giant acoustic resonator, producing up to 4x the volume of your phone speaker." },
+    { "type": "text",         "id": "feat1_bullet_1", "label": "Feature 1 — Bullet 1",       "default": "Works on wood, glass, metal, plastic & cardboard" },
+    { "type": "text",         "id": "feat1_bullet_2", "label": "Feature 1 — Bullet 2",       "default": "3W bone conduction driver" },
+    { "type": "text",         "id": "feat1_bullet_3", "label": "Feature 1 — Bullet 3",       "default": "Up to 4x louder than your phone speaker" },
+
+    { "type": "header", "content": "── Feature Section 2 (dark) ──" },
+    { "type": "image_picker", "id": "feat2_image",    "label": "Feature 2 — Image" },
+    { "type": "text",         "id": "feat2_eyebrow",  "label": "Feature 2 — Eyebrow Label", "default": "True Wireless Stereo" },
+    { "type": "text",         "id": "feat2_title",    "label": "Feature 2 — Title",          "default": "Left channel. Right channel. Automatic." },
+    { "type": "textarea",     "id": "feat2_desc",     "label": "Feature 2 — Description",    "default": "The 2-pack auto-pairs the moment you power it on. No app, no manual sync steps — just instant left/right stereo separation that fills the space between any two surfaces you choose." },
+    { "type": "text",         "id": "feat2_bullet_1", "label": "Feature 2 — Bullet 1",       "default": "Auto-pairs on startup — zero setup" },
+    { "type": "text",         "id": "feat2_bullet_2", "label": "Feature 2 — Bullet 2",       "default": "Separate left & right stereo channels" },
+    { "type": "text",         "id": "feat2_bullet_3", "label": "Feature 2 — Bullet 3",       "default": "Use as a stereo pair or as solo speakers" },
+
+    { "type": "header", "content": "── Video Section ──" },
+    { "type": "text",      "id": "video_eyebrow",      "label": "Video — Eyebrow Label", "default": "See It In Action" },
+    { "type": "text",      "id": "video_title",        "label": "Video — Title",          "default": "Watch any surface become a speaker" },
+    { "type": "video_url", "id": "product_video",      "label": "Video — YouTube or Vimeo URL", "accept": ["youtube", "vimeo"], "placeholder": "https://www.youtube.com/watch?v=..." },
+    { "type": "text",      "id": "product_video_file", "label": "Video — OR Shopify-hosted file URL (from Settings › Files)", "placeholder": "https://cdn.shopify.com/s/files/..." },
+
+    { "type": "header", "content": "── How It Works ──" },
+    { "type": "text", "id": "hiw_eyebrow", "label": "How It Works — Eyebrow", "default": "Setup In 3 Steps" },
+    { "type": "text", "id": "hiw_title",   "label": "How It Works — Title",   "default": "Stick. Connect. Play." },
+
+    { "type": "header", "content": "── How It Works — Step 1 ──" },
+    { "type": "image_picker", "id": "hiw_step1_image", "label": "Step 1 — Image" },
+    { "type": "text",         "id": "hiw_step1_title", "label": "Step 1 — Title", "default": "Attach" },
+    { "type": "text",         "id": "hiw_step1_desc",  "label": "Step 1 — Description", "default": "Stick the speaker to any hollow surface using the included magic sticker or suction cup." },
+
+    { "type": "header", "content": "── How It Works — Step 2 ──" },
+    { "type": "image_picker", "id": "hiw_step2_image", "label": "Step 2 — Image" },
+    { "type": "text",         "id": "hiw_step2_title", "label": "Step 2 — Title", "default": "Connect" },
+    { "type": "text",         "id": "hiw_step2_desc",  "label": "Step 2 — Description", "default": "Bluetooth pairs in seconds. Both speakers auto-sync for instant stereo — no app required." },
+
+    { "type": "header", "content": "── How It Works — Step 3 ──" },
+    { "type": "image_picker", "id": "hiw_step3_image", "label": "Step 3 — Image" },
+    { "type": "text",         "id": "hiw_step3_title", "label": "Step 3 — Title", "default": "Play" },
+    { "type": "text",         "id": "hiw_step3_desc",  "label": "Step 3 — Description", "default": "Crank your music, podcasts, or calls. The surface does the amplifying." },
+
+    { "type": "header", "content": "── How It Works — Optional Video ──" },
+    { "type": "video_url", "id": "hiw_video",      "label": "How It Works — Video (YouTube or Vimeo)", "accept": ["youtube", "vimeo"], "placeholder": "https://www.youtube.com/watch?v=..." },
+    { "type": "text",      "id": "hiw_video_file", "label": "How It Works — OR Shopify-hosted file URL", "placeholder": "https://cdn.shopify.com/s/files/..." }
+
+  ],
+  "presets": [
+    { "name": "Resonant Speaker Page" }
+  ]
+}
+{% endschema %}

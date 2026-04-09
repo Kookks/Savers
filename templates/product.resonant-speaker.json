@@ -1,0 +1,79 @@
+{
+  "sections": {
+    "main": {
+      "type": "custom-product-resonant-speaker",
+      "settings": {
+        "whatsapp_number": "96181807900",
+        "usp_1": "Bone Conduction Tech — turns any surface into a speaker",
+        "usp_2": "True Wireless Stereo — 2 speakers auto-pair instantly",
+        "usp_3": "USB-C Rechargeable — 6+ hours playtime per charge",
+        "review_score": "4.8",
+        "review_count": 127,
+        "sold_count": "300+",
+        "units_left": 12,
+        "trust1_icon": "🚚",
+        "trust1_text": "Free Shipping<br>Over $25",
+        "trust2_icon": "🔄",
+        "trust2_text": "30-Day<br>Returns",
+        "trust3_icon": "💵",
+        "trust3_text": "Cash on<br>Delivery",
+        "accordion_surfaces": "Works on any hollow surface — wooden tables, glass windows, laptop lids, plastic containers, cardboard boxes, metal shelves, and more. Dense solid surfaces (thick concrete, solid stone) won't resonate as effectively.",
+        "accordion_shipping": "Orders processed and shipped within 1–3 business days. Free shipping on orders over $25. Cash on delivery available. 30-day no-questions-asked returns.",
+        "feat1_eyebrow": "Surface Sound Technology",
+        "feat1_title": "Stick it anywhere. Sound fills the room.",
+        "feat1_desc": "Most Bluetooth speakers trap audio inside a tiny plastic box. The Resonant Speaker works differently — it attaches to any hollow surface and uses it as a giant acoustic resonator, producing up to 4x the volume of your phone speaker.",
+        "feat1_bullet_1": "Works on wood, glass, metal, plastic & cardboard",
+        "feat1_bullet_2": "3W bone conduction driver",
+        "feat1_bullet_3": "Up to 4x louder than your phone speaker",
+        "feat2_eyebrow": "True Wireless Stereo",
+        "feat2_title": "Left channel. Right channel. Automatic.",
+        "feat2_desc": "The 2-pack auto-pairs the moment you power it on. No app, no manual sync steps — just instant left/right stereo separation that fills the space between any two surfaces you choose.",
+        "feat2_bullet_1": "Auto-pairs on startup — zero setup",
+        "feat2_bullet_2": "Separate left & right stereo channels",
+        "feat2_bullet_3": "Use as a stereo pair or as solo speakers",
+        "video_eyebrow": "See It In Action",
+        "video_title": "Watch any surface become a speaker",
+        "product_video": "",
+        "product_video_file": "",
+        "hiw_eyebrow": "Setup In 3 Steps",
+        "hiw_title": "Stick. Connect. Play.",
+        "hiw_step1_title": "Attach",
+        "hiw_step1_desc": "Stick the speaker to any hollow surface using the included magic sticker or suction cup.",
+        "hiw_step2_title": "Connect",
+        "hiw_step2_desc": "Bluetooth pairs in seconds. Both speakers auto-sync for instant stereo — no app required.",
+        "hiw_step3_title": "Play",
+        "hiw_step3_desc": "Crank your music, podcasts, or calls. The surface does the amplifying.",
+        "hiw_video": "",
+        "hiw_video_file": ""
+      }
+    },
+    "faq_liquid": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.sfaq{font-family:'Inter',system-ui,sans-serif;background:#FAFAFA;padding:72px 24px}\n.sfaq-mx{max-width:760px;margin:0 auto}\n.sfaq-eyebrow{text-align:center;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#D4BC00;margin-bottom:8px}\n.sfaq-title{text-align:center;font-size:28px;font-weight:800;color:#111;margin:0 0 40px}\n.sfaq-list{border-top:1px solid #E8E8E8}\n.sfaq-item{border-bottom:1px solid #E8E8E8}\n.sfaq-btn{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;background:none;border:none;font-size:15px;font-weight:600;color:#111;cursor:pointer;text-align:left;font-family:inherit;line-height:1.4}\n.sfaq-icon{flex-shrink:0;font-size:22px;color:#999;transition:transform .3s;line-height:1}\n.sfaq-item.open .sfaq-icon{transform:rotate(45deg);color:#FAE10A}\n.sfaq-answer{font-size:14px;color:#666;line-height:1.8;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}\n.sfaq-item.open .sfaq-answer{max-height:400px;padding-bottom:18px}\n@media(max-width:768px){\n  .sfaq{padding:48px 20px}\n  .sfaq-title{font-size:22px}\n  .sfaq-btn{font-size:14px}\n}\n</style>\n\n<div class=\"sfaq\">\n  <div class=\"sfaq-mx\">\n    <p class=\"sfaq-eyebrow\">Got Questions?</p>\n    <h2 class=\"sfaq-title\">Frequently Asked Questions</h2>\n    <div class=\"sfaq-list\">\n\n      <div class=\"sfaq-item\">\n        <button class=\"sfaq-btn\" type=\"button\">\n          What surfaces work best?\n          <span class=\"sfaq-icon\">+</span>\n        </button>\n        <div class=\"sfaq-answer\">\n          Hollow surfaces produce the best results — wooden tables, cardboard boxes, plastic containers, glass windows, metal filing cabinets, and laptop lids all work great. The hollow air cavity is what creates the resonance. Dense solid surfaces like thick concrete or solid stone won't amplify as well.\n        </div>\n      </div>\n\n      <div class=\"sfaq-item\">\n        <button class=\"sfaq-btn\" type=\"button\">\n          Do I need to set up the stereo pair manually?\n          <span class=\"sfaq-icon\">+</span>\n        </button>\n        <div class=\"sfaq-answer\">\n          No — both speakers in the 2-pack auto-pair with each other the moment you turn them on. They split into left and right channels automatically. Just connect your phone to one speaker and both play instantly in stereo.\n        </div>\n      </div>\n\n      <div class=\"sfaq-item\">\n        <button class=\"sfaq-btn\" type=\"button\">\n          How long does the battery last?\n          <span class=\"sfaq-icon\">+</span>\n        </button>\n        <div class=\"sfaq-answer\">\n          Each speaker runs 6+ hours at 50% volume, with 220+ hours standby time. They recharge via USB-C, and a full charge takes approximately 1–1.5 hours.\n        </div>\n      </div>\n\n      <div class=\"sfaq-item\">\n        <button class=\"sfaq-btn\" type=\"button\">\n          Is it waterproof?\n          <span class=\"sfaq-icon\">+</span>\n        </button>\n        <div class=\"sfaq-answer\">\n          The speakers are splash-resistant for everyday use — light rain and sweaty hands are no problem. They are not rated for submersion or heavy water exposure, so avoid using them in the shower or near pools.\n        </div>\n      </div>\n\n      <div class=\"sfaq-item\">\n        <button class=\"sfaq-btn\" type=\"button\">\n          Can I use just one speaker, or do I need both?\n          <span class=\"sfaq-icon\">+</span>\n        </button>\n        <div class=\"sfaq-answer\">\n          You can absolutely use a single speaker on its own in mono mode. The 2-pack is designed for stereo pairing, but each unit functions as a fully independent Bluetooth speaker.\n        </div>\n      </div>\n\n      <div class=\"sfaq-item\">\n        <button class=\"sfaq-btn\" type=\"button\">\n          Will the vibration damage my furniture?\n          <span class=\"sfaq-icon\">+</span>\n        </button>\n        <div class=\"sfaq-answer\">\n          No. The vibration level is similar to a phone on vibrate mode — it won't scratch or damage surfaces. The included sticker pads are residue-free and safe to remove from any surface.\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>\n\n<script>\ndocument.querySelectorAll('.sfaq-btn').forEach(function(btn){\n  btn.addEventListener('click', function(){\n    var item = this.closest('.sfaq-item');\n    var isOpen = item.classList.contains('open');\n    document.querySelectorAll('.sfaq-item').forEach(function(i){ i.classList.remove('open'); });\n    if(!isOpen) item.classList.add('open');\n  });\n});\n</script>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "reviews_widget": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_review_widget": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": ["judge_me_review_widget"],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": ["main", "faq_liquid", "reviews_widget"]
+}
