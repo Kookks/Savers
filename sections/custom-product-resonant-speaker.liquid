@@ -299,14 +299,8 @@
         {%- endif -%}
       </div>
 
-      {%- form 'product', product, id: 'cp-product-form', class: 'product-form', data-type: 'add-to-cart-form', novalidate: 'novalidate' -%}
+      {%- form 'product', product, id: 'cp-product-form', novalidate: 'novalidate' -%}
         <input type="hidden" name="id" id="cp-variant-id" value="{{ current_var.id }}" />
-        <!-- Quantity input — Pumper replaces this entire block with its bundle widget -->
-        <div class="cp-qty-row">
-          <span class="cp-qty-label">Quantity</span>
-          <input type="number" name="quantity" id="cpQtyInput" value="1" min="1"
-            style="width:64px;padding:8px;border:2px solid var(--cp-border);border-radius:var(--cp-r-sm);font-size:14px;font-weight:600;text-align:center;font-family:var(--cp-font);" />
-        </div>
 
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
@@ -320,17 +314,29 @@
             </div>
           {%- endfor -%}
         {%- endunless -%}
+
+        <div class="cp-qty-row">
+          <span class="cp-qty-label">Quantity</span>
+          <div class="cp-qty-ctrl">
+            <button type="button" class="cp-qty-btn" onclick="cpChangeQty(-1)">−</button>
+            <div class="cp-qty-num" id="cpQtyNum">1</div>
+            <button type="button" class="cp-qty-btn" onclick="cpChangeQty(1)">+</button>
+          </div>
+          <input type="hidden" name="quantity" id="cpQtyInput" value="1" />
+        </div>
+
         <div class="cp-urgency">
           <div class="cp-pulse"></div>
           <span>Only {{ section.settings.units_left }} units left — order now!</span>
         </div>
 
-        {%- if product.available -%}
-          <button type="submit" name="add" id="cpAddToCart" class="cp-atc product-form__submit">🔒 Add to Cart</button>
-        {%- else -%}
-          <button type="button" class="cp-atc" disabled>Sold Out</button>
-        {%- endif -%}
-
+        <div class="cp-atc-wrap" id="cp-cta-area">
+          {%- if product.available -%}
+            <button type="submit" name="add" id="cpAddToCart" class="cp-atc">Add to Cart — {{ current_var.price | money }}</button>
+          {%- else -%}
+            <button type="button" class="cp-atc" disabled>Sold Out</button>
+          {%- endif -%}
+        </div>
       {%- endform -%}
 
       <!-- 3 Trust Badges -->
@@ -511,6 +517,7 @@
       <div class="cp-sticky-price">{{ current_var.price | money }}{%- if on_sale -%} <s style="color:#999;font-size:11px">{{ current_var.compare_at_price | money }}</s>{%- endif -%}</div>
     </div>
   </div>
+  <button class="cp-sticky-btn" onclick="document.getElementById('cpAddToCart').click()">Add to Cart</button>
 </div>
 
 <!-- WhatsApp Float -->
@@ -530,11 +537,12 @@
     var track=document.getElementById('cpThumbTrack');
     if(track) track.scrollBy({left:dir*160,behavior:'smooth'});
   };
-  /* Quantity — updated by Pumper when bundle selected */
+  /* Quantity */
+  var qty=1;
   window.cpChangeQty=function(d){
-    var input=document.getElementById('cpQtyInput');
-    if(!input) return;
-    input.value=Math.max(1,parseInt(input.value||1)+d);
+    qty=Math.max(1,qty+d);
+    document.getElementById('cpQtyNum').textContent=qty;
+    document.getElementById('cpQtyInput').value=qty;
   };
   /* Accordion */
   window.cpToggleAcc=function(b){b.closest('.cp-acc-item').classList.toggle('open')};
@@ -556,14 +564,14 @@
     if(m){
       document.getElementById('cp-variant-id').value=m.id;
       var p=document.querySelector('.cp-now');if(p)p.textContent='$'+(m.price/100).toFixed(2);
-      var atc=document.getElementById('cpAddToCart');
-      if(atc){atc.disabled=!m.available;atc.textContent=m.available?'🔒 Add to Cart':'Sold Out';}
+      var b=document.getElementById('cpAddToCart');
+      if(b){b.disabled=!m.available;b.textContent=m.available?'Add to Cart — $'+(m.price/100).toFixed(2):'Sold Out'}
     }
   };
   /* Sticky bar */
-  var sb=document.getElementById('cpStickyBar'),atcBtn=document.getElementById('cpAddToCart');
-  if(sb&&atcBtn){window.addEventListener('scroll',function(){
-    sb.classList.toggle('visible',atcBtn.getBoundingClientRect().bottom<0);
+  var sb=document.getElementById('cpStickyBar'),ca=document.getElementById('cp-cta-area');
+  if(sb&&ca){window.addEventListener('scroll',function(){
+    sb.classList.toggle('visible',ca.getBoundingClientRect().bottom<0);
   })}
 })();
 </script>
