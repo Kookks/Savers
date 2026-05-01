@@ -299,7 +299,7 @@
         {%- endif -%}
       </div>
 
-      {%- form 'product', product, id: 'cp-product-form', novalidate: 'novalidate' -%}
+      {%- form 'product', product, id: 'cp-product-form', data-type: 'add-to-cart-form', novalidate: 'novalidate' -%}
         <input type="hidden" name="id" id="cp-variant-id" value="{{ current_var.id }}" />
 
         {%- unless product.has_only_default_variant -%}
@@ -320,7 +320,7 @@
         </div>
 
         <!-- Hidden ATC button — required by Pumper Bundles to trigger checkout -->
-        <button type="submit" name="add" id="cpAddToCart" style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none;" tabindex="-1" aria-hidden="true">Add to Cart</button>
+        <button type="submit" name="add" id="cpAddToCart" class="cp-atc" style="visibility:hidden;height:0;padding:0;margin:0;border:0;overflow:hidden;">Add to Cart</button>
 
       {%- endform -%}
 
