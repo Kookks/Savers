@@ -301,7 +301,16 @@
 
       {%- form 'product', product, id: 'cp-product-form', class: 'product-form', data-type: 'add-to-cart-form', novalidate: 'novalidate' -%}
         <input type="hidden" name="id" id="cp-variant-id" value="{{ current_var.id }}" />
-        <input type="hidden" name="quantity" id="cpQtyInput" value="1" />
+        <!-- Quantity selector — Pumper replaces this with its bundle widget -->
+        <div class="cp-qty-row">
+          <span class="cp-qty-label">Quantity</span>
+          <div class="cp-qty-ctrl">
+            <button type="button" class="cp-qty-btn" onclick="cpChangeQty(-1)">−</button>
+            <div class="cp-qty-num" id="cpQtyNum">1</div>
+            <button type="button" class="cp-qty-btn" onclick="cpChangeQty(1)">+</button>
+          </div>
+          <input type="number" name="quantity" id="cpQtyInput" value="1" min="1" style="display:none" />
+        </div>
 
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
