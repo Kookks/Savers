@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -10,13 +19,13 @@
         "review_score": "4.8",
         "review_count": 127,
         "sold_count": "300+",
-        "units_left": 12,
+        "units_left": 39,
         "trust1_icon": "🚚",
-        "trust1_text": "Free Shipping<br>Over $25",
+        "trust1_text": "Free ShippingOver $35",
         "trust2_icon": "🔄",
-        "trust2_text": "30-Day<br>Returns",
+        "trust2_text": "30-DayReturns",
         "trust3_icon": "💵",
-        "trust3_text": "Cash on<br>Delivery",
+        "trust3_text": "Cash onDelivery",
         "accordion_surfaces": "Works on any hollow surface — wooden tables, glass windows, laptop lids, plastic containers, cardboard boxes, metal shelves, and more. Dense solid surfaces (thick concrete, solid stone) won't resonate as effectively.",
         "accordion_shipping": "Orders processed and shipped within 1–3 business days. Free shipping on orders over $25. Cash on delivery available. 30-day no-questions-asked returns.",
         "feat1_eyebrow": "Surface Sound Technology",
@@ -69,11 +78,17 @@
           }
         }
       },
-      "block_order": ["judge_me_review_widget"],
+      "block_order": [
+        "judge_me_review_widget"
+      ],
       "settings": {
         "include_margins": true
       }
     }
   },
-  "order": ["main", "faq_liquid", "reviews_widget"]
+  "order": [
+    "main",
+    "faq_liquid",
+    "reviews_widget"
+  ]
 }
