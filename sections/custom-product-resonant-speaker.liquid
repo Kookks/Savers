@@ -299,7 +299,7 @@
         {%- endif -%}
       </div>
 
-      {%- form 'product', product, id: 'cp-product-form', data-type: 'add-to-cart-form', novalidate: 'novalidate' -%}
+      {%- form 'product', product, id: 'cp-product-form', class: 'product-form', data-type: 'add-to-cart-form', novalidate: 'novalidate' -%}
         <input type="hidden" name="id" id="cp-variant-id" value="{{ current_var.id }}" />
         <input type="hidden" name="quantity" id="cpQtyInput" value="1" />
 
@@ -321,7 +321,7 @@
         </div>
 
         {%- if product.available -%}
-          <button type="submit" name="add" id="cpAddToCart" class="cp-atc">🛒 Add to Cart — {{ current_var.price | money }}</button>
+          <button type="submit" name="add" id="cpAddToCart" class="cp-atc product-form__submit">🛒 Add to Cart — {{ current_var.price | money }}</button>
         {%- else -%}
           <button type="button" class="cp-atc" disabled>Sold Out</button>
         {%- endif -%}
