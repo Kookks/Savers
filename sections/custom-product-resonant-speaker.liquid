@@ -418,12 +418,12 @@
         {%- if section.settings.product_video != blank -%}
           {%- assign video = section.settings.product_video -%}
           {%- if video.type == 'youtube' -%}
-            <iframe src="https://www.youtube.com/embed/{{ video.id }}?autoplay=1&mute=1&loop=1&playsinline=1&rel=0&playlist={{ video.id }}" frameborder="0" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+            <iframe src="https://www.youtube.com/embed/{{ video.id }}?autoplay=1&loop=1&playsinline=1&rel=0&playlist={{ video.id }}" frameborder="0" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
           {%- elsif video.type == 'vimeo' -%}
-            <iframe src="https://player.vimeo.com/video/{{ video.id }}?autoplay=1&muted=1&loop=1&playsinline=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+            <iframe src="https://player.vimeo.com/video/{{ video.id }}?autoplay=1&loop=1&playsinline=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
           {%- endif -%}
         {%- elsif section.settings.product_video_file != blank -%}
-          <video src="{{ section.settings.product_video_file }}" autoplay muted loop playsinline style="width:100%;height:100%;position:absolute;inset:0;object-fit:cover"></video>
+          <video src="{{ section.settings.product_video_file }}" autoplay loop playsinline style="width:100%;height:100%;position:absolute;inset:0;object-fit:cover"></video>
         {%- else -%}
           <button class="cp-play-btn" aria-label="Play video">▶</button>
           <span style="color:rgba(255,255,255,.4);font-size:13px;position:absolute;bottom:20px">Add your YouTube/Vimeo URL in Theme Editor → Video</span>
@@ -492,9 +492,9 @@
           {%- if section.settings.hiw_video != blank -%}
             {%- assign hv = section.settings.hiw_video -%}
             {%- if hv.type == 'youtube' -%}
-              <iframe src="https://www.youtube.com/embed/{{ hv.id }}?autoplay=1&mute=1&loop=1&playsinline=1&rel=0&playlist={{ hv.id }}" frameborder="0" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+              <iframe src="https://www.youtube.com/embed/{{ hv.id }}?autoplay=1&loop=1&playsinline=1&rel=0&playlist={{ hv.id }}" frameborder="0" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
             {%- elsif hv.type == 'vimeo' -%}
-              <iframe src="https://player.vimeo.com/video/{{ hv.id }}?autoplay=1&muted=1&loop=1&playsinline=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
+              <iframe src="https://player.vimeo.com/video/{{ hv.id }}?autoplay=1&loop=1&playsinline=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0"></iframe>
             {%- endif -%}
           {%- elsif section.settings.hiw_video_file != blank -%}
             <video src="{{ section.settings.hiw_video_file }}" autoplay muted loop playsinline style="width:100%;height:100%;position:absolute;inset:0;object-fit:cover"></video>
