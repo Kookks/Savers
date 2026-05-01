@@ -301,6 +301,7 @@
 
       {%- form 'product', product, id: 'cp-product-form', data-type: 'add-to-cart-form', novalidate: 'novalidate' -%}
         <input type="hidden" name="id" id="cp-variant-id" value="{{ current_var.id }}" />
+        <input type="hidden" name="quantity" id="cpQtyInput" value="1" />
 
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
