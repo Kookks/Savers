@@ -320,7 +320,7 @@
         </div>
 
         <!-- Hidden ATC button — required by Pumper Bundles to trigger checkout -->
-        <button type="submit" name="add" id="cpAddToCart" style="display:none" aria-hidden="true">Add to Cart</button>
+        <button type="submit" name="add" id="cpAddToCart" style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none;" tabindex="-1" aria-hidden="true">Add to Cart</button>
 
       {%- endform -%}
 
