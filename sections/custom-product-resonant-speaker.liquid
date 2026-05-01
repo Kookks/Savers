@@ -318,6 +318,10 @@
           <div class="cp-pulse"></div>
           <span>Only {{ section.settings.units_left }} units left — order now!</span>
         </div>
+
+        <!-- Hidden ATC button — required by Pumper Bundles to trigger checkout -->
+        <button type="submit" name="add" id="cpAddToCart" style="display:none" aria-hidden="true">Add to Cart</button>
+
       {%- endform -%}
 
       <!-- 3 Trust Badges -->
