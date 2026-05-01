@@ -530,9 +530,11 @@
     var track=document.getElementById('cpThumbTrack');
     if(track) track.scrollBy({left:dir*160,behavior:'smooth'});
   };
-  /* Quantity */
-  var qty=1;
-    qty=Math.max(1,qty+d);
+  /* Quantity — updated by Pumper when bundle selected */
+  window.cpChangeQty=function(d){
+    var input=document.getElementById('cpQtyInput');
+    if(!input) return;
+    input.value=Math.max(1,parseInt(input.value||1)+d);
   };
   /* Accordion */
   window.cpToggleAcc=function(b){b.closest('.cp-acc-item').classList.toggle('open')};
@@ -554,13 +556,14 @@
     if(m){
       document.getElementById('cp-variant-id').value=m.id;
       var p=document.querySelector('.cp-now');if(p)p.textContent='$'+(m.price/100).toFixed(2);
-      if(b){b.disabled=!m.available;b.textContent=m.available?'Add to Cart — $'+(m.price/100).toFixed(2):'Sold Out'}
+      var atc=document.getElementById('cpAddToCart');
+      if(atc){atc.disabled=!m.available;atc.textContent=m.available?'🔒 Add to Cart':'Sold Out';}
     }
   };
   /* Sticky bar */
-  var sb=document.getElementById('cpStickyBar'),ca=document.getElementById('cp-cta-area');
-  if(sb&&ca){window.addEventListener('scroll',function(){
-    sb.classList.toggle('visible',ca.getBoundingClientRect().bottom<0);
+  var sb=document.getElementById('cpStickyBar'),atcBtn=document.getElementById('cpAddToCart');
+  if(sb&&atcBtn){window.addEventListener('scroll',function(){
+    sb.classList.toggle('visible',atcBtn.getBoundingClientRect().bottom<0);
   })}
 })();
 </script>
