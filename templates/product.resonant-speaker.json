@@ -61,6 +61,34 @@
         "hiw_video_file": ""
       }
     },
+    "1777825421baff7996": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_c0e0667_b9hNWC": {
+          "type": "ai_gen_block_c0e0667",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/watch?v=pwbbftqf_R4",
+            "autoplay": true,
+            "loop": true,
+            "title": "How does it work",
+            "title_color": "#000000",
+            "title_size": 30,
+            "title_alignment": "center",
+            "title_spacing": 16,
+            "desktop_width_percent": 100,
+            "background_color": "#ffffff",
+            "padding": 20,
+            "border_radius": 0,
+            "video_border_radius": 8
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_c0e0667_b9hNWC"
+      ],
+      "settings": {}
+    },
     "faq_liquid": {
       "type": "custom-liquid",
       "settings": {
@@ -93,6 +121,7 @@
   },
   "order": [
     "main",
+    "1777825421baff7996",
     "faq_liquid",
     "reviews_widget"
   ]
